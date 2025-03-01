@@ -1,0 +1,10 @@
+package com.hotel.api.exceptionHandling.customExceptions;
+
+public class ReservationStatusUpdateFailedException extends RuntimeException{
+
+	private static final long serialVersionUID = -5538726724314812673L;
+
+	public ReservationStatusUpdateFailedException(String message) {
+		super(message);
+		}
+}

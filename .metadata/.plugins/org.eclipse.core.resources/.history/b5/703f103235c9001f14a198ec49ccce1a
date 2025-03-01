@@ -1,0 +1,67 @@
+package com.hotel.api;
+
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.hotel.api.entity.Room;
+import com.hotel.api.entity.enums.RoomTypes;
+import com.hotel.api.repository.RoomRepository;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
+import lombok.RequiredArgsConstructor;
+
+@SpringBootApplication
+@RequiredArgsConstructor
+public class HotelApiApplication {
+	
+	public final RoomRepository roomRepository;
+
+    @Bean
+    ApplicationRunner init() {
+		return args -> {
+			
+			for(int i = 1; i <= 15; i++) {
+				Room standardRoom = new Room("S-" + i,RoomTypes.Standard, "standard.jpg");
+				Room doubleRoom = new Room("D-" + i,RoomTypes.Double, "double.jpg");
+				Room twinRoom = new Room("T-" + i,RoomTypes.Twin, "twin.jpg");
+				
+				roomRepository.save(standardRoom);
+				roomRepository.save(doubleRoom);
+				roomRepository.save(twinRoom);
+			}
+			
+			for(int i = 1; i <= 10; i++) {
+				Room familyRoom = new Room("F-" + i,RoomTypes.Family, "family.jpg");
+				Room queenRoom = new Room("Q-" + i,RoomTypes.Queen, "queen.jpg");
+				Room kingRoom = new Room("K-" + i,RoomTypes.King, "king.jpg");
+				
+				roomRepository.save(familyRoom);
+				roomRepository.save(queenRoom);
+				roomRepository.save(kingRoom);
+			}
+			
+			for(int i = 1; i <= 5; i++) {
+				Room suiteRoom = new Room("Su-" + i,RoomTypes.Suite, "suite.jpg");
+				Room penthouseRoom = new Room("P-" + i,RoomTypes.Penthouse, "penthouse.jpg");
+				Room villaRoom = new Room("V-" + i,RoomTypes.Villa, "villa.jpg");
+				
+				roomRepository.save(suiteRoom);
+				roomRepository.save(penthouseRoom);
+				roomRepository.save(villaRoom);
+			}
+			
+			Room one = roomRepository.getRoomById((long) 1);
+			one.setReserved(true);
+			roomRepository.save(one);
+			
+			roomRepository.getRoomsByType(RoomTypes.Standard).forEach(r -> System.out.println(r));
+		};
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(HotelApiApplication.class, args);
+	}
+
+}
