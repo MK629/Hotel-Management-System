@@ -4,10 +4,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import {MdMenu} from 'react-icons/md'
 import { isLoggedIn, logout } from '../services/authenticationService'
 import NavItem from "./NavItem"
-import { ChangeTrackerContext } from '@/contexts/ChangeTrackerContext'
 import MiniProfile from './MiniProfile'
 import {BsBook, BsClipboard, BsClockHistory, BsPen} from 'react-icons/bs'
 import { AiOutlineCaretDown} from 'react-icons/ai'
+import { ChangeTrackerContext } from '@/contexts/contextComponents/ChangeTrackerContext'
 
 const Header = () => {
 
@@ -30,6 +30,7 @@ const Header = () => {
   }
 
   useEffect(() => {
+    console.log(changeTracker)
     setLoginState(isLoggedIn())
   }, [changeTracker])
 

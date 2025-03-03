@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import React, { useContext } from 'react'
 import { login, saveLoggedInUser, storeToken} from '@/services/authenticationService'
 import { formToJSON } from 'axios'
-import { ChangeTrackerContext } from '@/contexts/ChangeTrackerContext'
+import { ChangeTrackerContext } from '@/contexts/contextComponents/ChangeTrackerContext'
 
 const LoginPage = () => {
 
