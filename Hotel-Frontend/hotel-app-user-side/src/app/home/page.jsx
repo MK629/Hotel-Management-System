@@ -1,15 +1,4 @@
-'use client'
-
-import React, { useContext, useEffect } from 'react'
-import { ShieldContext } from '@/contexts/ShieldContext'
-
-const Home = () => {
-
-  const {protect} = useContext(ShieldContext)
-
-  useEffect(() => {
-    protect()
-  }, [])
+const HomePage = () => {
 
   return (
     <div>
@@ -18,4 +7,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomePage

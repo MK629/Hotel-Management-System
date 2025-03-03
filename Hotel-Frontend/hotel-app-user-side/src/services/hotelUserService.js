@@ -16,7 +16,6 @@ export const getSimpleUserInfo = (usernameOrEmail) => {
         const usernameOrEmailForm = {
             usernameOrEmail : usernameOrEmail
         }
-        console.log(usernameOrEmailForm)
         return axios.post(MASTER_URL + "/getSimpleUserInfo" , usernameOrEmailForm)
     }
     else{

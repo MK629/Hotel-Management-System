@@ -4,7 +4,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import {MdMenu} from 'react-icons/md'
 import { isLoggedIn, logout } from '../services/authenticationService'
 import NavItem from "./NavItem"
-import { useRouter } from 'next/navigation'
 import { ChangeTrackerContext } from '@/contexts/ChangeTrackerContext'
 import MiniProfile from './MiniProfile'
 import {BsBook, BsClipboard, BsClockHistory, BsPen} from 'react-icons/bs'
@@ -12,7 +11,6 @@ import { AiOutlineCaretDown} from 'react-icons/ai'
 
 const Header = () => {
 
-  const router = useRouter()
   const [loginState, setLoginState] = useState(false)
   const {changeTracker, flipChangeTracker} = useContext(ChangeTrackerContext)
   const [sidebar, setSidebar] = useState(false)

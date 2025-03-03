@@ -1,13 +1,11 @@
 'use client'
 
-import { ShieldContext } from '@/contexts/ShieldContext'
 import { initStandardReservationPage } from '@/services/hotelUserService'
 import { usePathname, useRouter } from 'next/navigation'
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 
-const bookingPage = () => {
+const StandardReservationPage = () => {
 
-  const {protect} = useContext(ShieldContext)
   const imageUrl = "/images/RoomTypeImages/"
   const [roomTypeChoices, setRoomTypeChoices] = useState([])
   const router = useRouter()
@@ -18,7 +16,6 @@ const bookingPage = () => {
   }
 
   useEffect(() => {
-    protect()
     initStandardReservationPage().then(res => {setRoomTypeChoices(res.data)}).catch(e => console.log(e))
   }, [])
 
@@ -49,4 +46,4 @@ const bookingPage = () => {
  )
 }
 
-export default bookingPage
+export default StandardReservationPage

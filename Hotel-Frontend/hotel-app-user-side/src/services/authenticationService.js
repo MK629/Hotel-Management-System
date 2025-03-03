@@ -31,7 +31,7 @@ export const getLoggedinUser = () => {
 }
 
 export const isLoggedIn = () => {
-    if (Cookies.get("user") === undefined){
+    if (!Cookies.get("user")){
         return false;
     }
     return true

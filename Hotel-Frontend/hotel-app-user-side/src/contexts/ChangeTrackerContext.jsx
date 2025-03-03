@@ -2,4 +2,4 @@
 
 import { createContext } from "react"
 
-export const ChangeTrackerContext = createContext({ changeTracker: "" ,flipChangeTracker: () => {}})
+export const ChangeTrackerContext = createContext({ changeTracker: true, flipChangeTracker: () => {}})
