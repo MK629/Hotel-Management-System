@@ -30,7 +30,6 @@ const Header = () => {
   }
 
   useEffect(() => {
-    console.log(changeTracker)
     setLoginState(isLoggedIn())
   }, [changeTracker])
 
