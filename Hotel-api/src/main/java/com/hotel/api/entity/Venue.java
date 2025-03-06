@@ -27,7 +27,7 @@ public class Venue {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String venueName;
+	private String name;
 	
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -41,4 +41,13 @@ public class Venue {
 	
 	@Column(nullable = false)
 	private String image;
+
+	public Venue(String name, VenueType type, Double price, String image) {
+		super();
+		this.name = name;
+		this.type = type;
+		this.price = price;
+		this.reserved = false;
+		this.image = image;
+	}
 }

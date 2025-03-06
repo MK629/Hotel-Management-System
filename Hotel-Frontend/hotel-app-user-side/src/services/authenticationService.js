@@ -1,18 +1,7 @@
-import axios from "axios";
 import Cookies from "js-cookie";
+import { axiosInstance } from "./axiosConfig";
 
 const MASTER_URL = "http://localhost:8080/hotel/auth"
-
-
-axios.interceptors.request.use(function (config) {
-    // Do something before request is sent
-    config.headers.Authorization = getToken()
-    return config;
-}, function (error) {
-    // Do something with request error
-    return Promise.reject(error);
-});
-
 
 export const storeToken = (token) => {
     Cookies.set("token", token)
@@ -38,7 +27,7 @@ export const isLoggedIn = () => {
 }
 
 export const login = (loginInfo) => {
-    return axios.post(MASTER_URL + "/userLogin", loginInfo)
+    return axiosInstance.post(MASTER_URL + "/userLogin", loginInfo)
 }
 
 export const logout = () => {
@@ -47,5 +36,5 @@ export const logout = () => {
 }
  
 export const sendRegisterInfo = (registerInfo) => {
-    return axios.post(MASTER_URL + "/register", registerInfo)
+    return axiosInstance.post(MASTER_URL + "/register", registerInfo)
 }

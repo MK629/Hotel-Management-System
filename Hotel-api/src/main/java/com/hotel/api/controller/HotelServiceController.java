@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hotel.api.dto.Input.ChangePasswordRequestForm;
+import com.hotel.api.dto.Input.ManualReservationForm;
+import com.hotel.api.dto.Input.StandardReservationForm;
+import com.hotel.api.dto.Input.UsernameOrEmailAndReservationStatusForm;
+import com.hotel.api.dto.Input.UsernameOrEmailAndReservationTypeForm;
+import com.hotel.api.dto.Input.UsernameOrEmailForm;
+import com.hotel.api.dto.Output.ReservationDTO;
+import com.hotel.api.dto.Output.RoomChoice;
+import com.hotel.api.dto.Output.RoomDTO;
+import com.hotel.api.dto.Output.SimpleUserInfo;
 import com.hotel.api.service.HotelService;
-import com.hotel.api.service.DTOs.Input.ChangePasswordRequestForm;
-import com.hotel.api.service.DTOs.Input.ManualReservationForm;
-import com.hotel.api.service.DTOs.Input.StandardReservationForm;
-import com.hotel.api.service.DTOs.Input.UsernameOrEmailAndReservationStatusForm;
-import com.hotel.api.service.DTOs.Input.UsernameOrEmailAndReservationTypeForm;
-import com.hotel.api.service.DTOs.Input.UsernameOrEmailForm;
-import com.hotel.api.service.DTOs.Output.ReservationDTO;
-import com.hotel.api.service.DTOs.Output.RoomChoice;
-import com.hotel.api.service.DTOs.Output.RoomDTO;
-import com.hotel.api.service.DTOs.Output.SimpleUserInfo;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

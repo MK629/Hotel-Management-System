@@ -9,12 +9,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.hotel.api.dto.Input.LoginForm;
+import com.hotel.api.dto.Input.RegisterForm;
 import com.hotel.api.entity.User;
 import com.hotel.api.exceptionHandling.customExceptions.DuplicateUsernameOrEmailException;
 import com.hotel.api.repository.RoleRepository;
 import com.hotel.api.repository.UserRepository;
-import com.hotel.api.service.DTOs.Input.LoginForm;
-import com.hotel.api.service.DTOs.Input.RegisterForm;
 
 import lombok.RequiredArgsConstructor;
 

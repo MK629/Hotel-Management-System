@@ -19,16 +19,16 @@ const GlobalContextManager = ({children}) => {
     }
 
     const initCachedData = async () => {
-        await initStandardReservationPage().then(res => {setRoomTypes(res.data)}).catch(e => console.log(e))
+        await initStandardReservationPage().then(res => {setRoomTypes(res.data)}).catch(e => console.log(e.response.data))
     }
 
     useEffect(() => {
         initCachedData()
-    }, [])
+    },[])
 
     return (
         <>
-            <CachedItemsContext.Provider value={{roomTypes, rooms, venues}}>
+            <CachedItemsContext.Provider value={{roomTypes, rooms, venues, initCachedData}}>
             <ChangeTrackerContext.Provider value={{changeTracker, flipChangeTracker}}>
                 {children}
             </ChangeTrackerContext.Provider>

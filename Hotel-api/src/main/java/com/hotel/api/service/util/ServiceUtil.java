@@ -1,11 +1,11 @@
 package com.hotel.api.service.util;
 
+import com.hotel.api.dto.Output.ReservationDTO;
+import com.hotel.api.dto.Output.RoomDTO;
+import com.hotel.api.dto.Output.SimpleUserInfo;
 import com.hotel.api.entity.Reservation;
 import com.hotel.api.entity.Room;
 import com.hotel.api.entity.User;
-import com.hotel.api.service.DTOs.Output.ReservationDTO;
-import com.hotel.api.service.DTOs.Output.RoomDTO;
-import com.hotel.api.service.DTOs.Output.SimpleUserInfo;
 
 public class ServiceUtil {
 

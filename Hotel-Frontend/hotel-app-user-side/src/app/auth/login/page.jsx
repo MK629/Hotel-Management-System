@@ -5,11 +5,13 @@ import React, { useContext } from 'react'
 import { login, saveLoggedInUser, storeToken} from '@/services/authenticationService'
 import { formToJSON } from 'axios'
 import { ChangeTrackerContext } from '@/contexts/contextComponents/ChangeTrackerContext'
+import { CachedItemsContext } from '@/contexts/contextComponents/CachedItemsContext'
 
 const LoginPage = () => {
 
   const router = useRouter()
   const {flipChangeTracker} = useContext(ChangeTrackerContext)
+  const {initCachedData} = useContext(CachedItemsContext)
 
   const sendLoginInfo = async (e) => {
 
@@ -24,6 +26,7 @@ const LoginPage = () => {
       storeToken('Basic ' + window.btoa(loginInfo.usernameOrEmail + ":" + loginInfo.password))
       router.push("/home")
       flipChangeTracker()
+      initCachedData()
     }
     else{
       window.alert(error)
