@@ -12,7 +12,7 @@ const GlobalContextManager = ({children}) => {
     const [changeTracker, setChangeTracker] = useState(false)
     const [roomTypes, setRoomTypes] = useState([])
     const [rooms, setRooms] = useState([])
-    const [venues, setVenues] = useState([]) 
+    const [venues, setVenues] = useState([])
 
     const flipChangeTracker = () => {
         setChangeTracker(!changeTracker)

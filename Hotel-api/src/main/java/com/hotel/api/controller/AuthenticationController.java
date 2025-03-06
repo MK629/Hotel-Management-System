@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hotel.api.dto.Input.LoginForm;
-import com.hotel.api.dto.Input.RegisterForm;
+import com.hotel.api.dto.input.LoginForm;
+import com.hotel.api.dto.input.RegisterForm;
 import com.hotel.api.service.AuthenticationService;
 
 import jakarta.validation.Valid;

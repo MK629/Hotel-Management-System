@@ -1,8 +1,8 @@
 package com.hotel.api.service.util;
 
-import com.hotel.api.dto.Output.ReservationDTO;
-import com.hotel.api.dto.Output.RoomDTO;
-import com.hotel.api.dto.Output.SimpleUserInfo;
+import com.hotel.api.dto.output.ReservationDTO;
+import com.hotel.api.dto.output.RoomDTO;
+import com.hotel.api.dto.output.SimpleUserInfo;
 import com.hotel.api.entity.Reservation;
 import com.hotel.api.entity.Room;
 import com.hotel.api.entity.User;

@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hotel.api.dto.Input.ChangePasswordRequestForm;
-import com.hotel.api.dto.Input.ManualReservationForm;
-import com.hotel.api.dto.Input.StandardReservationForm;
-import com.hotel.api.dto.Input.UsernameOrEmailAndReservationStatusForm;
-import com.hotel.api.dto.Input.UsernameOrEmailAndReservationTypeForm;
-import com.hotel.api.dto.Input.UsernameOrEmailForm;
-import com.hotel.api.dto.Output.ReservationDTO;
-import com.hotel.api.dto.Output.RoomChoice;
-import com.hotel.api.dto.Output.RoomDTO;
-import com.hotel.api.dto.Output.SimpleUserInfo;
+import com.hotel.api.dto.input.ChangePasswordRequestForm;
+import com.hotel.api.dto.input.ManualReservationForm;
+import com.hotel.api.dto.input.StandardReservationForm;
+import com.hotel.api.dto.input.UsernameOrEmailAndReservationStatusForm;
+import com.hotel.api.dto.input.UsernameOrEmailAndReservationTypeForm;
+import com.hotel.api.dto.input.UsernameOrEmailForm;
+import com.hotel.api.dto.output.ReservationDTO;
+import com.hotel.api.dto.output.RoomChoice;
+import com.hotel.api.dto.output.RoomDTO;
+import com.hotel.api.dto.output.SimpleUserInfo;
 import com.hotel.api.service.HotelService;
 
 import jakarta.validation.Valid;

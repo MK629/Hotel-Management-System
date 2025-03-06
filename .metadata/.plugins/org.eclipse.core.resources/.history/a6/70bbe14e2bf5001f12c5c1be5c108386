@@ -1,7 +1,0 @@
-package com.hotel.api.exceptionHandling.customExceptions;
-
-public class EditLimitExceededException extends RuntimeException{
-	
-	
-
-}

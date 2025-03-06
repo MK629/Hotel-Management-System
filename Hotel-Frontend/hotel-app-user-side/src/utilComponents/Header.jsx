@@ -39,13 +39,13 @@ const Header = () => {
         <MdMenu size={35} className='font-bold text-[#EAE0D2] hover:text-[#D7C9AE] transition' onClick={() => {flipSidebar()}}/>
       </div>
 
-      <nav className='flex justify-evenly py-3.5 px-2.5'>
+      <nav className='flex justify-evenly pt-3.5 px-2.5'>
         <NavItem link={"/home"} text={"Home"}/>
         <NavItem link={"/reservation/standard"} text={"Book"}/>
         <NavItem link={"/auth/login"} text={loginState ? "Logout" : "Login"} func={loginState ? () => {handleLogout()} : () => {}}/>
       </nav>
 
-      <div className={`fixed z-20 bg-black ${sidebar ? "opacity-75 w-full h-screen" : "opacity-0 w-0 h-0"} transition`} onClick={() => {sidebar ? flipSidebar() : {}}}></div>
+      <div className={`fixed z-20 bg-black ${sidebar ? "opacity-75 w-full h-screen" : "opacity-0 w-0 h-0"} transition duration-[400ms]`} onClick={() => {sidebar ? flipSidebar() : {}}}></div>
 
       <div className={`fixed top-0 ${sidebar ?  'left-0' : 'left-[-100%]'} w-[350px] h-screen bg-[#EAE0D2] z-30 duration-[400ms]`}>
         {
