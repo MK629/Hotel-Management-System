@@ -2,7 +2,7 @@
 
 import React, { useContext, useEffect, useState } from 'react'
 import {MdMenu} from 'react-icons/md'
-import { isLoggedIn, logout } from '../services/authenticationService'
+import { isLoggedIn, logout } from '../services/credentialsService'
 import NavItem from "./NavItem"
 import MiniProfile from './MiniProfile'
 import {BsBook, BsClipboard, BsClockHistory, BsPen} from 'react-icons/bs'
@@ -24,13 +24,17 @@ const Header = () => {
     setResvHistoryDrawer(!resvHistoryDrawer)
   }
 
-  const handleLogout = () => {
-    logout()
+  async function handleLogout() {
+    await logout()
     flipChangeTracker()
   }
 
+  async function updateLoginState() {
+    setLoginState(await isLoggedIn())
+  }
+
   useEffect(() => {
-    setLoginState(isLoggedIn())
+    updateLoginState()
   }, [changeTracker])
 
   return (

@@ -2,7 +2,8 @@
 
 import { useRouter } from 'next/navigation'
 import React, { useContext } from 'react'
-import { login, saveLoggedInUser, storeToken} from '@/services/authenticationService'
+import {saveLoggedInUser, saveToken} from '@/services/credentialsService'
+import { login } from '@/services/authenticationService'
 import { formToJSON } from 'axios'
 import { ChangeTrackerContext } from '@/contexts/contextComponents/ChangeTrackerContext'
 import { CachedItemsContext } from '@/contexts/contextComponents/CachedItemsContext'
@@ -13,8 +14,8 @@ const LoginPage = () => {
   const {flipChangeTracker} = useContext(ChangeTrackerContext)
   const {initCachedData} = useContext(CachedItemsContext)
 
-  const sendLoginInfo = async (e) => {
-
+  async function sendLoginInfo(e) {
+    
     const loginInfo = formToJSON(e)
     let response
     let error
@@ -22,8 +23,8 @@ const LoginPage = () => {
     await login(loginInfo).then((res) => {response = res.data}).catch((e) => {error = e.response.data})
     
     if(response && response === "success"){
-      saveLoggedInUser(loginInfo.usernameOrEmail)
-      storeToken('Basic ' + window.btoa(loginInfo.usernameOrEmail + ":" + loginInfo.password))
+      await saveLoggedInUser(loginInfo.usernameOrEmail)
+      await saveToken('Basic ' + window.btoa(loginInfo.usernameOrEmail + ":" + loginInfo.password))
       router.push("/home")
       flipChangeTracker()
       initCachedData()

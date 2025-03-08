@@ -1,5 +1,5 @@
-import { isLoggedIn } from "./authenticationService";
 import { axiosInstance } from "./axiosConfig";
+import { isLoggedIn } from "./credentialsService";
 
 const MASTER_URL = "http://localhost:8080/hotel/api"
 
@@ -11,8 +11,9 @@ export const standardReservation = (standardReservationForm) => {
     return axiosInstance.post(MASTER_URL + "/standardReservation", standardReservationForm)
 }
 
-export const getSimpleUserInfo = (usernameOrEmail) => {
-    if(isLoggedIn()){
+export async function getSimpleUserInfo(usernameOrEmail){
+    const loginStatus = await isLoggedIn()
+    if(loginStatus){
         const usernameOrEmailForm = {
             usernameOrEmail : usernameOrEmail
         }
