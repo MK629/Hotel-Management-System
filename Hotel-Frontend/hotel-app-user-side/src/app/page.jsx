@@ -20,8 +20,8 @@ export default function Root() {
           <a className='bg-[#EAE0D2] hover:bg-[#D7C9AE] transition text-[#2D2D2D] text-2xl font-extrabold px-3 py-2 rounded-xl' href="/home">Plan your vacation!</a>
         </div>
 
-        <div className='mt-12'>
-        <Image alt='img.jpg' src={imageUrl + "5.jpg"} width={1350} height={1350} className='border-8 border-[#EAE0D2]'/>
+        <div className='mt-12 mb-12'>
+        <Image alt='img.jpg' src={imageUrl + "5.jpg"} width={1325} height={1325} className='border-8 border-[#EAE0D2]'/>
         </div>
       </div>
     </div>

@@ -1,7 +1,9 @@
-import Header from "@/utilComponents/Header";
+import Header from "@/utilComponents/foundation/Header";
 import './global.css'
-import Footer from "@/utilComponents/Footer";
+import Footer from "@/utilComponents/foundation/Footer";
+import Loading from "@/utilComponents/statusMessages/Loading";
 import GlobalContextManager from "@/contexts/GlobalContextManager";
+import { Suspense } from "react";
 
 export default function RootLayout({ children }) {
 
@@ -12,7 +14,9 @@ export default function RootLayout({ children }) {
           <GlobalContextManager>
             <div className="min-h-screen">
             <Header/>
-            {children}
+              <Suspense fallback={<Loading/>}>
+                {children}
+              </Suspense>
             </div>
             <Footer/>
           </GlobalContextManager>

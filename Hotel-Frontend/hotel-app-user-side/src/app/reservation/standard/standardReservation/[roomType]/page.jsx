@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import { getLoggedinUser } from '@/services/authenticationService'
+import { getLoggedInUser } from '@/services/credentialsService'
 import { standardReservation } from '@/services/hotelUserService'
 import { useParams, useRouter } from 'next/navigation'
 import React from 'react'
@@ -11,9 +11,9 @@ const StandardReservationFormPage = () => {
   const param = useParams() 
   const router = useRouter()
 
-  const sendStandardBookingInfo = async (e) => {
+  async function sendStandardBookingInfo(e){
       const standardReservationForm = {
-        usernameOrEmail : getLoggedinUser(),
+        usernameOrEmail : await getLoggedInUser(),
         bookedDate : e.bookedDate.value,
         nights : e.nights.value,
         contactNumber : e.contactNumber.value,

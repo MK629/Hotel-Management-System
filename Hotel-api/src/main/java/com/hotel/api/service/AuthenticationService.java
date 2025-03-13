@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import com.hotel.api.dto.input.LoginForm;
 import com.hotel.api.dto.input.RegisterForm;
 import com.hotel.api.entity.User;
 import com.hotel.api.exceptionHandling.customExceptions.DuplicateUsernameOrEmailException;
+import com.hotel.api.exceptionHandling.customExceptions.IncorrectAuthoritiesException;
 import com.hotel.api.repository.RoleRepository;
 import com.hotel.api.repository.UserRepository;
 
@@ -29,28 +31,49 @@ public class AuthenticationService{
 	private final PasswordEncoder passwordEncoder;
 	
 	public String userLogin(LoginForm loginForm){
-		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.usernameOrEmail(), loginForm.password()));
-		if (authentication.getAuthorities().stream().anyMatch((authority) -> {return authority.getAuthority().equals("ROLE_USER");}) ||
-				authentication.getAuthorities().stream().anyMatch((authority) -> {return authority.getAuthority().equals("ROLE_DEVELOPER");})) {
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			return "success";
+		try {
+			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.usernameOrEmail(), loginForm.password()));
+			if (authentication.getAuthorities().stream().anyMatch((authority) -> {return authority.getAuthority().equals("ROLE_USER");}) ||
+					authentication.getAuthorities().stream().anyMatch((authority) -> {return authority.getAuthority().equals("ROLE_DEVELOPER");})) {
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+				return "success";
+			}
+			else {
+				throw new IncorrectAuthoritiesException("Incorrect authorities.");
+			}
 		}
-		else {
-			throw new BadCredentialsException("incorrect authorities");
+		catch (IncorrectAuthoritiesException e) {
+			throw new BadCredentialsException(e.getMessage());
+		}
+		catch (BadCredentialsException e) {
+			throw new BadCredentialsException("Incorrect username or password.");
+		}
+		catch (AuthenticationException e) {
+			throw new BadCredentialsException("User does not exist.");
 		}
 	}
 	
 	public String adminLogin(LoginForm loginForm){
-		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.usernameOrEmail(), loginForm.password()));
-		if (authentication.getAuthorities().stream().anyMatch((authority) -> {return authority.getAuthority().equals("ROLE_ADMIN");}) || 
-				authentication.getAuthorities().stream().anyMatch((authority) -> {return authority.getAuthority().equals("ROLE_DEVELOPER");})) {
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			return "success";
+		try {
+			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.usernameOrEmail(), loginForm.password()));
+			if (authentication.getAuthorities().stream().anyMatch((authority) -> {return authority.getAuthority().equals("ROLE_ADMIN");}) || 
+					authentication.getAuthorities().stream().anyMatch((authority) -> {return authority.getAuthority().equals("ROLE_DEVELOPER");})) {
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+				return "success";
+			}
+			else {
+				throw new IncorrectAuthoritiesException("Incorrect authorities.");
+			}
 		}
-		else {
-			throw new BadCredentialsException("incorrect authorities");
+		catch (IncorrectAuthoritiesException e) {
+			throw new BadCredentialsException(e.getMessage());
 		}
-
+		catch (BadCredentialsException e) {
+			throw new BadCredentialsException("Incorrect username or password.");
+		}
+		catch (AuthenticationException e) {
+			throw new BadCredentialsException("User does not exist.");
+		}
 	}
 	
 	@Transactional

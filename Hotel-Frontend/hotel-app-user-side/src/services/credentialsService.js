@@ -14,7 +14,7 @@ export async function getToken(){
 
 export async function saveLoggedInUser(loggedInUser){
     const cookieJar = await cookies()
-    cookieJar.set("user", loggedInUser, {secure:true, path: '/'})
+    cookieJar.set("user", loggedInUser, {secure: true, path: '/'})
 }
 
 export async function getLoggedInUser() {

@@ -6,13 +6,11 @@ import {saveLoggedInUser, saveToken} from '@/services/credentialsService'
 import { login } from '@/services/authenticationService'
 import { formToJSON } from 'axios'
 import { ChangeTrackerContext } from '@/contexts/contextComponents/ChangeTrackerContext'
-import { CachedItemsContext } from '@/contexts/contextComponents/CachedItemsContext'
 
 const LoginPage = () => {
 
   const router = useRouter()
   const {flipChangeTracker} = useContext(ChangeTrackerContext)
-  const {initCachedData} = useContext(CachedItemsContext)
 
   async function sendLoginInfo(e) {
     
@@ -27,7 +25,6 @@ const LoginPage = () => {
       await saveToken('Basic ' + window.btoa(loginInfo.usernameOrEmail + ":" + loginInfo.password))
       router.push("/home")
       flipChangeTracker()
-      initCachedData()
     }
     else{
       window.alert(error)

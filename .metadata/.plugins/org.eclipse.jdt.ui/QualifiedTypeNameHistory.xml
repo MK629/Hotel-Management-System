@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.context.annotation.Configuration"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="jakarta.persistence.OneToMany"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="com.hotel.api.entity.Reservation"/>
     <fullyQualifiedTypeName name="com.hotel.api.entity.enums.UserRank"/>
-    <fullyQualifiedTypeName name="javax.security.sasl.AuthenticationException"/>
     <fullyQualifiedTypeName name="com.hotel.api.service.DTOs.Input.ManualReservationForm"/>
     <fullyQualifiedTypeName name="com.hotel.api.service.DTOs.Output.ReservationRecord"/>
     <fullyQualifiedTypeName name="com.hotel.api.service.DTOs.Input.UsernameOrEmailAndReservationTypeForm"/>
@@ -21,7 +19,6 @@
     <fullyQualifiedTypeName name="com.hotel.api.service.DTOs.Input.ExtendStayForm"/>
     <fullyQualifiedTypeName name="com.hotel.api.service.DTOs.Input.ReservationIdForm"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ExceptionHandler"/>
-    <fullyQualifiedTypeName name="org.springframework.security.authentication.BadCredentialsException"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UsernameNotFoundException"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.UnavailableRoomException"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.ReservationNotFoundException"/>
@@ -60,4 +57,7 @@
     <fullyQualifiedTypeName name="jakarta.persistence.JoinColumn"/>
     <fullyQualifiedTypeName name="jakarta.persistence.CascadeType"/>
     <fullyQualifiedTypeName name="jakarta.validation.constraints.Pattern"/>
+    <fullyQualifiedTypeName name="org.springframework.security.authentication.BadCredentialsException"/>
+    <fullyQualifiedTypeName name="javax.security.sasl.AuthenticationException"/>
+    <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.IncorrectAuthoritiesException"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,7 @@
+package com.hotel.api.exceptionHandling.customExceptions;
+
+import javax.security.sasl.AuthenticationException;
+
+public class IncorrectAuthoritiesException extends AuthenticationException{
+
+}

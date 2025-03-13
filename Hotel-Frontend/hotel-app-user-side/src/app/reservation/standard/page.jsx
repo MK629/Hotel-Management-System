@@ -1,13 +1,13 @@
 'use client'
 
-import React, { useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { CachedItemsContext } from '@/contexts/contextComponents/CachedItemsContext'
+import { initStandardReservationPage } from '@/services/hotelUserService'
 
 const StandardReservationPage = () => {
 
-  const {roomTypes} = useContext(CachedItemsContext)
+  const [roomTypeChoices, setRoomTypeChoices] = useState([])
   const imageUrl = "/images/RoomTypeImages/"
   const router = useRouter()
   const currentUrl = usePathname()
@@ -16,11 +16,15 @@ const StandardReservationPage = () => {
     router.push(`${currentUrl}/standardReservation/${type}`)
   }
 
+  useEffect(() => {
+    initStandardReservationPage().then(res => setRoomTypeChoices(res.data)).catch(e => console.log(e))
+  }, [])
+
   return (
     <div className='p-10'>
       <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6 mx-auto'>
         {
-          roomTypes && roomTypes.map(item => {
+          roomTypeChoices && roomTypeChoices.map(item => {
             return(
               <div key={item.type} className='bg-[#D7C9AE] rounded-md flex hover:scale-105 transition'>
                 <Image src={imageUrl + item.image} alt={item.image} width={400} height={400} className='rounded-lg border-2 w-2/3 border-[#D7C9AE]'/>
