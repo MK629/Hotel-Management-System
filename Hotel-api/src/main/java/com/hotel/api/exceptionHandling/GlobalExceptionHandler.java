@@ -13,9 +13,15 @@ import com.hotel.api.exceptionHandling.customExceptions.InvalidDateException;
 import com.hotel.api.exceptionHandling.customExceptions.ReservationNotFoundException;
 import com.hotel.api.exceptionHandling.customExceptions.ReservationStatusErrorException;
 import com.hotel.api.exceptionHandling.customExceptions.UnavailableRoomException;
+import com.hotel.api.exceptionHandling.customExceptions.UnknownEnumTypeException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+	
+	@ExceptionHandler(UnknownEnumTypeException.class)
+	ResponseEntity<String> handleUnknownErrors(UnknownEnumTypeException e){
+		return ResponseEntity.status(400).body(e.getMessage());
+	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	ResponseEntity<String> handleConstraintErrors(MethodArgumentNotValidException e){

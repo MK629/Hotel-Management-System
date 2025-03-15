@@ -1,0 +1,12 @@
+package com.hotel.api.exceptionHandling.customExceptions;
+
+public class UnknownException extends RuntimeException{
+
+	private static final long serialVersionUID = -4423420692588187900L;
+
+	public UnknownException(String message) {
+		super(message);
+	}
+	
+	
+}

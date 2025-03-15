@@ -45,6 +45,9 @@ public class User{
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Role> roles = new HashSet<Role>();
+	
+	@Column(nullable = false)
+	private Double rankPoints;
 
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -57,7 +60,8 @@ public class User{
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.rank = determineUserRank(this.reservations);
+		this.rankPoints = 0.0;
+		this.rank = evaluateUserRank(this.rankPoints);
 	}
 	
 	public void addRole(Role role) {
@@ -65,26 +69,30 @@ public class User{
 		this.roles.add(role);
 	}
 	
-	public void recordReservation(Reservation reservation) {
+	public void addReservation(Reservation reservation) {
 		this.reservations.add(reservation);
-		this.rank = determineUserRank(this.reservations);
 	}
 	
-	private UserRank determineUserRank(List<Reservation> reservations) {
-		if(reservations.size() >= 20) {
+	public void grantUserRankPoints(Double rankPoints) {
+		this.rankPoints += rankPoints;
+		this.rank = evaluateUserRank(this.rankPoints);
+	}
+	
+	private UserRank evaluateUserRank(Double rankPoints) {
+		if(rankPoints >= 750.00) {
 			return UserRank.Platinum;
 		}
-		else if(reservations.size() >= 10) {
+		else if(rankPoints >= 500.00) {
 			return UserRank.Gold;
 		}
-		else if(reservations.size() >= 5) {
+		else if(rankPoints >= 250.00) {
 			return UserRank.Silver;
 		}
 		else {
 			return UserRank.Bronze;
 		}
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(email, id, username);

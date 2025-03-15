@@ -7,6 +7,7 @@ import com.hotel.api.entity.enums.ReservationStatus;
 import com.hotel.api.entity.enums.ReservationType;
 import com.hotel.api.entity.enums.RoomType;
 import com.hotel.api.entity.enums.UserRank;
+import com.hotel.api.exceptionHandling.customExceptions.UnknownEnumTypeException;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -110,7 +111,7 @@ public class Reservation {
 	
 	public Reservation(User user, LocalDateTime reservationTime, LocalDate bookedDate,
 			int nights, String contactNumber, Room room, ReservationType reservationType) {
-		user.recordReservation(this);
+		user.addReservation(this);
 		this.user = user;
 		this.username = user.getUsername();
 		this.userEmail = user.getEmail();
@@ -140,7 +141,7 @@ public class Reservation {
 		case Manual:{
 			return 100.00;
 		}
-		default: return 50.00;
+		default: throw new UnknownEnumTypeException("Enum type does not exist.");
 		}
 	}
 	
@@ -150,7 +151,7 @@ public class Reservation {
 		case Silver: return total * 0.9;
 		case Gold: return total * 0.8;
 		case Platinum: return total * 0.6;
-		default: return total;
+		default: throw new UnknownEnumTypeException("Enum type does not exist.");
 		}
 	}
 	

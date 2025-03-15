@@ -33,21 +33,22 @@ public class HotelApiApplication {
 			Role admin = new Role("ROLE_ADMIN");
 			Role user = new Role("ROLE_USER");
 			
+			User devUsr = new User("dev", "dev@gmail.com", passwordEncoder.encode("12345"));
+			devUsr.addRole(developer);
+			devUsr.addRole(admin);
+			
+			User adminUsr = new User("admin", "admin@gmail.com", passwordEncoder.encode("12345"));
+			adminUsr.addRole(admin);
+			
+			User usr = new User("user", "user@gmail.com", passwordEncoder.encode("12345"));
+			usr.addRole(user);
+			
 			roleRepository.save(developer);
 			roleRepository.save(admin);
 			roleRepository.save(user);
 			
-			User devUsr = new User("dev", "dev@gmail.com", passwordEncoder.encode("12345"));
-			devUsr.addRole(developer);
-			devUsr.addRole(admin);
 			userRepository.save(devUsr);
-			
-			User adminUsr = new User("admin", "admin@gmail.com", passwordEncoder.encode("12345"));
-			adminUsr.addRole(admin);
 			userRepository.save(adminUsr);
-			
-			User usr = new User("user", "user@gmail.com", passwordEncoder.encode("12345"));
-			usr.addRole(user);
 			userRepository.save(usr);
 			
 			

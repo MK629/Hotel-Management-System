@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="jakarta.persistence.OneToMany"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="com.hotel.api.entity.Reservation"/>
-    <fullyQualifiedTypeName name="com.hotel.api.entity.enums.UserRank"/>
-    <fullyQualifiedTypeName name="com.hotel.api.service.DTOs.Input.ManualReservationForm"/>
-    <fullyQualifiedTypeName name="com.hotel.api.service.DTOs.Output.ReservationRecord"/>
     <fullyQualifiedTypeName name="com.hotel.api.service.DTOs.Input.UsernameOrEmailAndReservationTypeForm"/>
     <fullyQualifiedTypeName name="com.hotel.api.service.DTOs.Input.ReservationStatusForm"/>
     <fullyQualifiedTypeName name="com.hotel.api.entity.enums.ReservationType"/>
@@ -45,7 +38,6 @@
     <fullyQualifiedTypeName name="jakarta.persistence.Enumerated"/>
     <fullyQualifiedTypeName name="jakarta.persistence.EnumType"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
-    <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.EditLimitExceededException"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.InvalidDateException"/>
     <fullyQualifiedTypeName name="com.hotel.api.service.util.ServiceUtil"/>
@@ -60,4 +52,12 @@
     <fullyQualifiedTypeName name="org.springframework.security.authentication.BadCredentialsException"/>
     <fullyQualifiedTypeName name="javax.security.sasl.AuthenticationException"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.IncorrectAuthoritiesException"/>
+    <fullyQualifiedTypeName name="com.hotel.api.entity.enums.UserRank"/>
+    <fullyQualifiedTypeName name="com.hotel.api.entity.enums.RoomType"/>
+    <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
+    <fullyQualifiedTypeName name="org.hibernate.query.UnknownNamedQueryException"/>
+    <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.UnknownException"/>
+    <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.UnknownEnumTypeException"/>
+    <fullyQualifiedTypeName name="com.hotel.api.entity.Role"/>
+    <fullyQualifiedTypeName name="com.hotel.api.service.util.UserRankPointsCalculator"/>
 </qualifiedTypeNameHistroy>

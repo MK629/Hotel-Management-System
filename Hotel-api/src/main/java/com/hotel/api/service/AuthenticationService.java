@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hotel.api.dto.input.LoginForm;
 import com.hotel.api.dto.input.RegisterForm;
+import com.hotel.api.entity.Role;
 import com.hotel.api.entity.User;
 import com.hotel.api.exceptionHandling.customExceptions.DuplicateUsernameOrEmailException;
 import com.hotel.api.exceptionHandling.customExceptions.IncorrectAuthoritiesException;
@@ -80,8 +81,10 @@ public class AuthenticationService{
 	public String register(RegisterForm registerForm) {
 		try {
 			User newUser = new User(registerForm.username(), registerForm.email(), passwordEncoder.encode(registerForm.password()));
-			newUser.addRole(roleRepository.findRoleByName("ROLE_USER"));
+			Role userRole = roleRepository.findRoleByName("ROLE_USER");
+			newUser.addRole(userRole);
 			userRepository.save(newUser);
+			roleRepository.save(userRole);
 			return "success";
 		}
 		catch(DataIntegrityViolationException e) {

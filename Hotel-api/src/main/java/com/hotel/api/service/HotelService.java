@@ -31,6 +31,7 @@ import com.hotel.api.repository.ReservationRepository;
 import com.hotel.api.repository.RoomRepository;
 import com.hotel.api.repository.UserRepository;
 import com.hotel.api.service.util.ServiceUtil;
+import com.hotel.api.service.util.UserRankPointsCalculator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -76,6 +77,8 @@ public class HotelService {
 			throw new UsernameNotFoundException("User not found.");
 		}
 		
+		reservationMaker.grantUserRankPoints(UserRankPointsCalculator.calculatePointsToGrant(availableRoom.getType(), standardReservationForm.nights()));
+		
 		Reservation reservation = new Reservation(reservationMaker, LocalDateTime.now(),
 				standardReservationForm.bookedDate(), standardReservationForm.nights(), "09-" + standardReservationForm.contactNumber(), availableRoom, ReservationType.Standard);
 		availableRoom.setReserved(true);
@@ -103,6 +106,8 @@ public class HotelService {
 		if(reservationMaker == null) {
 			throw new UsernameNotFoundException("User not found.");
 		}
+		
+		reservationMaker.grantUserRankPoints(UserRankPointsCalculator.calculatePointsToGrant(chosenRoom.getType(), manualReservationForm.nights()));
 		
 		Reservation reservation = new Reservation(reservationMaker, LocalDateTime.now(), 
 				manualReservationForm.bookedDate(), manualReservationForm.nights(),  "09-" + manualReservationForm.contactNumber(), chosenRoom, ReservationType.Manual);

@@ -1,0 +1,18 @@
+package com.hotel.api.service.util;
+
+import com.hotel.api.entity.enums.RoomType;
+
+public class UserRankPointsCalculator {
+
+	public static Double calculatePointsToGrant(RoomType roomType, Integer nights) {
+		return calculatePointsByRoomType(roomType);
+	}
+	
+	private static Double calculatePointsByRoomType(RoomType roomType, Double points) {
+		return 0.0;
+	}
+	
+	private static Double calculatePointsByNights(Integer nights, Double points) {
+		return 0.0;
+	}
+}
