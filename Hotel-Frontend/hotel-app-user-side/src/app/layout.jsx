@@ -14,9 +14,7 @@ export default function RootLayout({ children }) {
           <GlobalContextManager>
             <div className="min-h-screen">
             <Header/>
-              <Suspense fallback={<Loading/>}>
                 {children}
-              </Suspense>
             </div>
             <Footer/>
           </GlobalContextManager>

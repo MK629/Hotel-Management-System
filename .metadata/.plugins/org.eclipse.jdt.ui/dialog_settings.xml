@@ -128,4 +128,7 @@
 		<item key="DIALOG_HEIGHT" value="593"/>
 		<item key="DIALOG_FONT_NAME" value="1|JetBrains Mono|8.0|0|GTK|1|"/>
 	</section>
+	<section name="BuildPathsPropertyPage">
+		<item key="pageIndex" value="3"/>
+	</section>
 </section>
