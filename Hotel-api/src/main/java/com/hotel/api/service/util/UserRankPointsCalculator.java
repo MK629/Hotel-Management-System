@@ -27,4 +27,8 @@ public class UserRankPointsCalculator {
 	private static Double calculatePointsByNights(Integer nights) {
 		return 7.50 * nights;
 	}
+	
+	public static Double grantPointsByExtendedNights(Integer nights) {
+		return 7.50 * nights;
+	}
 }

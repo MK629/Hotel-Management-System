@@ -2,7 +2,7 @@ package com.hotel.api.dto.input;
 
 import java.time.LocalDate;
 import com.hotel.api.entity.enums.RoomType;
-import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -15,7 +15,7 @@ public record StandardReservationForm(
 		@NotEmpty(message = "username is empty.")
 		String usernameOrEmail,
 		@NotNull(message = "booking date is null.")
-		@Future(message = "booking date must be in the future.")
+		@FutureOrPresent(message = "booking date must be in the future or present.")
 		LocalDate bookedDate,
 		@NotNull(message = "nights can't be null!")
 		@Positive(message = "nights can't be negative.")

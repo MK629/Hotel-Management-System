@@ -2,6 +2,7 @@ package com.hotel.api.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import com.hotel.api.entity.enums.ReservationStatus;
 import com.hotel.api.entity.enums.ReservationType;
@@ -42,14 +43,8 @@ public class Reservation {
 	private User user;
 	
 	@Column(nullable = false)
-	private String username;
-	
-	@Column(nullable = false)
-	private String userEmail;
-	
-	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
-	private UserRank userRank;
+	private UserRank userRankAtReservationTime;
 	
 	@Column(nullable = false)
 	private LocalDateTime reservationDateTime;
@@ -81,7 +76,10 @@ public class Reservation {
 	private Double reservationFee;
 	
 	@Column(nullable = false)
-	private Double total;
+	private Double estimatedTotal;
+	
+	@Column(nullable = true)
+	private Double actualTotal;
 	
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -103,7 +101,10 @@ public class Reservation {
 	@Column(nullable = false, columnDefinition = "TINYINT(1)")
 	private Boolean extendedStay;
 	
-	@Column(nullable = true)
+	@Column(nullable = false, columnDefinition = "TINYINT(1)")
+	private Boolean earlyCheckout;
+	
+	@Column(nullable = false)
 	private Integer bookingDateEdited;
 	
 	@Transient //Hidden Variable
@@ -113,9 +114,7 @@ public class Reservation {
 			int nights, String contactNumber, Room room, ReservationType reservationType) {
 		user.addReservation(this);
 		this.user = user;
-		this.username = user.getUsername();
-		this.userEmail = user.getEmail();
-		this.userRank = user.getRank();
+		this.userRankAtReservationTime = user.getRank();
 		this.reservationDateTime = reservationTime;
 		this.bookedDate = bookedDate;
 		this.nights = nights;
@@ -127,9 +126,10 @@ public class Reservation {
 		this.reservationType = reservationType; 
 		this.reservationStatus = ReservationStatus.Awaiting;
 		this.reservationFee = chargeReservationFee(reservationType);
-		this.rawTotal = this.reservationFee + (room.getPrice() * nights); 
-		this.total = userRankDiscountTotal(this.userRank, this.rawTotal);
+		this.rawTotal = this.reservationFee + (this.room.getPrice() * this.nights); 
+		this.estimatedTotal = userRankDiscountTotal(this.userRankAtReservationTime, this.rawTotal);
 		this.extendedStay = false;
+		this.earlyCheckout = false;
 		this.bookingDateEdited = 0;
 	}
 	
@@ -159,12 +159,23 @@ public class Reservation {
 		this.nights += nights;
 		this.estimatedCheckoutDate = this.bookedDate.plusDays(this.nights);
 		this.rawTotal = this.reservationFee + (this.room.getPrice() * this.nights);
-		this.total = userRankDiscountTotal(this.userRank, rawTotal);
+		this.estimatedTotal = userRankDiscountTotal(this.userRankAtReservationTime, this.rawTotal);
 	}
 	
 	public void editBookedDate(LocalDate newBookedDate) {
 		this.bookedDate = newBookedDate;
 		this.estimatedCheckoutDate = this.bookedDate.plusDays(this.nights);
 		this.bookingDateEdited++;
+	}
+	
+	public void calculateActualTotal() {
+		if(this.earlyCheckout == true) {
+			Integer spentNights = (int) ChronoUnit.DAYS.between(this.bookedDate, LocalDate.now());
+			this.rawTotal = this.reservationFee + (this.room.getPrice() * spentNights);
+			this.actualTotal = userRankDiscountTotal(this.userRankAtReservationTime, rawTotal);
+		}
+		else {
+			this.actualTotal = this.estimatedTotal;
+		}
 	}
 }

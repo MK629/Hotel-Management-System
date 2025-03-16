@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import Loading from './Loading'
+import Loading from '../status/Loading'
 
 const ManageDelay = ({component}) => {
   return (

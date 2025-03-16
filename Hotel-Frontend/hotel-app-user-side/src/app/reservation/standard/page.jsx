@@ -1,10 +1,10 @@
 "use client"
 
-import ManageDelay from '@/utilComponents/status/ManageDelay'
+import ManageDelay from '@/utilComponents/rendering/ManageDelay'
 import dynamic from 'next/dynamic'
 import React from 'react'
 
-const StandardReservationPage = dynamic(() => import("../../../components/reservation/standard/StandardReservationPage"), { suspense: true, ssr: false})
+const StandardReservationPage = dynamic(() => import("@/components/reservation/standard/StandardReservationPage"), { suspense: true, ssr: false})
 
 const page = () => {
   return (

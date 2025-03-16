@@ -15,7 +15,7 @@ import com.hotel.api.dto.input.LoginForm;
 import com.hotel.api.dto.input.RegisterForm;
 import com.hotel.api.entity.Role;
 import com.hotel.api.entity.User;
-import com.hotel.api.exceptionHandling.customExceptions.DuplicateUsernameOrEmailException;
+import com.hotel.api.exceptionHandling.customExceptions.DuplicateDataException;
 import com.hotel.api.exceptionHandling.customExceptions.IncorrectAuthoritiesException;
 import com.hotel.api.repository.RoleRepository;
 import com.hotel.api.repository.UserRepository;
@@ -88,7 +88,7 @@ public class AuthenticationService{
 			return "success";
 		}
 		catch(DataIntegrityViolationException e) {
-			throw new DuplicateUsernameOrEmailException("Username or E-mail already exists. Please try a different one.");
+			throw new DuplicateDataException("Username or E-mail already exists. Please try a different one.");
 		}
 	}
 }

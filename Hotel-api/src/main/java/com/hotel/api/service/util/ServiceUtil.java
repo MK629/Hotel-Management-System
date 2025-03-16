@@ -14,10 +14,10 @@ public class ServiceUtil {
 	}
 	
 	public static ReservationDTO changeToReservationDTO(Reservation reservation) {
-		return new ReservationDTO(reservation.getId(), reservation.getUsername(), reservation.getUserEmail(), reservation.getUserRank(), reservation.getReservationDateTime(),
+		return new ReservationDTO(reservation.getId(), reservation.getUser().getUsername(), reservation.getUser().getEmail(), reservation.getUserRankAtReservationTime(), reservation.getUser().getRank(), reservation.getReservationDateTime(),
 				reservation.getBookedDate(), reservation.getNights(), reservation.getEstimatedCheckoutDate(), reservation.getContactNumber(), reservation.getRoomNumber(), reservation.getRoomType(),
-				reservation.getReservationFee(),reservation.getTotal(), reservation.getReservationType(), reservation.getReservationStatus(), reservation.getCheckInDateTime(),
-				reservation.getCheckOutDateTime(), reservation.getCancelDateTime(), reservation.getExtendedStay(), reservation.getBookingDateEdited());
+				reservation.getReservationFee(),reservation.getEstimatedTotal(), reservation.getActualTotal(), reservation.getReservationType(), reservation.getReservationStatus(), reservation.getCheckInDateTime(),
+				reservation.getCheckOutDateTime(), reservation.getCancelDateTime(), reservation.getExtendedStay(), reservation.getEarlyCheckout(), reservation.getBookingDateEdited());
 	}
 	
 	public static SimpleUserInfo changeToSimpleUserInfo(User user) {

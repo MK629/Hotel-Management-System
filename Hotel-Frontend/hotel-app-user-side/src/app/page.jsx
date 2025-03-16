@@ -1,4 +1,4 @@
-import ManageDelay from '@/utilComponents/status/ManageDelay'
+import ManageDelay from '@/utilComponents/rendering/ManageDelay'
 import dynamic from 'next/dynamic'
 import React from 'react'
 

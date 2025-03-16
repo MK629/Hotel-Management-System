@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.hotel.api.dto.input.EditBookedDateForm;
@@ -24,7 +25,9 @@ import com.hotel.api.dto.output.RoomDTO;
 import com.hotel.api.dto.output.SimpleUserInfo;
 import com.hotel.api.entity.Reservation;
 import com.hotel.api.entity.Room;
+import com.hotel.api.entity.User;
 import com.hotel.api.entity.enums.ReservationStatus;
+import com.hotel.api.exceptionHandling.customExceptions.DuplicateDataException;
 import com.hotel.api.exceptionHandling.customExceptions.EditLimitExceededException;
 import com.hotel.api.exceptionHandling.customExceptions.InvalidDateException;
 import com.hotel.api.exceptionHandling.customExceptions.ReservationNotFoundException;
@@ -35,6 +38,7 @@ import com.hotel.api.repository.RoleRepository;
 import com.hotel.api.repository.RoomRepository;
 import com.hotel.api.repository.UserRepository;
 import com.hotel.api.service.util.ServiceUtil;
+import com.hotel.api.service.util.UserRankPointsCalculator;
 
 import lombok.RequiredArgsConstructor;
 
@@ -69,9 +73,13 @@ public class AdminOperationsService {
 	}
 	
 	public String addNewRoom(RoomAddForm roomAddForm) {
-		Room newRoom = new Room(roomAddForm.number(), roomAddForm.type(), roomAddForm.image());
-		roomRepository.save(newRoom);
-		return "success";
+		try {
+			Room newRoom = new Room(roomAddForm.number(), roomAddForm.type(), roomAddForm.image());
+			roomRepository.save(newRoom);
+			return "success";
+		} catch (DataIntegrityViolationException e) {
+			throw new DuplicateDataException("Room number already exists.");
+		}
 	}
 	
 	public String editRoom(RoomEditForm roomEditForm) {
@@ -131,18 +139,17 @@ public class AdminOperationsService {
 		if(checkInReservation.getReservationStatus() == ReservationStatus.Awaiting) {
 			checkInReservation.setReservationStatus(ReservationStatus.Checked_In);
 			checkInReservation.setCheckInDateTime(LocalDateTime.now());
-			reservationRepository.save(checkInReservation);
 			
 			if(checkInReservation.getReservationStatus() != ReservationStatus.Checked_In) {
-				checkInReservation.setCheckInDateTime(null);
-				reservationRepository.save(checkInReservation);
 				throw new ReservationStatusErrorException("something went wrong. please contact the developer.");
 			}
 			
-			return "successfully checked in user: " + checkInReservation.getUsername() + ".";
+			reservationRepository.save(checkInReservation);
+			
+			return "successfully checked in user: " + checkInReservation.getUser().getUsername() + ".";
 		}
 		else {
-			throw new ReservationStatusErrorException("inappropriate reservation status.");
+			throw new ReservationStatusErrorException("Inappropriate reservation status.");
 		}
 	}
 	
@@ -154,24 +161,26 @@ public class AdminOperationsService {
 		}
 		
 		if(checkOutReservation.getReservationStatus() == ReservationStatus.Checked_In) {
+			if(LocalDate.now().isBefore(checkOutReservation.getEstimatedCheckoutDate())) {
+				checkOutReservation.setEarlyCheckout(true);
+			}
 			Room checkOutRoom = checkOutReservation.getRoom();
 			checkOutReservation.setReservationStatus(ReservationStatus.Checked_Out);
 			checkOutReservation.setCheckOutDateTime(LocalDateTime.now());
+			checkOutReservation.calculateActualTotal();
 			checkOutRoom.setReserved(false);
+			
+			if(checkOutReservation.getReservationStatus() != ReservationStatus.Checked_Out) {
+				throw new ReservationStatusErrorException("something went wrong. please contact the developer.");
+			}
+			
 			roomRepository.save(checkOutRoom);
 			reservationRepository.save(checkOutReservation);
 			
-			if(checkOutReservation.getReservationStatus() != ReservationStatus.Checked_Out) {
-				checkOutRoom.setReserved(true);
-				checkOutReservation.setCheckOutDateTime(null);
-				roomRepository.save(checkOutRoom);
-				reservationRepository.save(checkOutReservation);
-				throw new ReservationStatusErrorException("something went wrong. please contact the developer.");
-			}
-			return "successfully checked out user: " + checkOutReservation.getUsername() + ".";
+			return "successfully checked out user: " + checkOutReservation.getUser().getUsername() + ".";
 		}
 		else {
-			throw new ReservationStatusErrorException("inappropriate reservation status.");
+			throw new ReservationStatusErrorException("Inappropriate reservation status.");
 		}
 	}
 	
@@ -186,17 +195,17 @@ public class AdminOperationsService {
 			Room cancelRoom = cancelReservation.getRoom();
 			cancelReservation.setReservationStatus(ReservationStatus.Cancelled);
 			cancelReservation.setCancelDateTime(LocalDateTime.now());
+			cancelReservation.setActualTotal(cancelReservation.getReservationFee());
 			cancelRoom.setReserved(false);
+			
+			if(cancelReservation.getReservationStatus() != ReservationStatus.Cancelled) {
+				throw new ReservationStatusErrorException("something went wrong. please contact the developer.");
+			}
+			
 			roomRepository.save(cancelRoom);
 			reservationRepository.save(cancelReservation);
 			
-			if(cancelReservation.getReservationStatus() != ReservationStatus.Cancelled) {
-				cancelRoom.setReserved(true);
-				roomRepository.save(cancelRoom);
-				reservationRepository.save(cancelReservation);
-				throw new ReservationStatusErrorException("something went wrong. please contact the developer.");
-			}
-			return "successfully cancelled the reservation for user: " + cancelReservation.getUsername() + ".";
+			return "successfully cancelled the reservation for user: " + cancelReservation.getUser().getUsername() + ".";
 		}
 		else {
 			throw new ReservationStatusErrorException("inappropriate reservation status.");
@@ -213,8 +222,13 @@ public class AdminOperationsService {
 		if(extendReservation.getReservationStatus() == ReservationStatus.Awaiting || extendReservation.getReservationStatus() == ReservationStatus.Checked_In) {
 			extendReservation.addNights(extendStayForm.nights());
 			extendReservation.setExtendedStay(true);
+			
+			User updateUser = extendReservation.getUser();
+			updateUser.grantUserRankPoints(UserRankPointsCalculator.grantPointsByExtendedNights(extendStayForm.nights()));
+			userRepository.save(updateUser);
+			
 			reservationRepository.save(extendReservation);
-			return "nights extended to " + extendReservation.getNights() + " for user: " + extendReservation.getUsername() + ".";
+			return "nights extended to " + extendReservation.getNights() + " for user: " + extendReservation.getUser().getUsername() + ".";
 		}
 		else {
 			throw new ReservationStatusErrorException("inappropriate reservation status.");
@@ -237,7 +251,7 @@ public class AdminOperationsService {
 			}
 			editReservation.editBookedDate(editBookedDateForm.bookedDate());
 			reservationRepository.save(editReservation);
-			return "Booked date changed to " + editReservation.getBookedDate() + " for user: " + editReservation.getUsername() + ".";
+			return "Booked date changed to " + editReservation.getBookedDate() + " for user: " + editReservation.getUser().getUsername() + ".";
 		}
 		else {
 			throw new ReservationStatusErrorException("inappropriate reservation status.");

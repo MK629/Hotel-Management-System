@@ -7,7 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.hotel.api.exceptionHandling.customExceptions.DuplicateUsernameOrEmailException;
+import com.hotel.api.exceptionHandling.customExceptions.DuplicateDataException;
 import com.hotel.api.exceptionHandling.customExceptions.EditLimitExceededException;
 import com.hotel.api.exceptionHandling.customExceptions.InvalidDateException;
 import com.hotel.api.exceptionHandling.customExceptions.ReservationNotFoundException;
@@ -33,8 +33,8 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(401).body(e.getMessage());
 	}
 	
-	@ExceptionHandler(DuplicateUsernameOrEmailException.class)
-	ResponseEntity<String> handleDuplicateIdentitiesErrorInDBLevel(DuplicateUsernameOrEmailException e){
+	@ExceptionHandler(DuplicateDataException.class)
+	ResponseEntity<String> handleDuplicateIdentitiesErrorInDBLevel(DuplicateDataException e){
 		return ResponseEntity.status(400).body(e.getMessage());
 	}
 	
