@@ -1,17 +1,15 @@
 "use client"
 
-import Loading from '@/utilComponents/statusMessages/Loading'
+import ManageDelay from '@/utilComponents/status/ManageDelay'
 import dynamic from 'next/dynamic'
-import React, { lazy, Suspense } from 'react'
+import React from 'react'
 
-const StandardReservationPage = dynamic(() => import("./StandardReservationPage"), { suspense: true, ssr: false})
+const StandardReservationPage = dynamic(() => import("../../../components/reservation/standard/StandardReservationPage"), { suspense: true, ssr: false})
 
 const page = () => {
   return (
     <>
-      <Suspense fallback={<Loading/>}>
-        <StandardReservationPage/>
-      </Suspense>
+      <ManageDelay component={<StandardReservationPage/>}/>
     </>
   )
 }

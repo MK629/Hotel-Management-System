@@ -1,9 +1,7 @@
-import Header from "@/utilComponents/foundation/Header";
+import Header from "@/components/layout/Header";
 import './global.css'
-import Footer from "@/utilComponents/foundation/Footer";
-import Loading from "@/utilComponents/statusMessages/Loading";
+import Footer from "@/components/layout/Footer";
 import GlobalContextManager from "@/contexts/GlobalContextManager";
-import { Suspense } from "react";
 
 export default function RootLayout({ children }) {
 

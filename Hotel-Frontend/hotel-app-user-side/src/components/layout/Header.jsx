@@ -3,8 +3,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {MdMenu} from 'react-icons/md'
 import { isLoggedIn, logout } from '../../services/credentialsService'
-import NavItem from "./NavItem"
-import MiniProfile from '../userProfile/MiniProfile'
+import NavItem from "../../utilComponents/layout/NavItem"
+import MiniProfile from '../../utilComponents/profile/MiniProfile'
 import {BsBook, BsClipboard, BsClockHistory, BsPen} from 'react-icons/bs'
 import { AiOutlineCaretDown} from 'react-icons/ai'
 import { ChangeTrackerContext } from '@/contexts/contextComponents/ChangeTrackerContext'
