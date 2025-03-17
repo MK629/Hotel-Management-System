@@ -1,0 +1,188 @@
+package com.hotel.api.service;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.hotel.api.dto.input.ChangePasswordRequestForm;
+import com.hotel.api.dto.input.ManualReservationForm;
+import com.hotel.api.dto.input.StandardReservationForm;
+import com.hotel.api.dto.input.UsernameOrEmailAndReservationStatusForm;
+import com.hotel.api.dto.input.UsernameOrEmailAndReservationTypeForm;
+import com.hotel.api.dto.input.UsernameOrEmailForm;
+import com.hotel.api.dto.output.ReservationDTO;
+import com.hotel.api.dto.output.RoomChoice;
+import com.hotel.api.dto.output.RoomDTO;
+import com.hotel.api.dto.output.SimpleUserInfo;
+import com.hotel.api.entity.Reservation;
+import com.hotel.api.entity.Room;
+import com.hotel.api.entity.User;
+import com.hotel.api.entity.enums.ReservationType;
+import com.hotel.api.entity.enums.RoomType;
+import com.hotel.api.exceptionHandling.customExceptions.InvalidDateException;
+import com.hotel.api.exceptionHandling.customExceptions.UnavailableRoomException;
+import com.hotel.api.repository.ReservationRepository;
+import com.hotel.api.repository.RoomRepository;
+import com.hotel.api.repository.UserRepository;
+import com.hotel.api.service.util.ServiceUtil;
+import com.hotel.api.service.util.UserRankPointsCalculator;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class HotelService {
+	
+	private final RoomRepository roomRepository;
+	private final ReservationRepository reservationRepository;
+	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
+	
+	//Get reservations from a specific user
+	public List<ReservationDTO> getAllReservationsByUsernameOrEmail(UsernameOrEmailForm usernameOrEmailForm){
+		return userRepository.SimpleFindByUsernameOrEmail(usernameOrEmailForm.usernameOrEmail()).getReservations().
+				stream().map((reservation) -> {return ServiceUtil.changeToReservationDTO(reservation);}).collect(Collectors.toList());
+	}
+	
+	//Get reservations from a specific user and filter by reservation status.
+	public List<ReservationDTO> getAllReservationsByUsernameOrEmailAndStatus(UsernameOrEmailAndReservationStatusForm usernameOrEmailAndReservationStatusForm){
+		return userRepository.SimpleFindByUsernameOrEmail(usernameOrEmailAndReservationStatusForm.usernameOrEmail()).getReservations().
+				stream().filter((reservation) -> {return reservation.getReservationStatus() == usernameOrEmailAndReservationStatusForm.reservationStatus();}).
+				map((reservation) -> {return ServiceUtil.changeToReservationDTO(reservation);}).collect(Collectors.toList());
+	}
+	
+	//Get reservations from a specific user and filter by reservation type.
+	public List<ReservationDTO> getAllReservationsByUsernameOrEmailAndType(UsernameOrEmailAndReservationTypeForm usernameOrEmailAndReservationTypeForm){
+		return userRepository.SimpleFindByUsernameOrEmail(usernameOrEmailAndReservationTypeForm.usernameOrEmail()).getReservations().
+				stream().filter((reservation) -> {return reservation.getReservationType() == usernameOrEmailAndReservationTypeForm.reservationType();}).
+				map((reservation) -> {return ServiceUtil.changeToReservationDTO(reservation);}).collect(Collectors.toList());
+	}
+	
+	//Make a standard reservation. An unoccupied room is assigned randomly based on requested room type.
+	public String standardReservation(StandardReservationForm standardReservationForm) {
+		
+		//Make sure that booking date doesn't exceed the one month threshold. Or else, it's bad for business. Someone might hoard rooms.
+		if(standardReservationForm.bookedDate().isAfter(LocalDate.now().plusMonths(1))) {
+			throw new InvalidDateException("You can only book less than one month in advance.");
+		}
+		
+		//Find an unoccupied room based on requested room type.
+		Room availableRoom = findAvailableRoom(standardReservationForm.roomType());
+		
+		//Make sure that an unoccupied room exists. If not, throw a custom exception.
+		if(availableRoom == null) {
+			throw new UnavailableRoomException("Sorry, no rooms of " + standardReservationForm.roomType() + " type are available at the moment.");
+		}
+		
+		User reservationMaker = userRepository.findByUsernameOrEmail(standardReservationForm.usernameOrEmail()).orElse(null); 
+		
+		//Make sure user exists.
+		if(reservationMaker == null) {
+			throw new UsernameNotFoundException("User not found.");
+		}
+		
+		//Grant rank points to user based on booked room type and nights.
+		reservationMaker.grantUserRankPoints(UserRankPointsCalculator.calculatePointsToGrant(availableRoom.getType(), standardReservationForm.nights()));
+		
+		//Make reservation data.
+		Reservation reservation = new Reservation(reservationMaker, LocalDateTime.now(),
+				standardReservationForm.bookedDate(), standardReservationForm.nights(), "09-" + standardReservationForm.contactNumber(), availableRoom, ReservationType.Standard);
+		availableRoom.setReserved(true);
+		
+		//Save to database.
+		roomRepository.save(availableRoom);
+		reservationRepository.save(reservation);
+		userRepository.save(reservationMaker);
+		return "Reservation placed successfully.";
+	}
+	
+	public String manualReservation(ManualReservationForm manualReservationForm) {
+		if(manualReservationForm.bookedDate().isAfter(LocalDate.now().plusMonths(1))) {
+			throw new InvalidDateException("You can only book less than one month in advance.");
+		}
+		
+		Room chosenRoom = roomRepository.getRoomByNumber(manualReservationForm.roomNumber());
+		if(chosenRoom == null) {
+			throw new UnavailableRoomException("room not found");
+		}
+		
+		if(chosenRoom.getReserved() == true) {
+			throw new UnavailableRoomException("room " + manualReservationForm.roomNumber() + " is not available");
+		}
+		
+		User reservationMaker = userRepository.findByUsernameOrEmail(manualReservationForm.usernameOrEmail()).orElse(null); 
+		if(reservationMaker == null) {
+			throw new UsernameNotFoundException("User not found.");
+		}
+		
+		reservationMaker.grantUserRankPoints(UserRankPointsCalculator.calculatePointsToGrant(chosenRoom.getType(), manualReservationForm.nights()));
+		
+		Reservation reservation = new Reservation(reservationMaker, LocalDateTime.now(), 
+				manualReservationForm.bookedDate(), manualReservationForm.nights(),  "09-" + manualReservationForm.contactNumber(), chosenRoom, ReservationType.Manual);
+		chosenRoom.setReserved(true);
+		roomRepository.save(chosenRoom);
+		reservationRepository.save(reservation);
+		userRepository.save(reservationMaker);
+		return "Reservation placed successfully.";
+	}
+	
+	public SimpleUserInfo getSimpleUserInfo(UsernameOrEmailForm usernameOrEmailForm) {
+		User foundUser = userRepository.findByUsernameOrEmail(usernameOrEmailForm.usernameOrEmail()).orElse(null);
+		if(foundUser == null) {
+			throw new UsernameNotFoundException("User not found.");
+		}
+		return ServiceUtil.changeToSimpleUserInfo(foundUser);
+	}
+	
+	@Transactional
+	public String changePassword(ChangePasswordRequestForm changePasswordRequestForm) {
+		User user = userRepository.findByUsernameOrEmail(changePasswordRequestForm.usernameOrEmail()).orElse(null);
+		if(user == null) {
+			throw new BadCredentialsException("user not found.");
+		}
+		if(passwordEncoder.matches(changePasswordRequestForm.oldPassword(), user.getPassword())) {
+			user.setPassword(passwordEncoder.encode(changePasswordRequestForm.newPassword()));
+			userRepository.save(user);
+			return "password changed successfully.";
+		}
+		else {
+			throw new BadCredentialsException("old password is incorrect.");
+		}
+	}
+	
+	public List<RoomDTO> getAllRooms(){
+		return roomRepository.findAll().stream().map((room) -> {return ServiceUtil.changeToRoomDTO(room);}).collect(Collectors.toList());
+	}
+	
+	public List<RoomChoice> initStandardReservationPage(){
+		return List.of(
+				new RoomChoice(RoomType.Standard, 1, 50.00, "Standard.jpg"),
+				new RoomChoice(RoomType.Double, 1, 70.00, "Double.jpg"),
+				new RoomChoice(RoomType.Twin, 2, 70.00, "Twin.jpg"),
+				new RoomChoice(RoomType.Family, 3, 90.00, "Family.jpg"),
+				new RoomChoice(RoomType.Queen, 1, 120.00, "Queen.jpg"),
+				new RoomChoice(RoomType.King, 1, 140.00, "King.jpg"),
+				new RoomChoice(RoomType.Suite, 2, 200.00, "Suite.jpg"),
+				new RoomChoice(RoomType.Penthouse, 3, 250.00, "Penthouse.jpg"),
+				new RoomChoice(RoomType.Villa, 4, 400.00, "Villa.jpg")
+				);
+	}
+	
+	//Utilities/////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private Room findAvailableRoom(RoomType roomType) {
+		List<Room> rooms = roomRepository.getRoomsByType(roomType);
+		for(int i = 0; i < rooms.size(); i ++) {
+			if(rooms.get(i).getReserved() == false) {
+				return rooms.get(i);
+			}
+		}
+		return null;
+	}
+}

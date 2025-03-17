@@ -31,6 +31,7 @@ public class AuthenticationService{
 	private final AuthenticationManager authenticationManager;
 	private final PasswordEncoder passwordEncoder;
 	
+	//Login method for user accounts.
 	public String userLogin(LoginForm loginForm){
 		try {
 			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.usernameOrEmail(), loginForm.password()));
@@ -54,6 +55,7 @@ public class AuthenticationService{
 		}
 	}
 	
+	//Login method for administrator accounts.
 	public String adminLogin(LoginForm loginForm){
 		try {
 			Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.usernameOrEmail(), loginForm.password()));
@@ -78,6 +80,7 @@ public class AuthenticationService{
 	}
 	
 	@Transactional
+	//Make a new user
 	public String register(RegisterForm registerForm) {
 		try {
 			User newUser = new User(registerForm.username(), registerForm.email(), passwordEncoder.encode(registerForm.password()));

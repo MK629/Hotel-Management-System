@@ -133,6 +133,7 @@ public class Reservation {
 		this.bookingDateEdited = 0;
 	}
 	
+	//Charge reservation fee based on reservation type. (Standard, Manual)
 	private Double chargeReservationFee(ReservationType type) {
 		switch(type) {
 		case Standard:{
@@ -145,6 +146,7 @@ public class Reservation {
 		}
 	}
 	
+	//Get overall discounted total based on user's rank.
 	private Double userRankDiscountTotal(UserRank rank, Double total) {
 		switch(rank) {
 		case Bronze: return total;
@@ -155,6 +157,7 @@ public class Reservation {
 		}
 	}
 	
+	//Used when extending stay.
 	public void addNights(Integer nights) {
 		this.nights += nights;
 		this.estimatedCheckoutDate = this.bookedDate.plusDays(this.nights);
@@ -162,12 +165,14 @@ public class Reservation {
 		this.estimatedTotal = userRankDiscountTotal(this.userRankAtReservationTime, this.rawTotal);
 	}
 	
+	//Used when editing booked date. In case the user tried to check in early or late. Or if they wanted to change it beforehand.
 	public void editBookedDate(LocalDate newBookedDate) {
 		this.bookedDate = newBookedDate;
 		this.estimatedCheckoutDate = this.bookedDate.plusDays(this.nights);
 		this.bookingDateEdited++;
 	}
 	
+	//Called upon checking out. If it's an early checkout, it calculates total based on actual nights stayed and applies discount based on user's rank.
 	public void calculateActualTotal() {
 		if(this.earlyCheckout == true) {
 			Integer spentNights = (int) ChronoUnit.DAYS.between(this.bookedDate, LocalDate.now());

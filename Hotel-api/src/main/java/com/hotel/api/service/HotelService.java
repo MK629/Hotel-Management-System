@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +26,7 @@ import com.hotel.api.entity.enums.ReservationType;
 import com.hotel.api.entity.enums.RoomType;
 import com.hotel.api.exceptionHandling.customExceptions.InvalidDateException;
 import com.hotel.api.exceptionHandling.customExceptions.UnavailableRoomException;
+import com.hotel.api.exceptionHandling.customExceptions.UserNotFoundException;
 import com.hotel.api.repository.ReservationRepository;
 import com.hotel.api.repository.RoomRepository;
 import com.hotel.api.repository.UserRepository;
@@ -44,94 +44,134 @@ public class HotelService {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	
-	
+	//Get reservations from a specific user
 	public List<ReservationDTO> getAllReservationsByUsernameOrEmail(UsernameOrEmailForm usernameOrEmailForm){
 		return userRepository.SimpleFindByUsernameOrEmail(usernameOrEmailForm.usernameOrEmail()).getReservations().
 				stream().map((reservation) -> {return ServiceUtil.changeToReservationDTO(reservation);}).collect(Collectors.toList());
 	}
 	
+	//Get reservations from a specific user and filter by reservation status.
 	public List<ReservationDTO> getAllReservationsByUsernameOrEmailAndStatus(UsernameOrEmailAndReservationStatusForm usernameOrEmailAndReservationStatusForm){
 		return userRepository.SimpleFindByUsernameOrEmail(usernameOrEmailAndReservationStatusForm.usernameOrEmail()).getReservations().
 				stream().filter((reservation) -> {return reservation.getReservationStatus() == usernameOrEmailAndReservationStatusForm.reservationStatus();}).
 				map((reservation) -> {return ServiceUtil.changeToReservationDTO(reservation);}).collect(Collectors.toList());
 	}
 	
+	//Get reservations from a specific user and filter by reservation type.
 	public List<ReservationDTO> getAllReservationsByUsernameOrEmailAndType(UsernameOrEmailAndReservationTypeForm usernameOrEmailAndReservationTypeForm){
 		return userRepository.SimpleFindByUsernameOrEmail(usernameOrEmailAndReservationTypeForm.usernameOrEmail()).getReservations().
 				stream().filter((reservation) -> {return reservation.getReservationType() == usernameOrEmailAndReservationTypeForm.reservationType();}).
 				map((reservation) -> {return ServiceUtil.changeToReservationDTO(reservation);}).collect(Collectors.toList());
 	}
 	
+	@Transactional
+	//Make a standard reservation. An unoccupied room is assigned randomly based on requested room type.
 	public String standardReservation(StandardReservationForm standardReservationForm) {
+		
+		//Make sure that booking date doesn't exceed the one month threshold. Or else, it's bad for business. Someone might hoard rooms.
 		if(standardReservationForm.bookedDate().isAfter(LocalDate.now().plusMonths(1))) {
 			throw new InvalidDateException("You can only book less than one month in advance.");
 		}
 		
-		Room availableRoom = findAvailableRoom(standardReservationForm.roomType());	
+		//Find an unoccupied room based on requested room type.
+		Room availableRoom = findAvailableRoom(standardReservationForm.roomType());
+		
+		//Make sure that an unoccupied room exists. If not, throw a custom exception.
 		if(availableRoom == null) {
 			throw new UnavailableRoomException("Sorry, no rooms of " + standardReservationForm.roomType() + " type are available at the moment.");
 		}
 		
 		User reservationMaker = userRepository.findByUsernameOrEmail(standardReservationForm.usernameOrEmail()).orElse(null); 
+		
+		//Make sure user exists.
 		if(reservationMaker == null) {
-			throw new UsernameNotFoundException("User not found.");
+			throw new UserNotFoundException("User not found.");
 		}
 		
+		//Grant rank points to user based on booked room type and nights.
 		reservationMaker.grantUserRankPoints(UserRankPointsCalculator.calculatePointsToGrant(availableRoom.getType(), standardReservationForm.nights()));
 		
+		//Make reservation data.
 		Reservation reservation = new Reservation(reservationMaker, LocalDateTime.now(),
 				standardReservationForm.bookedDate(), standardReservationForm.nights(), "09-" + standardReservationForm.contactNumber(), availableRoom, ReservationType.Standard);
 		availableRoom.setReserved(true);
+		
+		//Save to database.
 		roomRepository.save(availableRoom);
 		reservationRepository.save(reservation);
 		userRepository.save(reservationMaker);
+		
 		return "Reservation placed successfully.";
 	}
 	
+	@Transactional
+	//Make a manual reservation. Specifically choose a room number from a list of rooms from the front-end.
 	public String manualReservation(ManualReservationForm manualReservationForm) {
+		
+		//Make sure that booking date doesn't exceed the one month threshold. Or else, it's bad for business. Someone might hoard rooms.
 		if(manualReservationForm.bookedDate().isAfter(LocalDate.now().plusMonths(1))) {
 			throw new InvalidDateException("You can only book less than one month in advance.");
 		}
 		
+		//Get chosen room.
 		Room chosenRoom = roomRepository.getRoomByNumber(manualReservationForm.roomNumber());
+		
+		//Make sure the chosen room exists.
 		if(chosenRoom == null) {
 			throw new UnavailableRoomException("room not found");
 		}
 		
+		//Make sure the chosen room is not occupied. This will be checked and constrained on the front-end as well. But, I just had to make it sure.
 		if(chosenRoom.getReserved() == true) {
 			throw new UnavailableRoomException("room " + manualReservationForm.roomNumber() + " is not available");
 		}
 		
 		User reservationMaker = userRepository.findByUsernameOrEmail(manualReservationForm.usernameOrEmail()).orElse(null); 
+		
+		//Make sure user exists.
 		if(reservationMaker == null) {
-			throw new UsernameNotFoundException("User not found.");
+			throw new UserNotFoundException("User not found.");
 		}
 		
+		//Grant rank points to user based on booked room type and nights.
 		reservationMaker.grantUserRankPoints(UserRankPointsCalculator.calculatePointsToGrant(chosenRoom.getType(), manualReservationForm.nights()));
 		
+		//Make reservation data.
 		Reservation reservation = new Reservation(reservationMaker, LocalDateTime.now(), 
 				manualReservationForm.bookedDate(), manualReservationForm.nights(),  "09-" + manualReservationForm.contactNumber(), chosenRoom, ReservationType.Manual);
 		chosenRoom.setReserved(true);
+		
+		//Save to database.
 		roomRepository.save(chosenRoom);
 		reservationRepository.save(reservation);
 		userRepository.save(reservationMaker);
+		
 		return "Reservation placed successfully.";
 	}
 	
+	//Get simple non-confidential user info for front-end profile display.
 	public SimpleUserInfo getSimpleUserInfo(UsernameOrEmailForm usernameOrEmailForm) {
 		User foundUser = userRepository.findByUsernameOrEmail(usernameOrEmailForm.usernameOrEmail()).orElse(null);
+		
+		//Make sure user exists.
 		if(foundUser == null) {
-			throw new UsernameNotFoundException("User not found.");
+			throw new UserNotFoundException("User not found.");
 		}
+		
 		return ServiceUtil.changeToSimpleUserInfo(foundUser);
 	}
 	
 	@Transactional
+	//Change a user's password.
 	public String changePassword(ChangePasswordRequestForm changePasswordRequestForm) {
 		User user = userRepository.findByUsernameOrEmail(changePasswordRequestForm.usernameOrEmail()).orElse(null);
+		
+		//Make sure user exists.
 		if(user == null) {
-			throw new BadCredentialsException("user not found.");
+			throw new UserNotFoundException("user not found.");
 		}
+		
+		//Validate user with old password.
 		if(passwordEncoder.matches(changePasswordRequestForm.oldPassword(), user.getPassword())) {
 			user.setPassword(passwordEncoder.encode(changePasswordRequestForm.newPassword()));
 			userRepository.save(user);
@@ -142,10 +182,12 @@ public class HotelService {
 		}
 	}
 	
+	//Get all rooms for user to choose when making a manual reservation.
 	public List<RoomDTO> getAllRooms(){
 		return roomRepository.findAll().stream().map((room) -> {return ServiceUtil.changeToRoomDTO(room);}).collect(Collectors.toList());
 	}
 	
+	//Initialize room types for user to choose when making a standard reservation.
 	public List<RoomChoice> initStandardReservationPage(){
 		return List.of(
 				new RoomChoice(RoomType.Standard, 1, 50.00, "Standard.jpg"),
@@ -162,6 +204,7 @@ public class HotelService {
 	
 	//Utilities/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	//Used in standard reservation.
 	private Room findAvailableRoom(RoomType roomType) {
 		List<Room> rooms = roomRepository.getRoomsByType(roomType);
 		for(int i = 0; i < rooms.size(); i ++) {

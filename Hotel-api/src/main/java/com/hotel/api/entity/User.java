@@ -73,11 +73,13 @@ public class User{
 		this.reservations.add(reservation);
 	}
 	
+	//Gain points, then update user rank.
 	public void grantUserRankPoints(Double rankPoints) {
 		this.rankPoints += rankPoints;
 		this.rank = evaluateUserRank(this.rankPoints);
 	}
 	
+	//Determine rank based on rank points.
 	private UserRank evaluateUserRank(Double rankPoints) {
 		if(rankPoints >= 750.00) {
 			return UserRank.Platinum;

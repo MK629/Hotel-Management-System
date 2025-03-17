@@ -14,6 +14,7 @@ import com.hotel.api.exceptionHandling.customExceptions.ReservationNotFoundExcep
 import com.hotel.api.exceptionHandling.customExceptions.ReservationStatusErrorException;
 import com.hotel.api.exceptionHandling.customExceptions.UnavailableRoomException;
 import com.hotel.api.exceptionHandling.customExceptions.UnknownEnumTypeException;
+import com.hotel.api.exceptionHandling.customExceptions.UserNotFoundException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -28,9 +29,19 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(400).body(e.getBindingResult().getFieldError().getDefaultMessage());
 	}
 	
-	@ExceptionHandler(AuthenticationException.class)
-	ResponseEntity<String> handleAuthenticationErrors(AuthenticationException e){
-		return ResponseEntity.status(401).body(e.getMessage());
+	@ExceptionHandler(ReservationStatusErrorException.class)
+	ResponseEntity<String> handleReservationStatusErrors(ReservationStatusErrorException e){
+		return ResponseEntity.status(400).body(e.getMessage());
+	}
+	
+	@ExceptionHandler(InvalidDateException.class)
+	ResponseEntity<String> handleDateInputErrors(InvalidDateException e){
+		return ResponseEntity.status(400).body(e.getMessage());
+	}
+	
+	@ExceptionHandler(EditLimitExceededException.class)
+	ResponseEntity<String> handleExceedingEditLimits(EditLimitExceededException e){
+		return ResponseEntity.status(400).body(e.getMessage());
 	}
 	
 	@ExceptionHandler(DuplicateDataException.class)
@@ -43,28 +54,23 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(400).body(e.getMessage());
 	}
 	
+	@ExceptionHandler(AuthenticationException.class)
+	ResponseEntity<String> handleAuthenticationErrors(AuthenticationException e){
+		return ResponseEntity.status(401).body(e.getMessage());
+	}
+	
 	@ExceptionHandler(UnavailableRoomException.class)
 	ResponseEntity<String> handleFindRoomErrors(UnavailableRoomException e){
 		return ResponseEntity.status(404).body(e.getMessage());
 	}
 	
-	@ExceptionHandler(ReservationStatusErrorException.class)
-	ResponseEntity<String> handleReservationStatusErrors(ReservationStatusErrorException e){
-		return ResponseEntity.status(403).body(e.getMessage());
-	}
-	
-	@ExceptionHandler(InvalidDateException.class)
-	ResponseEntity<String> handleDateInputErrors(InvalidDateException e){
-		return ResponseEntity.status(403).body(e.getMessage());
-	}
-	
-	@ExceptionHandler(EditLimitExceededException.class)
-	ResponseEntity<String> handleExceedingEditLimits(EditLimitExceededException e){
-		return ResponseEntity.status(403).body(e.getMessage());
-	}
-	
 	@ExceptionHandler(ReservationNotFoundException.class)
 	ResponseEntity<String> handleReservationNotFoundErrors(ReservationNotFoundException e){
+		return ResponseEntity.status(404).body(e.getMessage());
+	}
+	
+	@ExceptionHandler(UserNotFoundException.class)
+	ResponseEntity<String> handleUserNotFoundErrors(UserNotFoundException e){
 		return ResponseEntity.status(404).body(e.getMessage());
 	}
 }
