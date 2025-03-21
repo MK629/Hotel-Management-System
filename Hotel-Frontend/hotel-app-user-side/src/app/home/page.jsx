@@ -1,6 +1,6 @@
 "use client"
 
-import ManageDelay from '@/utilComponents/rendering/ManageDelay'
+import RenderCSR from '@/utilComponents/rendering/RenderCSR'
 import dynamic from 'next/dynamic'
 import React from 'react'
 
@@ -8,7 +8,9 @@ const HomePage = dynamic(() => import("@/components/home/HomePage"), {suspense: 
 
 const page = () => {
   return (
-    <ManageDelay component={<HomePage/>}/>
+    <>
+      <RenderCSR csrComponent={<HomePage/>}/>
+    </>
   )
 }
 

@@ -1,6 +1,6 @@
 "use client"
 
-import ManageDelay from '@/utilComponents/rendering/ManageDelay'
+import RenderCSR from '@/utilComponents/rendering/RenderCSR'
 import dynamic from 'next/dynamic'
 import React from 'react'
 
@@ -9,7 +9,7 @@ const StandardReservationPage = dynamic(() => import("@/components/reservation/s
 const page = () => {
   return (
     <>
-      <ManageDelay component={<StandardReservationPage/>}/>
+      <RenderCSR csrComponent={<StandardReservationPage/>}/>
     </>
   )
 }

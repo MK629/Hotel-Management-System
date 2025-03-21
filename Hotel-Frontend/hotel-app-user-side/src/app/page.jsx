@@ -1,4 +1,4 @@
-import ManageDelay from '@/utilComponents/rendering/ManageDelay'
+import RenderSSR from '@/utilComponents/rendering/RenderSSR'
 import dynamic from 'next/dynamic'
 import React from 'react'
 
@@ -7,7 +7,7 @@ const RootPage = dynamic(() => import('@/components/root/RootPage'), {suspense: 
 const page = () => {
   return (
     <>
-      <ManageDelay component={<RootPage/>}/>
+      <RenderSSR ssrComponent={<RootPage/>}/>
     </>
   )
 }

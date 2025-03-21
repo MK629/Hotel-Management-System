@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-const NavItem = ({link, text, func}) => {
+const HeaderNavItem = ({link, text, func}) => {
   return (
     <Link href={link} className='font-semibold text-[#EAE0D2] text-lg hover:text-[#D7C9AE] group' onClick={func ? () => {func()} : () => {}}>
         <div className='px-4 py-3.5'>{text}</div>
@@ -12,4 +12,4 @@ const NavItem = ({link, text, func}) => {
   )
 }
 
-export default NavItem
+export default HeaderNavItem

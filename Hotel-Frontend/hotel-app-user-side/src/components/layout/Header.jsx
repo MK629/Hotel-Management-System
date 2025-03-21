@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {MdMenu} from 'react-icons/md'
 import { isLoggedIn, logout } from '../../services/credentialsService'
-import NavItem from "../../utilComponents/layout/NavItem"
+import HeaderNavItem from "../../utilComponents/navigation/HeaderNavItem"
 import MiniProfile from '../../utilComponents/profile/MiniProfile'
 import {BsBook, BsClipboard, BsClockHistory, BsPen} from 'react-icons/bs'
 import { AiOutlineCaretDown} from 'react-icons/ai'
@@ -50,9 +50,9 @@ const Header = () => {
       </div>
 
       <nav className='flex justify-evenly pt-3.5 px-2.5'>
-        <NavItem link={"/home"} text={"Home"}/>
-        <NavItem link={"/reservation/standard"} text={"Book"}/>
-        <NavItem link={"/auth/login"} text={loginState ? "Logout" : "Login"} func={loginState ? () => {handleLogout()} : () => {}}/>
+        <HeaderNavItem link={"/home"} text={"Home"}/>
+        <HeaderNavItem link={"/reservation/standard"} text={"Book"}/>
+        <HeaderNavItem link={"/auth/login"} text={loginState ? "Logout" : "Login"} func={loginState ? () => {handleLogout()} : () => {}}/>
       </nav>
 
       <div className={`fixed z-20 bg-black ${sidebar ? "opacity-75 w-full h-screen" : "opacity-0 w-0 h-0"} transition duration-[400ms]`} onClick={() => {sidebar ? flipSidebar() : {}}}></div>
