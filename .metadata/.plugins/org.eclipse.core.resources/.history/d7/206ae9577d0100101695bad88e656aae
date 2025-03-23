@@ -1,8 +1,0 @@
-package com.hotel.api.service.util;
-
-public class UserRankPointsCalculator {
-
-	public static Double calculatePointsToGrant() {
-		return 0.0;
-	}
-}

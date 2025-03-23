@@ -1,6 +1,0 @@
-package com.hotel.api.service.util;
-
-public class UserRankPointsCalculator {
-
-	
-}

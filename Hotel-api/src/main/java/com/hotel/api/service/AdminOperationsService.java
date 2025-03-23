@@ -240,12 +240,17 @@ public class AdminOperationsService {
 			cancelReservation.setActualTotal(cancelReservation.getReservationFee());
 			cancelRoom.setReserved(false);
 			
+			//Deduct points from user
+			User cancelUser = cancelReservation.getUser();
+			cancelUser.deductUserRankPoints(UserRankPointsCalculator.calculatePoints(cancelRoom.getType(), cancelReservation.getNights()));
+			
 			//Just in case if there was anything wrong.
 			if(cancelReservation.getReservationStatus() != ReservationStatus.Cancelled) {
 				throw new ReservationStatusErrorException("something went wrong. please contact the developer.");
 			}
 			
 			//Save to database.
+			userRepository.save(cancelUser);
 			roomRepository.save(cancelRoom);
 			reservationRepository.save(cancelReservation);
 			

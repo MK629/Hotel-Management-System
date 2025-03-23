@@ -5,7 +5,7 @@ import com.hotel.api.exceptionHandling.customExceptions.UnknownEnumTypeException
 
 public class UserRankPointsCalculator {
 
-	public static Double calculatePointsToGrant(RoomType roomType, Integer nights) {
+	public static Double calculatePoints(RoomType roomType, Integer nights) {
 		return (calculatePointsByRoomType(roomType) + calculatePointsByNights(nights));
 	}
 	

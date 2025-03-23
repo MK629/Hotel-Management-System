@@ -89,7 +89,7 @@ public class HotelService {
 		}
 		
 		//Grant rank points to user based on booked room type and nights.
-		reservationMaker.grantUserRankPoints(UserRankPointsCalculator.calculatePointsToGrant(availableRoom.getType(), standardReservationForm.nights()));
+		reservationMaker.grantUserRankPoints(UserRankPointsCalculator.calculatePoints(availableRoom.getType(), standardReservationForm.nights()));
 		
 		//Make reservation data.
 		Reservation reservation = new Reservation(reservationMaker, LocalDateTime.now(),
@@ -134,7 +134,7 @@ public class HotelService {
 		}
 		
 		//Grant rank points to user based on booked room type and nights.
-		reservationMaker.grantUserRankPoints(UserRankPointsCalculator.calculatePointsToGrant(chosenRoom.getType(), manualReservationForm.nights()));
+		reservationMaker.grantUserRankPoints(UserRankPointsCalculator.calculatePoints(chosenRoom.getType(), manualReservationForm.nights()));
 		
 		//Make reservation data.
 		Reservation reservation = new Reservation(reservationMaker, LocalDateTime.now(), 

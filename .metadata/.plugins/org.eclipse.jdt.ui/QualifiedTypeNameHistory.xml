@@ -51,7 +51,6 @@
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.DuplicateDataException"/>
     <fullyQualifiedTypeName name="java.time.temporal.ChronoUnit"/>
     <fullyQualifiedTypeName name="org.springframework.context.annotation.Profile"/>
-    <fullyQualifiedTypeName name="com.hotel.api.service.util.UserRankPointsCalculator"/>
     <fullyQualifiedTypeName name="com.hotel.api.entity.User"/>
     <fullyQualifiedTypeName name="com.hotel.api.entity.enums.UserRank"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Enumerated"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UsernameNotFoundException"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.UserNotFoundException"/>
+    <fullyQualifiedTypeName name="com.hotel.api.service.util.UserRankPointsCalculator"/>
 </qualifiedTypeNameHistroy>

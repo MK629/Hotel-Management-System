@@ -8,7 +8,7 @@ import { initStandardReservationPage } from '@/services/hotelUserService'
 const StandardReservationPage = () => {
 
   const [roomTypeChoices, setRoomTypeChoices] = useState([])
-  const imageUrl = "/images/RoomTypeImages/"
+  const imageUrl = "/images/roomTypeImages/"
   const router = useRouter()
   const currentUrl = usePathname()
 

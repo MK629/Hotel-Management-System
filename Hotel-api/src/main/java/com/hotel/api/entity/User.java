@@ -79,6 +79,12 @@ public class User{
 		this.rank = evaluateUserRank(this.rankPoints);
 	}
 	
+	//Deduct points, then update user rank.
+	public void deductUserRankPoints(Double rankPoints) {
+		this.rankPoints -= rankPoints;
+		this.rank = evaluateUserRank(this.rankPoints);
+	}
+	
 	//Determine rank based on rank points.
 	private UserRank evaluateUserRank(Double rankPoints) {
 		if(rankPoints >= 750.00) {
