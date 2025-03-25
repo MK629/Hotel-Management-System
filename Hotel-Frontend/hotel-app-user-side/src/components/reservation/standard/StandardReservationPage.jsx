@@ -1,13 +1,11 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { initStandardReservationPage } from '@/services/hotelUserService'
 
-const StandardReservationPage = () => {
+const StandardReservationPage = ({roomTypeChoices}) => {
 
-  const [roomTypeChoices, setRoomTypeChoices] = useState([])
   const imageUrl = "/images/roomTypeImages/"
   const router = useRouter()
   const currentUrl = usePathname()
@@ -15,10 +13,6 @@ const StandardReservationPage = () => {
   const toStandardReservationForm = (type) => {
     router.push(`${currentUrl}/standardReservation/${type}`)
   }
-
-  useEffect(() => {
-    initStandardReservationPage().then(res => setRoomTypeChoices(res.data)).catch(e => console.log(e))
-  }, [])
 
   return (
     <div className='p-10'>

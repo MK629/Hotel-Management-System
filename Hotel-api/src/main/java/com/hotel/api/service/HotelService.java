@@ -16,7 +16,7 @@ import com.hotel.api.dto.input.UsernameOrEmailAndReservationStatusForm;
 import com.hotel.api.dto.input.UsernameOrEmailAndReservationTypeForm;
 import com.hotel.api.dto.input.UsernameOrEmailForm;
 import com.hotel.api.dto.output.ReservationDTO;
-import com.hotel.api.dto.output.RoomChoice;
+import com.hotel.api.dto.output.RoomTypeChoice;
 import com.hotel.api.dto.output.RoomDTO;
 import com.hotel.api.dto.output.SimpleUserInfo;
 import com.hotel.api.entity.Reservation;
@@ -188,17 +188,17 @@ public class HotelService {
 	}
 	
 	//Initialize room types for user to choose when making a standard reservation.
-	public List<RoomChoice> initStandardReservationPage(){
+	public List<RoomTypeChoice> initRoomTypeChoices(){
 		return List.of(
-				new RoomChoice(RoomType.Standard, 1, 50.00, "Standard.jpg"),
-				new RoomChoice(RoomType.Double, 1, 70.00, "Double.jpg"),
-				new RoomChoice(RoomType.Twin, 2, 70.00, "Twin.jpg"),
-				new RoomChoice(RoomType.Family, 3, 90.00, "Family.jpg"),
-				new RoomChoice(RoomType.Queen, 1, 120.00, "Queen.jpg"),
-				new RoomChoice(RoomType.King, 1, 140.00, "King.jpg"),
-				new RoomChoice(RoomType.Suite, 2, 200.00, "Suite.jpg"),
-				new RoomChoice(RoomType.Penthouse, 3, 250.00, "Penthouse.jpg"),
-				new RoomChoice(RoomType.Villa, 4, 400.00, "Villa.jpg")
+				new RoomTypeChoice(RoomType.Standard, 1, 50.00, "Standard.jpg"),
+				new RoomTypeChoice(RoomType.Double, 1, 70.00, "Double.jpg"),
+				new RoomTypeChoice(RoomType.Twin, 2, 70.00, "Twin.jpg"),
+				new RoomTypeChoice(RoomType.Family, 3, 90.00, "Family.jpg"),
+				new RoomTypeChoice(RoomType.Queen, 1, 120.00, "Queen.jpg"),
+				new RoomTypeChoice(RoomType.King, 1, 140.00, "King.jpg"),
+				new RoomTypeChoice(RoomType.Suite, 2, 200.00, "Suite.jpg"),
+				new RoomTypeChoice(RoomType.Penthouse, 3, 250.00, "Penthouse.jpg"),
+				new RoomTypeChoice(RoomType.Villa, 4, 400.00, "Villa.jpg")
 				);
 	}
 	

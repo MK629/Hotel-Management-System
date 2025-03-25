@@ -15,7 +15,7 @@ import com.hotel.api.dto.input.UsernameOrEmailAndReservationStatusForm;
 import com.hotel.api.dto.input.UsernameOrEmailAndReservationTypeForm;
 import com.hotel.api.dto.input.UsernameOrEmailForm;
 import com.hotel.api.dto.output.ReservationDTO;
-import com.hotel.api.dto.output.RoomChoice;
+import com.hotel.api.dto.output.RoomTypeChoice;
 import com.hotel.api.dto.output.RoomDTO;
 import com.hotel.api.dto.output.SimpleUserInfo;
 import com.hotel.api.service.HotelService;
@@ -70,8 +70,8 @@ public class HotelServiceController {
 		return hotelService.getAllReservationsByUsernameOrEmailAndType(usernameOrEmailFormAndReservationTypeForm);
 	}
 	
-	@GetMapping("/initStandardReservationPage")
-	public List<RoomChoice> initStandardReservationPage(){
-		return hotelService.initStandardReservationPage();
+	@GetMapping("/initRoomTypeChoices")
+	public List<RoomTypeChoice> initRoomTypeChoices(){
+		return hotelService.initRoomTypeChoices();
 	}
 }

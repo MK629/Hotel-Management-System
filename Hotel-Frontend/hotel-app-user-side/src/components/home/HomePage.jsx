@@ -6,9 +6,8 @@ import React, { useEffect, useState } from 'react'
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
 import { BsClipboard2Fill, BsFillBalloonHeartFill, BsFillPenFill, BsPersonBadgeFill } from 'react-icons/bs'
 
-const HomePage = () => {
+const HomePage = ({sliderImages}) => {
 
-  const [sliderImages, setSliderImages] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const router = useRouter()
   const sliderImageUrl = "/images/homeSliderImages/"
@@ -25,16 +24,6 @@ const HomePage = () => {
     }
   }
 
-  const initSliderImages = () => {
-    let addImages = []
-
-    for(let i = 1; i <= 5; i++){
-      addImages.push("sliderImg" + i  + ".jpg")
-    }
-
-    setSliderImages(addImages)
-  }
-
   const navToStandardReservation = () => {
     router.push("/reservation/standard")
   }
@@ -42,10 +31,6 @@ const HomePage = () => {
   const navToManualReservation = () => {
     router.push("/reservation/manual")
   }
-
-  useEffect(() => {
-    initSliderImages()
-  }, [])
 
   return (
     <div>
