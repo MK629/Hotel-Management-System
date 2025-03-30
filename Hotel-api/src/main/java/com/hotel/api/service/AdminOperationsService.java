@@ -80,7 +80,7 @@ public class AdminOperationsService {
 	//Create new room.
 	public String addNewRoom(RoomAddForm roomAddForm) {
 		try {
-			Room newRoom = new Room(roomAddForm.number(), roomAddForm.type(), roomAddForm.image());
+			Room newRoom = new Room(roomAddForm.number(), roomAddForm.type());
 			roomRepository.save(newRoom);
 			return "success";
 		}
@@ -100,7 +100,6 @@ public class AdminOperationsService {
 		roomToEdit.setType(roomEditForm.type());
 		roomToEdit.setBeds(roomEditForm.beds());
 		roomToEdit.setPrice(roomEditForm.price());
-		roomToEdit.setImage(roomEditForm.image());
 		roomRepository.save(roomToEdit);
 		return "success";
 	}

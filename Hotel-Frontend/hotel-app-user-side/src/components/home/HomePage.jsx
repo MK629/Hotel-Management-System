@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { AiOutlineCaretLeft, AiOutlineCaretRight } from 'react-icons/ai'
 import { BsClipboard2Fill, BsFillBalloonHeartFill, BsFillPenFill, BsPersonBadgeFill } from 'react-icons/bs'
 

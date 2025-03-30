@@ -8,6 +8,5 @@ public record RoomDTO(
 		RoomType type,
 		Integer beds,
 		Double price,
-		Boolean reserved,
-		String image
+		Boolean reserved
 		){}

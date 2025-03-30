@@ -1,13 +1,18 @@
 "use client"
 
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import React from 'react'
 
 const ManualReservationPage = ({roomTypeChoices}) => {
 
   const imageUrl = "/images/roomTypeImages/"
   const currentUrl = usePathname()
+  const router = useRouter()
+
+  const toRoomChoicePage = (roomType) => {
+    router.push(currentUrl + "/rooms/" + roomType)
+  }
 
   return (
     <div className='p-10'>
@@ -24,7 +29,7 @@ const ManualReservationPage = ({roomTypeChoices}) => {
                   </div>
                   <div>
                     <h2 className='text-[13px] font-extrabold text-[#2D2D2D]'>${item.price} per night</h2>
-                    <button onClick={() => {console.log(currentUrl)}} className='bg-[#A68763] hover:bg-[#d3af87] transition px-3 py-0.5 rounded-lg font-bold text-[#2D2D2D] text-[15px]'>See Rooms</button>
+                    <button onClick={() => {toRoomChoicePage(item.type)}} className='bg-[#A68763] hover:bg-[#d3af87] transition px-3 py-0.5 rounded-lg font-bold text-[#2D2D2D] text-[15px]'>See Rooms</button>
                   </div>
                 </div>
               </div>

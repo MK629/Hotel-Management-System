@@ -10,7 +10,7 @@ import com.hotel.api.entity.User;
 public class ServiceUtil {
 
 	public static RoomDTO changeToRoomDTO(Room room) {
-		return new RoomDTO(room.getId(), room.getNumber(), room.getType(), room.getBeds(), room.getPrice(), room.getReserved(), room.getImage());
+		return new RoomDTO(room.getId(), room.getNumber(), room.getType(), room.getBeds(), room.getPrice(), room.getReserved());
 	}
 	
 	public static ReservationDTO changeToReservationDTO(Reservation reservation) {

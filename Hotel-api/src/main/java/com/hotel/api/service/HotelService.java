@@ -44,6 +44,26 @@ public class HotelService {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	
+	//Initialize room types for user to choose when making a standard reservation.
+	public List<RoomTypeChoice> initRoomTypeChoices(){
+		return List.of(
+				new RoomTypeChoice(RoomType.Standard, 1, 50.00, "Standard.jpg"),
+				new RoomTypeChoice(RoomType.Double, 1, 70.00, "Double.jpg"),
+				new RoomTypeChoice(RoomType.Twin, 2, 70.00, "Twin.jpg"),
+				new RoomTypeChoice(RoomType.Family, 3, 90.00, "Family.jpg"),
+				new RoomTypeChoice(RoomType.Queen, 1, 120.00, "Queen.jpg"),
+				new RoomTypeChoice(RoomType.King, 1, 140.00, "King.jpg"),
+				new RoomTypeChoice(RoomType.Suite, 2, 200.00, "Suite.jpg"),
+				new RoomTypeChoice(RoomType.Penthouse, 3, 250.00, "Penthouse.jpg"),
+				new RoomTypeChoice(RoomType.Villa, 4, 400.00, "Villa.jpg")
+				);
+	}
+	
+	//Get all rooms for user to choose when making a manual reservation.
+	public List<RoomDTO> getAllRooms(){
+		return roomRepository.findAll().stream().map((room) -> {return ServiceUtil.changeToRoomDTO(room);}).collect(Collectors.toList());
+	}
+	
 	//Get reservations from a specific user
 	public List<ReservationDTO> getAllReservationsByUsernameOrEmail(UsernameOrEmailForm usernameOrEmailForm){
 		return userRepository.SimpleFindByUsernameOrEmail(usernameOrEmailForm.usernameOrEmail()).getReservations().
@@ -180,26 +200,6 @@ public class HotelService {
 		else {
 			throw new BadCredentialsException("old password is incorrect.");
 		}
-	}
-	
-	//Get all rooms for user to choose when making a manual reservation.
-	public List<RoomDTO> getAllRooms(){
-		return roomRepository.findAll().stream().map((room) -> {return ServiceUtil.changeToRoomDTO(room);}).collect(Collectors.toList());
-	}
-	
-	//Initialize room types for user to choose when making a standard reservation.
-	public List<RoomTypeChoice> initRoomTypeChoices(){
-		return List.of(
-				new RoomTypeChoice(RoomType.Standard, 1, 50.00, "Standard.jpg"),
-				new RoomTypeChoice(RoomType.Double, 1, 70.00, "Double.jpg"),
-				new RoomTypeChoice(RoomType.Twin, 2, 70.00, "Twin.jpg"),
-				new RoomTypeChoice(RoomType.Family, 3, 90.00, "Family.jpg"),
-				new RoomTypeChoice(RoomType.Queen, 1, 120.00, "Queen.jpg"),
-				new RoomTypeChoice(RoomType.King, 1, 140.00, "King.jpg"),
-				new RoomTypeChoice(RoomType.Suite, 2, 200.00, "Suite.jpg"),
-				new RoomTypeChoice(RoomType.Penthouse, 3, 250.00, "Penthouse.jpg"),
-				new RoomTypeChoice(RoomType.Villa, 4, 400.00, "Villa.jpg")
-				);
 	}
 	
 	//Utilities/////////////////////////////////////////////////////////////////////////////////////////////////////

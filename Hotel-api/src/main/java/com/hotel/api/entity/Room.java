@@ -42,16 +42,12 @@ public class Room {
 	@Column(nullable = false, columnDefinition = "TINYINT(1)")
 	private Boolean reserved;
 	
-	@Column(nullable = false)
-	private String image;
-
-	public Room(String number ,RoomType type, String image) {
+	public Room(String number ,RoomType type) {
 		this.number = number;
 		this.type = type;
 		this.beds = resolveBedCount(type);
 		this.price = resolvePrice(type);
 		this.reserved = false;
-		this.image = image;
 	}
 	
 	private Double resolvePrice(RoomType type) {

@@ -1,15 +1,14 @@
-"use client"
-
-import StandardReservationFormPage from '@/components/reservation/standard/StandardReservationFormPage'
-import { useParams } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import React from 'react'
 
-const page = () => {
+const StandardReservationFormPage = dynamic(() => import('@/components/reservation/standard/StandardReservationFormPage'), {suspense: true, ssr: true})
 
-  const params = useParams()
+const page = async ({params}) => {
+
+  const {roomType} = await params
 
   return (
-    <StandardReservationFormPage roomType={params.roomType}/>
+    <StandardReservationFormPage roomType={roomType}/>
   )
 }
 

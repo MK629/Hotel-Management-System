@@ -1,4 +1,4 @@
-import { initRoomTypeChoices } from '@/services/hotelUserService'
+import { initRoomTypeChoices } from '@/services/asyncHotelUserService'
 import RenderCSR from '@/utilComponents/rendering/RenderCSR'
 import dynamic from 'next/dynamic'
 import React from 'react'

@@ -3,10 +3,6 @@ import { isLoggedIn } from "./credentialsService";
 
 const MASTER_URL = "http://localhost:8080/hotel/api"
 
-export const initRoomTypeChoices= () => {
-    return axiosInstance.get(MASTER_URL + "/initRoomTypeChoices")
-}
-
 export const standardReservation = (standardReservationForm) => {
     return axiosInstance.post(MASTER_URL + "/standardReservation", standardReservationForm)
 }
