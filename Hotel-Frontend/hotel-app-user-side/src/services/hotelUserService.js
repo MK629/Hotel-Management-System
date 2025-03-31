@@ -7,6 +7,10 @@ export const standardReservation = (standardReservationForm) => {
     return axiosInstance.post(MASTER_URL + "/standardReservation", standardReservationForm)
 }
 
+export const manualReservation = (manualReservationForm) => {
+    return axiosInstance.post(MASTER_URL + "/manualReservation", manualReservationForm)
+}
+
 export async function getSimpleUserInfo(usernameOrEmail){
     const loginStatus = await isLoggedIn()
     if(loginStatus){

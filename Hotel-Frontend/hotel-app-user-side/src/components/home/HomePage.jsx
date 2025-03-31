@@ -13,13 +13,19 @@ const HomePage = ({sliderImages}) => {
   const sliderImageUrl = "/images/homeSliderImages/"
 
   const slideLeft = () => {
-    if(currentIndex > 0){
+    if(currentIndex <= 0){
+      setCurrentIndex(4)
+    }
+    else{
       setCurrentIndex(currentIndex - 1)
     }
   }
 
   const slideRight = () => {
-    if(currentIndex < 4){
+    if(currentIndex >= 4){
+      setCurrentIndex(0)
+    }
+    else{
       setCurrentIndex(currentIndex + 1)
     }
   }
@@ -36,13 +42,13 @@ const HomePage = ({sliderImages}) => {
     <div>
       <div className='container mx-auto mt-5'>
         <div className='flex my-auto mx-auto lg:w-3/5 border-6 border-[#A68763] rounded-lg'>
-          <div className='text-[#2D2D2D] bg-[#EAE0D2] hover:bg-[#D7C9AE] transition duration-300 p-2 flex' onClick={() => slideLeft()}>
+          <div className='text-[#2D2D2D] bg-[#EAE0D2] hover:bg-[#D7C9AE] hover:cursor-pointer transition duration-300 p-2 flex' onClick={() => slideLeft()}>
             <AiOutlineCaretLeft size={25} className='my-auto'/>
           </div>
           <div className=''>
             <Image src={sliderImages || sliderImages[currentIndex] ? sliderImageUrl + sliderImages[currentIndex] : sliderImageUrl + "sliderImg1.jpg"} alt='sliderImg' height={800} width={800} className='transition-all transform duration-300 h-auto w-auto'/>
           </div>
-          <div className='text-[#2D2D2D] bg-[#EAE0D2] hover:bg-[#D7C9AE] transition duration-300 p-2 flex' onClick={() => slideRight()}>
+          <div className='text-[#2D2D2D] bg-[#EAE0D2] hover:bg-[#D7C9AE] hover:cursor-pointer transition duration-300 p-2 flex' onClick={() => slideRight()}>
             <AiOutlineCaretRight size={25} className='my-auto'/>
           </div>
         </div>

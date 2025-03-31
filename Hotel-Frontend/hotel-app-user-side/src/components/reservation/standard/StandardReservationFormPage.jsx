@@ -2,6 +2,7 @@
 
 import { getLoggedInUser } from '@/services/credentialsService'
 import { standardReservation } from '@/services/hotelUserService'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -23,7 +24,8 @@ const StandardReservationFormPage = ({roomType}) => {
 
   return (
     <div className='p-1'>
-      <div className='rounded-2xl bg-[#D7C9AE] mx-auto lg:w-[60em] md:w-[45em] sm:w-[35em] p-8 mt-52'>
+      <Image src={`/images/roomTypeImages/${roomType}.jpg`} alt={`${roomType}.jpg`} height={800} width={800} className='mx-auto border-4 border-[#EAE0D2] rounded-2xl mt-5'/>
+      <div className='rounded-2xl bg-[#D7C9AE] mx-auto lg:w-[60em] md:w-[45em] sm:w-[35em] p-8 mt-8 mb-52'>
         <form onSubmit={(e) => {e.preventDefault(); sendStandardBookingInfo(e.target)}} className='items-center mx-auto'>
           <div className='flex justify-center'>
             <div className='flex flex-col text-right'>

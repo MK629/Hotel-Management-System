@@ -38,7 +38,7 @@ const MiniProfile = () => {
           </div>
                     
           <div className='flex'>
-            <button className='bg-[#A68763] hover:bg-[#d3af87] transition px-3 py-0.5 rounded-lg font-extrabold text-[#2D2D2D] mx-auto mt-1 mb-5'>Detailed view</button>
+            <button className='bg-[#7c654b] hover:bg-[#d3af87] transition px-3 py-0.5 rounded-lg font-extrabold text-[#EAE0D2] mx-auto mt-1 mb-5'>Detailed view</button>
           </div>
        </div>
     </div>

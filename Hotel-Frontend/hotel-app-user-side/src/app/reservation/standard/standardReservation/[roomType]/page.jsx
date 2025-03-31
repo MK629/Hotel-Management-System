@@ -1,3 +1,4 @@
+import RenderCSR from '@/utilComponents/rendering/RenderCSR'
 import dynamic from 'next/dynamic'
 import React from 'react'
 
@@ -8,7 +9,7 @@ const page = async ({params}) => {
   const {roomType} = await params
 
   return (
-    <StandardReservationFormPage roomType={roomType}/>
+    <RenderCSR csrComponent={<StandardReservationFormPage roomType={roomType}/>}/>
   )
 }
 

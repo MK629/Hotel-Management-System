@@ -29,7 +29,7 @@ const StandardReservationPage = ({roomTypeChoices}) => {
                   </div>
                   <div>
                     <h2 className='text-[13px] font-extrabold text-[#2D2D2D]'>${item.price} per night</h2>
-                    <button onClick={() => {toStandardReservationForm(item.type)}} className='bg-[#A68763] hover:bg-[#d3af87] transition px-3 py-0.5 rounded-lg font-bold text-[#2D2D2D]'>Book</button>
+                    <button onClick={() => {toStandardReservationForm(item.type)}} className='bg-[#7c654b] hover:bg-[#d3af87] transition px-3 py-0.5 rounded-lg font-bold text-[#EAE0D2]'>Book</button>
                   </div>
                 </div>
               </div>
