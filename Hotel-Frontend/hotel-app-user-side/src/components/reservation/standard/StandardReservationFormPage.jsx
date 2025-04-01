@@ -19,7 +19,7 @@ const StandardReservationFormPage = ({roomType}) => {
         contactNumber : e.contactNumber.value,
         roomType : roomType  
       }
-      await standardReservation(standardReservationForm).then(res => {router.back(); window.alert(res.data)}).catch(e => window.alert(e.response.data))
+      await standardReservation(standardReservationForm).then(res => {router.push("/home"); window.alert(res.data)}).catch(e => window.alert(e.response.data))
   }
 
   return (

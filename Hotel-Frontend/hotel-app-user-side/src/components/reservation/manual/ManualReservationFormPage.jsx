@@ -18,7 +18,7 @@ const ManualReservationFormPage = ({roomType, roomNumber}) => {
             contactNumber : e.contactNumber.value,
             roomNumber : roomNumber 
           }
-        await manualReservation(manualReservationForm).then(res => {router.back(); window.alert(res.data)}).catch(e => {window.alert(e.response.data)})
+        await manualReservation(manualReservationForm).then(res => {router.push("/home"); window.alert(res.data)}).catch(e => {window.alert(e.response.data)})
     }
 
 

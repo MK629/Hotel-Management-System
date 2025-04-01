@@ -19,7 +19,7 @@ const RoomChoicePage = ({rooms}) => {
       <div className={`grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 items-center text-center gap-4 mt-8 mb-56`}>
         {rooms && rooms.map(room => {
               return (
-                <div key={room.id} className='bg-[#D7C9AE] w-[10rem] mx-auto h-[12rem] rounded-2xl flex-col p-2'>
+                <div key={room.id} className='bg-[#D7C9AE] w-[10rem] mx-auto h-[12rem] rounded-2xl flex-col p-2 hover:scale-[103%] transition duration-200 hover:shadow-2xl'>
                   <h4 className='bg-[#2D2D2D] w-2/4 mx-auto rounded-md text-[#EAE0D2] font-extrabold p-1'>{room.number}</h4>
                   <Image src={`/images/icons/others/${room.reserved ? "Lock" : "Key"}.svg`} alt='icon.svg' width={40} height={40} className='mx-auto text-center mt-2'/>
                   <div className={`${room.reserved ? 'bg-red-800' : 'bg-green-800'} w-[1.25rem] h-[1.25rem] mx-auto mt-2 rounded-md`}></div>

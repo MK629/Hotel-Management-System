@@ -20,7 +20,7 @@ const ManualReservationPage = ({roomTypeChoices}) => {
         {
           roomTypeChoices && roomTypeChoices.map(item => {
             return(
-              <div key={item.type} className='bg-[#D7C9AE] rounded-md flex hover:scale-105 transition'>
+              <div key={item.type} className='bg-[#D7C9AE] rounded-md flex hover:scale-105 transition hover:shadow-2xl'>
                 <Image src={imageUrl + item.image} alt={item.image} width={400} height={400} className='rounded-lg border-2 w-2/3 border-[#D7C9AE]'/>
                 <div className='flex flex-col text-[#EAE0D2] p-3 text-center mx-auto justify-between'>
                   <div>
