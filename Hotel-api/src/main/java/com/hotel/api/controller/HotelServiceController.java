@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hotel.api.dto.input.ChangePasswordRequestForm;
 import com.hotel.api.dto.input.ManualReservationForm;
+import com.hotel.api.dto.input.RoomTypeForm;
 import com.hotel.api.dto.input.StandardReservationForm;
 import com.hotel.api.dto.input.UsernameOrEmailAndReservationStatusForm;
 import com.hotel.api.dto.input.UsernameOrEmailAndReservationTypeForm;
@@ -53,6 +54,11 @@ public class HotelServiceController {
 	@GetMapping("/getAllRooms")
 	public List<RoomDTO> getAllRooms(){
 		return hotelService.getAllRooms();
+	}
+	
+	@PostMapping("/getRoomsByType")
+	public List<RoomDTO> getRoomsByType(@RequestBody @Valid RoomTypeForm roomTypeForm){
+		return hotelService.getRoomsByType(roomTypeForm);
 	}
 	
 	@PostMapping("/getAllReservationsByUsernameOrEmail")

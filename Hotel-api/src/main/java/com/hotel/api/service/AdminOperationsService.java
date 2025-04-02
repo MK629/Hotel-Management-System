@@ -17,6 +17,7 @@ import com.hotel.api.dto.input.ReservationTypeForm;
 import com.hotel.api.dto.input.RoomAddForm;
 import com.hotel.api.dto.input.RoomEditForm;
 import com.hotel.api.dto.input.RoomIdForm;
+import com.hotel.api.dto.input.RoomTypeForm;
 import com.hotel.api.dto.input.UserRoleForm;
 import com.hotel.api.dto.input.UsernameOrEmailAndReservationStatusForm;
 import com.hotel.api.dto.input.UsernameOrEmailAndReservationTypeForm;
@@ -67,6 +68,12 @@ public class AdminOperationsService {
 	public List<RoomDTO> getAllRooms(){
 		return roomRepository.findAll().stream().map((room) -> {return ServiceUtil.changeToRoomDTO(room);}).collect(Collectors.toList());
 	}
+	
+	//Get rooms according to a specified type.
+	public List<RoomDTO> getRoomsByType(RoomTypeForm roomTypeForm){
+		return roomRepository.getRoomsByType(roomTypeForm.roomType()).stream().map((room) -> {return ServiceUtil.changeToRoomDTO(room);}).collect(Collectors.toList());
+	}
+	
 	
 	//Get room info by id.
 	public RoomDTO getRoomById(RoomIdForm roomIdForm) {

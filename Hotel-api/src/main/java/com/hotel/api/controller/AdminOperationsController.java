@@ -16,6 +16,7 @@ import com.hotel.api.dto.input.ReservationTypeForm;
 import com.hotel.api.dto.input.RoomAddForm;
 import com.hotel.api.dto.input.RoomEditForm;
 import com.hotel.api.dto.input.RoomIdForm;
+import com.hotel.api.dto.input.RoomTypeForm;
 import com.hotel.api.dto.input.UserRoleForm;
 import com.hotel.api.dto.input.UsernameOrEmailAndReservationStatusForm;
 import com.hotel.api.dto.input.UsernameOrEmailAndReservationTypeForm;
@@ -40,9 +41,14 @@ public class AdminOperationsController {
 		return adminOpsService.getAllUsers();
 	}
 	
-	@GetMapping("/getUsersByRole")
+	@PostMapping("/getUsersByRole")
 	public List<SimpleUserInfo> getUsersByRole(@RequestBody @Valid UserRoleForm userRoleForm){
 		return adminOpsService.getUsersByRole(userRoleForm);
+	}
+	
+	@PostMapping("/getRoomsByType")
+	public List<RoomDTO> getRoomsByType(@RequestBody @Valid RoomTypeForm roomTypeForm){
+		return adminOpsService.getRoomsByType(roomTypeForm);
 	}
 	
 	@GetMapping("/getAllRooms")
@@ -50,7 +56,7 @@ public class AdminOperationsController {
 		return adminOpsService.getAllRooms();
 	}
 	
-	@GetMapping("/getRoomById")
+	@PostMapping("/getRoomById")
 	public RoomDTO getRoomById(@RequestBody @Valid RoomIdForm roomIdForm) {
 		return adminOpsService.getRoomById(roomIdForm);
 	}
@@ -95,27 +101,27 @@ public class AdminOperationsController {
 		return adminOpsService.getAllReservationsByUsernameOrEmailAndType(usernameOrEmailFormAndReservationTypeForm);
 	}
 	
-	@GetMapping("/checkInReservation")
+	@PostMapping("/checkInReservation")
 	public String checkIn(@RequestBody @Valid ReservationIdForm reservationIdForm) {
 		return adminOpsService.checkIn(reservationIdForm);
 	}
 	
-	@GetMapping("/checkOutReservation")
+	@PostMapping("/checkOutReservation")
 	public String checkOut(@RequestBody @Valid ReservationIdForm reservationIdForm) {
 		return adminOpsService.checkOut(reservationIdForm);
 	}
 	
-	@GetMapping("/cancelReservation")
+	@PostMapping("/cancelReservation")
 	public String cancel(@RequestBody @Valid ReservationIdForm reservationIdForm) {
 		return adminOpsService.cancel(reservationIdForm);
 	}
 	
-	@GetMapping("/extendStay")
+	@PostMapping("/extendStay")
 	public String extendStay(@RequestBody @Valid ExtendStayForm extendStayForm) {
 		return adminOpsService.extendStay(extendStayForm);
 	}
 	
-	@GetMapping("/editBookedDate")
+	@PostMapping("/editBookedDate")
 	public String editBookedDate(@RequestBody @Valid EditBookedDateForm editBookedDateForm) {
 		return adminOpsService.editBookedDate(editBookedDateForm);
 	}

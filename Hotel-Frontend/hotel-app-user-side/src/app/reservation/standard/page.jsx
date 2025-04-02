@@ -5,11 +5,11 @@ import React from 'react'
 
 const StandardReservationPage = dynamic(() => import("@/components/reservation/standard/StandardReservationPage"), { suspense: true, ssr: true})
 
-const getData = async () => {
-  return await initRoomTypeChoices().then(res => {return res.data}).catch(e => console.log(e))
-}
-
 const page = async () => {
+
+  const getData = async () => {
+    return await initRoomTypeChoices().then(res => {return res.data}).catch(e => console.log(e))
+  }
 
   const roomTypeChoices = await getData()
 

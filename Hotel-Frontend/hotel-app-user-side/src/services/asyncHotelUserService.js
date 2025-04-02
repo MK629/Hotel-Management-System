@@ -8,6 +8,13 @@ export const initRoomTypeChoices = async () => {
     return await axiosInstance.get(MASTER_URL + "/initRoomTypeChoices")
 }
 
-export const getAllRooms = async () => {
-    return await axiosInstance.get(MASTER_URL + "/getAllRooms")
+export const getRoomsByType = async (roomType) => {
+    const roomTypeForm = {
+        roomType: roomType
+    }
+    return await axiosInstance.post(MASTER_URL + "/getRoomsByType", roomTypeForm)
+}
+
+export const getReservations = async () => {
+    
 }

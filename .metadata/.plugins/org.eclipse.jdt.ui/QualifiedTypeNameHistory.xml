@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="jakarta.validation.constraints.NotEmpty"/>
-    <fullyQualifiedTypeName name="com.hotel.api.service.DTOs.Input.RoomIdForm"/>
-    <fullyQualifiedTypeName name="com.hotel.api.service.DTOs.Input.UserRoleForm"/>
-    <fullyQualifiedTypeName name="com.hotel.api.service.DTOs.Input.ExtendStayForm"/>
-    <fullyQualifiedTypeName name="com.hotel.api.service.DTOs.Input.ReservationIdForm"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ExceptionHandler"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.UnavailableRoomException"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.ReservationNotFoundException"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.ReservationStatusErrorException"/>
@@ -30,7 +24,6 @@
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.EditLimitExceededException"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.InvalidDateException"/>
-    <fullyQualifiedTypeName name="com.hotel.api.service.util.ServiceUtil"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="lombok.RequiredArgsConstructor"/>
     <fullyQualifiedTypeName name="com.hotel.api.service.AdminOperationsService"/>
@@ -42,7 +35,6 @@
     <fullyQualifiedTypeName name="org.springframework.security.authentication.BadCredentialsException"/>
     <fullyQualifiedTypeName name="javax.security.sasl.AuthenticationException"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.IncorrectAuthoritiesException"/>
-    <fullyQualifiedTypeName name="com.hotel.api.entity.enums.RoomType"/>
     <fullyQualifiedTypeName name="org.hibernate.query.UnknownNamedQueryException"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.UnknownException"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.UnknownEnumTypeException"/>
@@ -60,4 +52,12 @@
     <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UsernameNotFoundException"/>
     <fullyQualifiedTypeName name="com.hotel.api.exceptionHandling.customExceptions.UserNotFoundException"/>
     <fullyQualifiedTypeName name="com.hotel.api.service.util.UserRankPointsCalculator"/>
+    <fullyQualifiedTypeName name="com.hotel.api.entity.enums.RoomType"/>
+    <fullyQualifiedTypeName name="jakarta.validation.constraints.NotNull"/>
+    <fullyQualifiedTypeName name="com.hotel.api.service.util.ServiceUtil"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+    <fullyQualifiedTypeName name="jakarta.validation.Valid"/>
+    <fullyQualifiedTypeName name="com.hotel.api.dto.input.RoomTypeForm"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.exc.InvalidFormatException"/>
 </qualifiedTypeNameHistroy>
