@@ -2,14 +2,13 @@ import { getSimpleUserInfo } from '@/services/hotelUserService'
 import React, { useEffect, useState } from 'react'
 import { BsDot } from 'react-icons/bs'
 import UserRankDisplay from './UserRankDisplay'
-import { getLoggedInUser } from '@/services/credentialsService'
 
 const MiniProfile = () => {
 
   const [simpleUserInfo, setSimpleUserInfo] = useState({})
 
-  async function updateUserInfo() {
-    await getSimpleUserInfo(await getLoggedInUser()).then((res) => {setSimpleUserInfo(res.data)}).catch(e => console.log(e.response.data))
+  const updateUserInfo = async () => {
+    await getSimpleUserInfo().then((res) => {setSimpleUserInfo(res.data)}).catch(e => console.log(e.response.data))
   }
 
   useEffect(() => {

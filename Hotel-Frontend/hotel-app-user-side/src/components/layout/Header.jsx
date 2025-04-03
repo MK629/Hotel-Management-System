@@ -45,7 +45,7 @@ const Header = () => {
         <MdMenu size={35} className='font-bold text-[#EAE0D2] mt-1.5 hover:text-[#D7C9AE] transition' onClick={() => {flipSidebar()}}/>
         <Link href={"/"} className='text-[#EAE0D2] ml-4 mt-2 flex text-center'>
           <FaHotel size={34}/> 
-          <h1 className='text-center font-extrabold ml-2 text-2xl'>Bayview</h1> 
+          <h1 className='text-center font-extrabold ml-2 lg:text-2xl md:text-2xl sm:text-2xl text-[0px]'>Bayview</h1> 
         </Link>
       </div>
 
