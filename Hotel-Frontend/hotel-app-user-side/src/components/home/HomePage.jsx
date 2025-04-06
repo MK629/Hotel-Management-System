@@ -63,7 +63,7 @@ const HomePage = ({sliderImages}) => {
 
           <div className='flex-col text-center bg-[#EAE0D2] hover:bg-[#D7C9AE] hover:scale-[102%] transition p-4 rounded-lg' onClick={() => {navToManualReservation()}}>
             <BsFillPenFill size={45} className='mx-auto'/>
-            <h2 className='mt-4 lg:text-[15px] md:text-[14x] sm:text-[14px] text-[14px]'>Manual Reservation</h2>
+            <h2 className='mt-4 lg:text-[15px] md:text-[14x] sm:text-[14px] text-[14px] px-2'>Manual Reservation</h2>
           </div>
 
           <div className='flex-col text-center bg-[#EAE0D2] hover:bg-[#D7C9AE] hover:scale-[102%] transition p-4 rounded-lg'>

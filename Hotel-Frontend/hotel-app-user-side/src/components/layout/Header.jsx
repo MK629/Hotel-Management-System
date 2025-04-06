@@ -10,6 +10,7 @@ import { AiOutlineCaretDown} from 'react-icons/ai'
 import { ChangeTrackerContext } from '@/contexts/contextComponents/ChangeTrackerContext'
 import { FaHotel } from 'react-icons/fa'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 const Header = () => {
 
@@ -17,6 +18,7 @@ const Header = () => {
   const {changeTracker, flipChangeTracker} = useContext(ChangeTrackerContext)
   const [sidebar, setSidebar] = useState(false)
   const [resvHistoryDrawer, setResvHistoryDrawer] = useState(false)
+  const router = useRouter()
 
   const flipSidebar = () => {
     setSidebar(!sidebar)
@@ -27,6 +29,7 @@ const Header = () => {
   }
 
   async function handleLogout() {
+    router.push("/")
     await logout()
     flipChangeTracker()
   }
@@ -42,10 +45,10 @@ const Header = () => {
   return (
     <header className='flex justify-between sticky top-0 z-10 bg-[#2D2D2D]'>
       <div className='pt-3.5 px-2.5 flex justify-evenly'>
-        <MdMenu size={35} className='font-bold text-[#EAE0D2] mt-1.5 hover:text-[#D7C9AE] transition' onClick={() => {flipSidebar()}}/>
+        <MdMenu size={35} className='font-bold text-[#EAE0D2] mt-1.5 hover:text-[#D7C9AE] hover:cursor-pointer transition' onClick={() => {flipSidebar()}}/>
         <Link href={"/"} className='text-[#EAE0D2] ml-4 mt-2 flex text-center'>
-          <FaHotel size={34}/> 
-          <h1 className='text-center font-extrabold ml-2 lg:text-2xl md:text-2xl sm:text-2xl text-[0px]'>Bayview</h1> 
+          <FaHotel size={34} className='lg:block md:block sm:block hidden'/> 
+          <h1 className='text-center font-extrabold lg:ml-2 md:ml-2 sm:ml-2 ml-0 lg:text-2xl md:text-2xl sm:text-2xl text-[0px]'>Bayview</h1> 
         </Link>
       </div>
 
@@ -69,19 +72,19 @@ const Header = () => {
                 </div>
 
                 <ul className={`mx-auto ${resvHistoryDrawer ? '' : 'hidden'} text-[16px]`}>
-                  <li className='hover:bg-[#D7C9AE] transition py-2 px-3 rounded-xl mt-1'>
+                  <li className='hover:bg-[#D7C9AE] transition py-2 px-3 rounded-xl mt-1 hover:cursor-pointer' onClick={() => {router.push("/reservation/history/All"); flipSidebar()}}>
                     <div className='flex'>
                       <BsJournalBookmarkFill size={22} className='mr-2 ml-14'/> All
                     </div>
                   </li>
 
-                  <li className='hover:bg-[#D7C9AE] transition py-2 px-3 rounded-xl mt-1'>
+                  <li className='hover:bg-[#D7C9AE] transition py-2 px-3 rounded-xl mt-1 hover:cursor-pointer' onClick={() => {router.push("/reservation/history/Standard"); flipSidebar()}}>
                     <div className='flex'>
                       <BsClipboard2Fill size={22} className='mr-2 ml-14'/> Standard
                     </div>
                   </li>
                   
-                  <li className='hover:bg-[#D7C9AE] transition py-2 px-3 rounded-xl mt-1'>
+                  <li className='hover:bg-[#D7C9AE] transition py-2 px-3 rounded-xl mt-1 hover:cursor-pointer' onClick={() => {router.push("/reservation/history/Manual"); flipSidebar()}}>
                     <div className='flex'>
                       <BsPenFill size={22} className='mr-2 ml-14'/> Manual
                     </div>

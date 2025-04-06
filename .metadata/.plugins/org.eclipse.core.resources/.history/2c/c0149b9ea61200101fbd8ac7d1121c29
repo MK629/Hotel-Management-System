@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.hotel.api.exceptionHandling.customExceptions.DuplicateDataException;
 import com.hotel.api.exceptionHandling.customExceptions.EditLimitExceededException;
 import com.hotel.api.exceptionHandling.customExceptions.InvalidDateException;

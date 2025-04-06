@@ -4,13 +4,37 @@ import React, { useEffect, useState } from 'react'
 
 const ReservationHistoryPage = ({reservations}) => {
 
-  const [fetchedReservations, setFetchedReservations] = useState([]) 
-  const [filteredReservations, setFilteredReservations] = useState([])
+  const [fetchedReservations, setFetchedReservations] = useState([])
+  const [shownReservations, setShownReservations] = useState([])
 
-  console.log(reservations)
+  useEffect(() => {
+    setFetchedReservations(reservations)
+    setShownReservations(reservations)
+  },[])
  
   return (
-    <div>ReservationHistoryPage</div>
+
+    shownReservations && shownReservations.length > 0 ? 
+    
+    <div>
+      <div className='grid grid-cols-3'>
+        {
+          shownReservations && shownReservations.map(reservation => {
+            return (
+              <div key={reservation.id}>
+                {reservation.roomNumber}
+              </div>
+            )
+          })
+        }
+      </div>
+    </div>
+
+    :
+
+    <div>
+      No such reservations exist.
+    </div>
   )
 }
 

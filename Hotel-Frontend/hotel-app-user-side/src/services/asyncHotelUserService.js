@@ -1,7 +1,7 @@
 "use server"
 
 import { axiosInstance } from "./axiosConfig";
-import { getLoggedInUser } from "./credentialsService";
+import { getLoggedInUser, isLoggedIn } from "./credentialsService";
 
 const MASTER_URL = "http://localhost:8080/hotel/api"
 
@@ -17,6 +17,7 @@ export const getRoomsByType = async (roomType) => {
 }
 
 export async function getReservations(reservationType){
+
     const usernameOrEmail = await getLoggedInUser()
 
     switch(reservationType){
