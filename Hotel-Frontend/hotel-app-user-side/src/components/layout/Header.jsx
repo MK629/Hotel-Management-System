@@ -29,9 +29,9 @@ const Header = () => {
   }
 
   async function handleLogout() {
-    router.push("/")
     await logout()
     flipChangeTracker()
+    router.push("/auth/login")
   }
 
   async function updateLoginState() {

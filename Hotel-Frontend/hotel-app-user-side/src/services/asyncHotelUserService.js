@@ -1,7 +1,7 @@
 "use server"
 
 import { axiosInstance } from "./axiosConfig";
-import { getLoggedInUser, isLoggedIn } from "./credentialsService";
+import { getLoggedInUser} from "./credentialsService";
 
 const MASTER_URL = "http://localhost:8080/hotel/api"
 
