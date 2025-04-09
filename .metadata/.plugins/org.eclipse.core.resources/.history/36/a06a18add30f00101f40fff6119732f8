@@ -1,9 +1,0 @@
-package com.hotel.api.dto.input;
-
-import com.hotel.api.entity.enums.RoomType;
-
-public record RoomTypeForm(
-		RoomType roomType
-		) {
-
-}
