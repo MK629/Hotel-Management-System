@@ -48,7 +48,7 @@ const LoginPage = () => {
 
             <div className='flex-col w-2/5 text-[#2D2D2D]'>
               <input id='usernameOrEmail' type="text" name='usernameOrEmail' placeholder='Enter username/e-mail.' className='sm:w-[10em] md:w-[12em] lg:w-[14em] max-w-[14em] min-w-[10em] rounded-md py-1 px-2 font-medium bg-[#EAE0D2] focus:outline-none'/>
-              <input id='password' type="text" name='password' placeholder='Enter password.' className='sm:w-[10em] md:w-[12em] lg:w-[14em] max-w-[14em] min-w-[10em] rounded-md py-1 px-2 font-medium shadow-[#2D2D2D] mt-4 bg-[#EAE0D2] focus:outline-none'/>
+              <input id='password' type="password" name='password' placeholder='Enter password.' className='sm:w-[10em] md:w-[12em] lg:w-[14em] max-w-[14em] min-w-[10em] rounded-md py-1 px-2 font-medium shadow-[#2D2D2D] mt-4 bg-[#EAE0D2] focus:outline-none'/>
             </div>
           </div>
 
