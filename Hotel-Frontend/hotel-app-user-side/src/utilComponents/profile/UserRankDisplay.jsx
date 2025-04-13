@@ -8,6 +8,7 @@ const UserRankDisplay = ({rank}) => {
         case 'Silver': return "bg-[#C0C0C0]";
         case 'Gold': return "bg-[#FFD700]";
         case 'Platinum': return "bg-[#E5E4E2]";
+        default: return "bg-[#CD7F32]"
     }
   }  
 

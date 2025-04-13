@@ -6,7 +6,7 @@ import React from 'react'
 const ManualReservationPage = dynamic(() => import("@/components/reservation/manual/ManualReservationPage"), {suspense: true ,ssr: true})
 
 const getData = async () => {
-  return await initRoomTypeChoices().then(res => {return res.data}).catch(e => console.log(e))
+  return await initRoomTypeChoices().then(res => {return res.data}).catch(e => console.log(e.response))
 }
 
 const page = async () => {
