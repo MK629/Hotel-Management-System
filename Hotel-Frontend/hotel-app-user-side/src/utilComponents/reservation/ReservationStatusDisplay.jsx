@@ -8,7 +8,7 @@ const ReservationStatusDisplay = ({reservationStatus}) => {
       case "Awaiting": return "text-[#c45602]";
       case "Checked_In": return "text-[#01548c]";
       case "Checked_Out": return "text-[#018c04]";
-      case "Cancelled": return "text-[#c41f02]";
+      case "Cancelled": return "text-[#b30202]";
       default: return ""
     }
   }
