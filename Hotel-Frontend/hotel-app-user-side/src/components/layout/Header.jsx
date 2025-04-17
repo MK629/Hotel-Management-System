@@ -48,7 +48,7 @@ const Header = () => {
         <MdMenu size={35} className='font-bold text-[#EAE0D2] mt-1.5 hover:text-[#D7C9AE] hover:cursor-pointer transition' onClick={() => {flipSidebar()}}/>
         <Link href={"/"} className='text-[#EAE0D2] ml-4 mt-2 flex text-center'>
           <FaHotel size={34} className='lg:block md:block sm:block hidden'/> 
-          <h1 className='text-center font-extrabold lg:ml-2 md:ml-2 sm:ml-2 ml-0 lg:text-2xl md:text-2xl sm:text-2xl text-[0px]'>Bayview</h1> 
+          <h1 className='text-center font-extrabold lg:ml-2 md:ml-2 sm:ml-2 ml-0 lg:text-2xl md:text-2xl sm:text-2xl text-[0px]'>Sunview</h1> 
         </Link>
       </div>
 
@@ -60,7 +60,7 @@ const Header = () => {
 
       <div className={`fixed z-20 bg-black ${sidebar ? "opacity-75 w-full h-screen" : "opacity-0 w-0 h-0"} transition duration-[400ms]`} onClick={() => {sidebar ? flipSidebar() : {}}}></div>
 
-      <div className={`fixed top-0 ${sidebar ?  'left-0 ' : 'left-[-100%]'} w-[350px] h-screen bg-[#EAE0D2] z-30 duration-[400ms]`}>
+      <div className={`fixed top-0 ${sidebar ?  'left-0 ' : 'left-[-125%]'} w-[350px] h-screen bg-[#EAE0D2] z-30 duration-[400ms]`}>
         {
           loginState ? 
           <div className='h-screen'>
@@ -69,7 +69,7 @@ const Header = () => {
 
               <li className='font-bold mt-1 text-[#2D2D2D]'>
                 <div className='flex justify-between text-[16px] hover:bg-[#D7C9AE] py-2.5 px-10 rounded-lg transition' onClick={() => {flipResvHistoryDrawer()}}>
-                  <BsClockFill size={25}/> Reservation History <AiOutlineCaretDown size={25} className={`duration-[400ms] transform ${resvHistoryDrawer ?  'rotate-x-180' : "rotate-x-0"}`}/>
+                  <BsClockFill size={25}/> Reservation History <AiOutlineCaretDown size={25} className={`duration-[400ms] transform ${resvHistoryDrawer ?  'rotate-x-0' : "rotate-x-180"}`}/>
                 </div>
 
                 <ul className={`mx-auto ${resvHistoryDrawer ? '' : 'hidden'} text-[16px]`}>

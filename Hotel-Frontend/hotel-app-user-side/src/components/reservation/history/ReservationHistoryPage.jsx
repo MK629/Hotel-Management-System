@@ -58,7 +58,7 @@ const ReservationHistoryPage = ({reservations}) => {
           {
             shownReservations && shownReservations.map(reservation => {
               return (
-                <div key={reservation.id} className='mx-auto bg-[#D7C9AE] rounded-xl p-1.5'>
+                <div key={reservation.id} className='mx-auto bg-[#D7C9AE] rounded-xl p-1.5 hover:scale-[102%] transition duration-200'>
                   <Image src={`/images/roomTypeImages/${reservation.roomType}.jpg`} alt={`${reservation.roomType}.jpg`} width={550} height={550} className='border-[#D7C9AE] rounded-xl mb-3.5'/>
                   
                   <ReservationStatusDisplay reservationStatus={reservation.reservationStatus}/>
