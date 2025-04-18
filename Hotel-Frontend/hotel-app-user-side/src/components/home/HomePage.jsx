@@ -30,12 +30,8 @@ const HomePage = ({sliderImages}) => {
     }
   }
 
-  const navToStandardReservation = () => {
-    router.push("/reservation/standard")
-  }
-
-  const navToManualReservation = () => {
-    router.push("/reservation/manual")
+  const navigate = (path) => {
+    router.push(path)
   }
 
   return (
@@ -56,22 +52,22 @@ const HomePage = ({sliderImages}) => {
         <h1 className='mx-auto text-center text-[#D7C9AE] lg:text-4xl md:text-4xl sm:text-3xl text-2xl font-extrabold mt-8 w-2/4 items-center'>Adventure awaits!</h1>
 
         <div className='grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 p-4 gap-12 mt-12 text-[#2D2D2D] text-center items-center font-extrabold mx-auto'>
-          <div className='flex-col text-center bg-[#EAE0D2] hover:bg-[#D7C9AE] hover:scale-[102%] transition p-3.5 rounded-lg' onClick={() => {navToStandardReservation()}}>
+          <div className='flex-col text-center bg-[#EAE0D2] hover:bg-[#D7C9AE] hover:scale-[102%] transition p-3.5 rounded-lg' onClick={() => {navigate("/reservation/standard")}}>
             <BsClipboard2Fill size={45} className='mx-auto'/>
             <h2 className='mt-4 lg:text-[15px] md:text-[14x] sm:text-[14px] text-[14px]'>Standard Reservation</h2>
           </div>
 
-          <div className='flex-col text-center bg-[#EAE0D2] hover:bg-[#D7C9AE] hover:scale-[102%] transition p-3.5 rounded-lg' onClick={() => {navToManualReservation()}}>
+          <div className='flex-col text-center bg-[#EAE0D2] hover:bg-[#D7C9AE] hover:scale-[102%] transition p-3.5 rounded-lg' onClick={() => {navigate("/reservation/manual")}}>
             <BsFillPenFill size={45} className='mx-auto'/>
             <h2 className='mt-4 lg:text-[15px] md:text-[14x] sm:text-[14px] text-[14px] px-2'>Manual Reservation</h2>
           </div>
 
-          <div className='flex-col text-center bg-[#EAE0D2] hover:bg-[#D7C9AE] hover:scale-[102%] transition p-3.5 rounded-lg'>
+          <div className='flex-col text-center bg-[#EAE0D2] hover:bg-[#D7C9AE] hover:scale-[102%] transition p-3.5 rounded-lg' onClick={() => {navigate("/profile")}}>
             <BsPersonBadgeFill size={45} className='mx-auto'/>
             <h2 className='mt-4 lg:text-[15px] md:text-[14x] sm:text-[14px] text-[14px]'>Profile</h2>
           </div>
 
-          <div className='flex-col text-center bg-[#EAE0D2] hover:bg-[#D7C9AE] hover:scale-[102%] transition p-3.5 rounded-lg'>
+          <div className='flex-col text-center bg-[#EAE0D2] hover:bg-[#D7C9AE] hover:scale-[102%] transition p-3.5 rounded-lg' onClick={() => {navigate("/about")}}>
             <BsInfoCircleFill size={45} className='mx-auto'/>
             <h2 className='mt-4 lg:text-[15px] md:text-[14x] sm:text-[14px] text-[14px]'>About</h2>
           </div>

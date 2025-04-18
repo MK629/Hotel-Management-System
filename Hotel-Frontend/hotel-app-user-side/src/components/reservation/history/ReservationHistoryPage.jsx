@@ -4,7 +4,7 @@ import UserRankDisplay from '@/utilComponents/profile/UserRankDisplay'
 import ReservationStatusDisplay from '@/utilComponents/reservation/ReservationStatusDisplay'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { BsArchiveFill, BsClipboardCheckFill, BsClipboardXFill, BsDoorOpenFill, BsStopwatchFill } from 'react-icons/bs'
+import { BsArchiveFill, BsClipboardCheckFill, BsClipboardXFill, BsDoorOpenFill, BsEmojiFrownFill, BsStopwatchFill } from 'react-icons/bs'
 
 const ReservationHistoryPage = ({reservations}) => {
 
@@ -33,6 +33,10 @@ const ReservationHistoryPage = ({reservations}) => {
 
   const extractDate = (dateTime) => {
     return dateTime.slice(0, 10)
+  }
+
+  const extractTime = (dateTime) => {
+    return dateTime.slice(11, 19)
   }
 
   useEffect(() => {
@@ -99,6 +103,10 @@ const ReservationHistoryPage = ({reservations}) => {
                     <UserRankDisplay rank={reservation.userRankAtReservationTime}/>{showDiscount(reservation.userRankAtReservationTime)} Off
                   </div>
 
+                  <div className='flex justify-center text-[9px] font-extrabold'>
+                    Registered on: {extractDate(reservation.reservationTime)} {extractTime(reservation.reservationTime)}
+                  </div>
+
                   <h6 className='lg:text-[11px] md:text-[11px] sm:text-[10px] text-[10px] px-0.5 py-0.5 font-semibold'>ID: {reservation.id}</h6>
                 </div>
               )
@@ -108,8 +116,10 @@ const ReservationHistoryPage = ({reservations}) => {
 
         :
 
-        <div>
-          No such reservations exist.
+        <div className='flex justify-center items-center min-h-screen'>
+          <div className='flex mx-auto rounded-xl bg-[#EAE0D2] text-[#2D2D2D] text-xl font-extrabold px-6 py-3 my-auto'>
+            No such reservations exist. <BsEmojiFrownFill size={30}/>
+          </div>
         </div>
       } 
     </div>

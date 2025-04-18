@@ -6461,3 +6461,4 @@
 2025-04-18 02:06:52,688 [Worker-57: Launching Hotel-api - HotelApiApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src/main/resources to target/classes
 2025-04-18 02:06:52,728 [Worker-57: Launching Hotel-api - HotelApiApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src/main/resources to target/classes
 2025-04-18 02:06:52,745 [Worker-57: Launching Hotel-api - HotelApiApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory /media/mk/Data/Projects/Hotel/Hotel-api/src/test/resources
+2025-04-18 13:37:08,789 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.

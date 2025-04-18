@@ -1,11 +1,15 @@
+"use client"
+
 import { getSimpleUserInfo } from '@/services/hotelUserService'
 import React, { useEffect, useState } from 'react'
 import { BsDot } from 'react-icons/bs'
 import UserRankDisplay from './UserRankDisplay'
+import { useRouter } from 'next/navigation'
 
 const MiniProfile = () => {
 
   const [simpleUserInfo, setSimpleUserInfo] = useState({})
+  const router = useRouter()
 
   const updateUserInfo = async () => {
     await getSimpleUserInfo().then((res) => {setSimpleUserInfo(res.data)}).catch(e => console.log(e.response.data))
@@ -37,7 +41,7 @@ const MiniProfile = () => {
           </div>
                     
           <div className='flex'>
-            <button className='bg-[#7c654b] hover:bg-[#d3af87] transition px-3 py-0.5 rounded-lg font-extrabold text-[#EAE0D2] mx-auto mt-1 mb-5'>Detailed view</button>
+            <button onClick={() => {router.push("/profile")}} className='bg-[#7c654b] hover:bg-[#d3af87] transition px-3 py-0.5 rounded-lg font-extrabold text-[#EAE0D2] mx-auto mt-1 mb-5'>Detailed view</button>
           </div>
        </div>
     </div>

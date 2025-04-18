@@ -38,6 +38,11 @@ const Header = () => {
     setLoginState(await isLoggedIn())
   }
 
+  const navigate = (path) => {
+    router.push(path)
+    flipSidebar()
+  }
+
   useEffect(() => {
     updateLoginState()
   }, [changeTracker])
@@ -68,24 +73,24 @@ const Header = () => {
               <li><MiniProfile/></li>
 
               <li className='font-bold mt-1 text-[#2D2D2D]'>
-                <div className='flex justify-between text-[16px] hover:bg-[#D7C9AE] py-2.5 px-10 rounded-lg transition' onClick={() => {flipResvHistoryDrawer()}}>
+                <div className='flex justify-between text-[16px] hover:bg-[#D7C9AE] py-2.5 px-10 rounded-lg transition duration-300' onClick={() => {flipResvHistoryDrawer()}}>
                   <BsClockFill size={25}/> Reservation History <AiOutlineCaretDown size={25} className={`duration-[400ms] transform ${resvHistoryDrawer ?  'rotate-x-0' : "rotate-x-180"}`}/>
                 </div>
 
                 <ul className={`mx-auto ${resvHistoryDrawer ? '' : 'hidden'} text-[16px]`}>
-                  <li className='hover:bg-[#D7C9AE] transition py-2 px-3 rounded-lg mt-1 hover:cursor-pointer' onClick={() => {router.push("/reservation/history/All"); flipSidebar()}}>
+                  <li className='hover:bg-[#D7C9AE] transition py-2 px-3 rounded-lg mt-1 hover:cursor-pointer duration-300' onClick={() => {navigate("/reservation/history/All")}}>
                     <div className='flex'>
                       <BsJournalBookmarkFill size={22} className='mr-2 ml-14'/> All
                     </div>
                   </li>
 
-                  <li className='hover:bg-[#D7C9AE] transition py-2 px-3 rounded-lg mt-1 hover:cursor-pointer' onClick={() => {router.push("/reservation/history/Standard"); flipSidebar()}}>
+                  <li className='hover:bg-[#D7C9AE] transition py-2 px-3 rounded-lg mt-1 hover:cursor-pointer duration-300' onClick={() => {navigate("/reservation/history/Standard")}}>
                     <div className='flex'>
                       <BsClipboard2Fill size={22} className='mr-2 ml-14'/> Standard
                     </div>
                   </li>
                   
-                  <li className='hover:bg-[#D7C9AE] transition py-2 px-3 rounded-lg mt-1 hover:cursor-pointer' onClick={() => {router.push("/reservation/history/Manual"); flipSidebar()}}>
+                  <li className='hover:bg-[#D7C9AE] transition py-2 px-3 rounded-lg mt-1 hover:cursor-pointer duration-300' onClick={() => {navigate("/reservation/history/Manual")}}>
                     <div className='flex'>
                       <BsPenFill size={22} className='mr-2 ml-14'/> Manual
                     </div>
@@ -93,8 +98,8 @@ const Header = () => {
                 </ul>
               </li>
 
-              <li className='font-bold mt-1 text-[#2D2D2D]'>
-                <div className='flex text-[16px] hover:bg-[#D7C9AE] py-2.5 px-10 rounded-lg transition'>
+              <li className='font-bold mt-1 text-[#2D2D2D] hover:bg-[#D7C9AE] py-2.5 px-10 rounded-lg transition duration-300' onClick={() => {navigate("/about")}}>
+                <div className='flex text-[16px]'>
                   <BsInfoCircleFill size={25} className='mr-3.5'/> About
                 </div>
               </li>

@@ -1,14 +1,16 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import {saveLoggedInUser, saveToken} from '@/services/credentialsService'
 import { login } from '@/services/authenticationService'
 import { formToJSON } from 'axios'
 import { ChangeTrackerContext } from '@/contexts/contextComponents/ChangeTrackerContext'
+import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 
 const LoginPage = () => {
 
+  const [showPassword, setShowPassword] = useState(false)
   const router = useRouter()
   const {flipChangeTracker} = useContext(ChangeTrackerContext)
 
@@ -47,8 +49,17 @@ const LoginPage = () => {
             </div>
 
             <div className='flex-col w-2/5 text-[#2D2D2D]'>
-              <input id='usernameOrEmail' type="text" name='usernameOrEmail' placeholder='Enter username/e-mail.' className='sm:w-[10em] md:w-[12em] lg:w-[14em] max-w-[14em] min-w-[10em] rounded-md py-1 px-2 font-medium bg-[#EAE0D2] focus:outline-none'/>
-              <input id='password' type="password" name='password' placeholder='Enter password.' className='sm:w-[10em] md:w-[12em] lg:w-[14em] max-w-[14em] min-w-[10em] rounded-md py-1 px-2 font-medium shadow-[#2D2D2D] mt-4 bg-[#EAE0D2] focus:outline-none'/>
+              <div className='flex w-fit'>
+                <input id='usernameOrEmail' type="text" name='usernameOrEmail' placeholder='Enter username/e-mail.' className='sm:w-[11em] md:w-[12em] lg:w-[15em] w-[10.5em] rounded-md py-1 px-2 font-medium bg-[#EAE0D2] focus:outline-none'/>
+              </div>
+              <div className='flex w-fit'>
+                <input id='password' type={`${showPassword ? 'text': 'password'}`} name='password' placeholder='Enter password.' className='sm:w-[11em] md:w-[12em] lg:w-[15em] w-[10.5em] rounded-md py-1 px-2 font-medium shadow-[#2D2D2D] mt-4 bg-[#EAE0D2] focus:outline-none'/>
+                <div className='mt-5 ml-2 hover:cursor-pointer' onClick={() => {setShowPassword(!showPassword)}}>
+                  {
+                    showPassword ? <BsEyeFill size={25}/> : <BsEyeSlashFill size={25}/> 
+                  }
+                </div>
+              </div>
             </div>
           </div>
 
