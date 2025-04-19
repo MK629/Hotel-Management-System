@@ -1,8 +1,14 @@
+import RenderCSR from '@/components/rendering/RenderCSR'
+import dynamic from 'next/dynamic'
 import React from 'react'
+
+const ProfilePage = dynamic(() => {return import("@/pageComponents/profile/ProfilePage")}, { suspense: true, ssr: true})
 
 const page = () => {
   return (
-    <div>Profile</div>
+    <>
+      <RenderCSR csrComponent={<ProfilePage/>}/>
+    </>
   )
 }
 

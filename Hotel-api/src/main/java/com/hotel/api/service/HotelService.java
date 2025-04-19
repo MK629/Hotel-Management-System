@@ -9,7 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hotel.api.dto.input.ChangePasswordRequestForm;
+import com.hotel.api.dto.input.ChangePasswordForm;
+import com.hotel.api.dto.input.ChangeUsernameForm;
 import com.hotel.api.dto.input.ManualReservationForm;
 import com.hotel.api.dto.input.RoomTypeForm;
 import com.hotel.api.dto.input.StandardReservationForm;
@@ -188,9 +189,9 @@ public class HotelService {
 	}
 	
 	@Transactional
-	//Change a user's password.
-	public String changePassword(ChangePasswordRequestForm changePasswordRequestForm) {
-		User user = userRepository.findByUsernameOrEmail(changePasswordRequestForm.usernameOrEmail()).orElse(null);
+	//Change a user's user name.
+	public String changeUsername(ChangeUsernameForm changeUsernameForm) {
+		User user = userRepository.findByUsernameOrEmail(changeUsernameForm.currentUsernameOrEmail()).orElse(null);
 		
 		//Make sure user exists.
 		if(user == null) {
@@ -198,13 +199,34 @@ public class HotelService {
 		}
 		
 		//Validate user with old password.
-		if(passwordEncoder.matches(changePasswordRequestForm.oldPassword(), user.getPassword())) {
-			user.setPassword(passwordEncoder.encode(changePasswordRequestForm.newPassword()));
+		if(passwordEncoder.matches(ServiceUtil.decodeBase64(changeUsernameForm.currentPassword()), user.getPassword())) {
+			user.setUsername(changeUsernameForm.newUsername());
 			userRepository.save(user);
-			return "password changed successfully.";
+			return "success";
 		}
 		else {
-			throw new BadCredentialsException("old password is incorrect.");
+			throw new BadCredentialsException("current password is incorrect.");
+		}
+	}
+	
+	@Transactional
+	//Change a user's password.
+	public String changePassword(ChangePasswordForm changePasswordForm) {
+		User user = userRepository.findByUsernameOrEmail(changePasswordForm.currentUsernameOrEmail()).orElse(null);
+		
+		//Make sure user exists.
+		if(user == null) {
+			throw new UserNotFoundException("user not found.");
+		}
+		
+		//Validate user with old password.
+		if(passwordEncoder.matches(ServiceUtil.decodeBase64(changePasswordForm.currentPassword()), user.getPassword())) {
+			user.setPassword(passwordEncoder.encode(ServiceUtil.decodeBase64(changePasswordForm.newPassword())));
+			userRepository.save(user);
+			return "success";
+		}
+		else {
+			throw new BadCredentialsException("current password is incorrect.");
 		}
 	}
 	

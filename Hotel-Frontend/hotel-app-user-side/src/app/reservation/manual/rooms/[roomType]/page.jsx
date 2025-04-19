@@ -1,9 +1,9 @@
 import { getRoomsByType } from '@/services/asyncHotelUserService'
-import RenderCSR from '@/utilComponents/rendering/RenderCSR'
+import RenderCSR from '@/components/rendering/RenderCSR'
 import dynamic from 'next/dynamic'
 import React from 'react'
 
-const RoomChoicePage = dynamic(() => import('@/components/reservation/manual/RoomChoicePage'), {suspense: true, ssr: true})
+const RoomChoicePage = dynamic(() => import('@/pageComponents/reservation/manual/RoomChoicePage'), {suspense: true, ssr: true})
 
 const getData = async (roomType) => {
   return await getRoomsByType(roomType).then(res => {return res.data}).catch(e => console.log(e.response))

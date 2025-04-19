@@ -1,0 +1,6 @@
+package com.hotel.api.dto.input;
+
+public record ChangeUsernameForm(
+		String currentUsernameOrEmail,
+		String newUsername
+		) {}

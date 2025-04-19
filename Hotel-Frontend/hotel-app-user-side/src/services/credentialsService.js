@@ -36,4 +36,22 @@ export async function logout() {
     const cookieJar = await cookies()
     cookieJar.delete("token")
     cookieJar.delete("user")
+    await brushUp()
+}
+
+//For Profile Editing
+
+export async function tempSavePassword(password){
+    const cookieJar = await cookies()
+    cookieJar.set("password", password, {secure: true, path: '/profile'})
+}
+
+export async function tempGetPassword(){
+    const cookieJar = await cookies()
+    return cookieJar.get("password")?.value
+}
+
+export async function brushUp(){
+    const cookieJar = await cookies()
+    cookieJar.delete("password")
 }

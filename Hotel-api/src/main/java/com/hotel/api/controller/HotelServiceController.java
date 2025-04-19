@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hotel.api.dto.input.ChangePasswordRequestForm;
+import com.hotel.api.dto.input.ChangePasswordForm;
+import com.hotel.api.dto.input.ChangeUsernameForm;
 import com.hotel.api.dto.input.ManualReservationForm;
 import com.hotel.api.dto.input.RoomTypeForm;
 import com.hotel.api.dto.input.StandardReservationForm;
@@ -46,8 +47,13 @@ public class HotelServiceController {
 		return hotelService.getSimpleUserInfo(usernameOrEmailForm);
 	}
 	
+	@PostMapping("/changeUsername")
+	public String changeUsername(@RequestBody @Valid ChangeUsernameForm changeUsernameForm) {
+		return hotelService.changeUsername(changeUsernameForm);
+	}
+	
 	@PostMapping("/changePassword")
-	public String changePassword(@RequestBody @Valid ChangePasswordRequestForm changePasswordRequestForm) {
+	public String changePassword(@RequestBody @Valid ChangePasswordForm changePasswordRequestForm) {
 		return hotelService.changePassword(changePasswordRequestForm);
 	}
 	

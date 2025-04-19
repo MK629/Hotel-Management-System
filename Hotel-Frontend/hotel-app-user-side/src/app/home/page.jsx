@@ -1,10 +1,10 @@
-import RenderCSR from '@/utilComponents/rendering/RenderCSR'
+import RenderCSR from '@/components/rendering/RenderCSR'
 import dynamic from 'next/dynamic'
 import React from 'react'
 
 //Makes a client component render as a Server Component (HTML first, then hydrate js) but still enables it to use client-side React hooks.
 //Render with SSR, then use client side hooks.
-const HomePage = dynamic(() => import("@/components/home/HomePage"), {suspense: true ,ssr: true})
+const HomePage = dynamic(() => import("@/pageComponents/home/HomePage"), {suspense: true ,ssr: true})
 
 const initSliderImages = async () => {
   let addImages = []

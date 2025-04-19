@@ -1,5 +1,6 @@
 package com.hotel.api.service.util;
 
+import java.util.Base64;
 import com.hotel.api.dto.output.ReservationDTO;
 import com.hotel.api.dto.output.RoomDTO;
 import com.hotel.api.dto.output.SimpleUserInfo;
@@ -22,5 +23,9 @@ public class ServiceUtil {
 	
 	public static SimpleUserInfo changeToSimpleUserInfo(User user) {
 		return new SimpleUserInfo(user.getUsername(), user.getEmail(), user.getRank());
+	}
+	
+	public static String decodeBase64(String encodedString) {
+		return new String(Base64.getDecoder().decode(encodedString));
 	}
 }
