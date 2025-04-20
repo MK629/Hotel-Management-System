@@ -41,3 +41,5 @@ export async function getReservations(reservationType){
         default: console.log("Unknown reservation type.")
     }
 }
+
+

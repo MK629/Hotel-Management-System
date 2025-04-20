@@ -53,8 +53,8 @@ public class HotelServiceController {
 	}
 	
 	@PostMapping("/changePassword")
-	public String changePassword(@RequestBody @Valid ChangePasswordForm changePasswordRequestForm) {
-		return hotelService.changePassword(changePasswordRequestForm);
+	public String changePassword(@RequestBody @Valid ChangePasswordForm changePasswordForm) {
+		return hotelService.changePassword(changePasswordForm);
 	}
 	
 	@GetMapping("/getAllRooms")

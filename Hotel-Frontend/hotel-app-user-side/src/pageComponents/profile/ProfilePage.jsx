@@ -6,6 +6,7 @@ import ChangeUsername from '@/components/profile/ChangeUsername'
 import PasswordVaidation from '@/components/profile/PasswordVaidation'
 import ProfileDetails from '@/components/profile/ProfileDetails'
 import React, { useEffect, useState } from 'react'
+import { brushUp } from '@/services/credentialsService'
 
 const ProfilePage = () => {
 
@@ -28,9 +29,10 @@ const ProfilePage = () => {
     setManagementItem(2)
   }
 
-  const cleanUp = () => {
+  async function cleanUp(){
     setManagementStep(0)
     setManagementItem(0)
+    await brushUp()
   }
 
   useEffect(() => {

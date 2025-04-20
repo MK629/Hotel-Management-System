@@ -39,7 +39,7 @@ export async function logout() {
     await brushUp()
 }
 
-//For Profile Editing
+//For Profile Management
 
 export async function tempSavePassword(password){
     const cookieJar = await cookies()

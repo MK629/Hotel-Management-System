@@ -103,7 +103,7 @@ const ReservationHistoryPage = ({reservations}) => {
                     <UserRankDisplay rank={reservation.userRankAtReservationTime}/>{showDiscount(reservation.userRankAtReservationTime)} Off
                   </div>
 
-                  <div className='flex justify-center text-[9px] font-extrabold'>
+                  <div className='flex justify-center text-[10px] font-extrabold'>
                     Registered on: {extractDate(reservation.reservationTime)} {extractTime(reservation.reservationTime)}
                   </div>
 

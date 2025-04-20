@@ -1,14 +1,16 @@
 "use client"
 
 import { getSimpleUserInfo } from '@/services/hotelUserService'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BsDot } from 'react-icons/bs'
 import UserRankDisplay from './UserRankDisplay'
 import { useRouter } from 'next/navigation'
+import { ProfileEditNoticeContext } from '@/contexts/contextComponents/ProfileEditNoticeContext'
 
 const MiniProfile = () => {
 
   const [simpleUserInfo, setSimpleUserInfo] = useState({})
+  const {profileEditNotice} = useContext(ProfileEditNoticeContext)
   const router = useRouter()
 
   const updateUserInfo = async () => {
@@ -17,7 +19,7 @@ const MiniProfile = () => {
 
   useEffect(() => {
     updateUserInfo()
-  },[])
+  },[profileEditNotice])
     
   return (
     <div>

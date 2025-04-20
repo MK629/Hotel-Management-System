@@ -14,5 +14,4 @@ public record ChangePasswordForm(
 		@NotEmpty(message = "new password is empty")
 		String newPassword
 		) {
-
 }
