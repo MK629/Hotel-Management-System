@@ -3,9 +3,12 @@
 import { ProfileManagementContext } from '@/contexts/contextComponents/ProfileManagementContext'
 import { login } from '@/services/authenticationService'
 import { getLoggedInUser, tempSavePassword } from '@/services/credentialsService'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
+import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 
 const PasswordVaidation = () => {
+
+  const [showPassword, setShowPassword] = useState(false)
 
   const {editingStep, cleanUp} = useContext(ProfileManagementContext)
 
@@ -28,15 +31,27 @@ const PasswordVaidation = () => {
     
   return (
     <div className='container mx-auto'>
-      <div className='flex flex-col bg-[#D7C9AE] p-4 space-y-6 rounded-xl'>
-        <form onSubmit={(e) => {e.preventDefault(); validatePassword(e.target)}} className='flex-col'>
-          <div>
-            <input id='password' name='password' type="text" className='bg-[#EAE0D2]'/>
+      <div className='flex flex-col bg-[#D7C9AE] p-4 space-y-6 rounded-xl lg:w-2/5 md:3/5 sm:2/4 mx-auto'>
+        <form onSubmit={(e) => {e.preventDefault(); validatePassword(e.target)}} className='flex-col space-y-3'>
+          <h1 className='p-0.5 text-[#2D2D2D] font-bold'>Enter your current password:</h1>
+
+          <div className='flex'> 
+            <input id='password' name='password' type={showPassword ? 'text' : 'password'} className='bg-[#EAE0D2] mx-auto w-full rounded-lg py-1 px-2 focus:outline-none text-[#2D2D2D] font-bold'/>
+            <div className='mt-1 ml-2 hover:cursor-pointer' onClick={() => {setShowPassword(!showPassword)}}>
+              {
+                showPassword ? <BsEyeFill size={25}/> : <BsEyeSlashFill size={25}/> 
+              }
+            </div>
           </div>
 
-          <div className='flex'>
-            <button type='submit'>Next</button>
-            <div onClick={() => {cleanUp()}}>Cancel</div>
+          <div className='flex justify-center space-x-20 p-2'>
+            <button className='bg-[#7c654b] hover:bg-[#d3af87] transition px-3 py-[5px] rounded-lg font-bold text-[#EAE0D2] hover:cursor-pointer' type='submit'>
+              Next
+            </button>
+
+            <div className='bg-[#7c654b] hover:bg-[#d3af87] transition px-3 py-[5px] rounded-lg font-bold text-[#EAE0D2] hover:cursor-pointer' onClick={() => {cleanUp()}}>
+              Cancel
+            </div>
           </div>
         </form>
       </div>

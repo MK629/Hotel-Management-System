@@ -7,7 +7,7 @@ import UserRankDisplay from './UserRankDisplay'
 import { BsEnvelopeFill, BsPersonFill} from 'react-icons/bs'
 import Image from 'next/image'
 import { AiFillCrown } from 'react-icons/ai'
-import { FaLockOpen, FaUserEdit } from 'react-icons/fa'
+import { FaUserEdit, FaUserLock } from 'react-icons/fa'
 
 const ProfileDetails = () => {
 
@@ -49,7 +49,7 @@ const ProfileDetails = () => {
             </div>
 
             <div className='flex bg-[#7c654b] hover:bg-[#d3af87] transition px-3 py-[5px] rounded-lg font-bold text-[#EAE0D2] hover:cursor-pointer' onClick={() => {validationStep(); changePassword()}}>
-              <FaLockOpen size={22} className='mr-1.5'/> Change Password
+              <FaUserLock size={22} className='mr-1.5'/> Change Password
             </div>
           </div>
         </div>

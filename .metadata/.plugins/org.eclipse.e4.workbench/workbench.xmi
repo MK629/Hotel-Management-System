@@ -117,7 +117,7 @@
                 </children>
               </children>
             </children>
-            <children xsi:type="basic:PartSashContainer" xmi:id="_5jxKARdiEfCt4-y9K0xULg" containerData="8255" selectedElement="_5jxKDRdiEfCt4-y9K0xULg">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_5jxKARdiEfCt4-y9K0xULg" containerData="8255" selectedElement="_5jxKAhdiEfCt4-y9K0xULg">
               <children xsi:type="basic:PartSashContainer" xmi:id="_5jxKAhdiEfCt4-y9K0xULg" containerData="7260" selectedElement="_5jxKAxdiEfCt4-y9K0xULg" horizontal="true">
                 <children xsi:type="advanced:Placeholder" xmi:id="_5jxKAxdiEfCt4-y9K0xULg" elementId="org.eclipse.ui.editorss" containerData="8957" ref="_5jy_MxdiEfCt4-y9K0xULg"/>
                 <children xsi:type="basic:PartSashContainer" xmi:id="_5jxKBBdiEfCt4-y9K0xULg" containerData="1043" selectedElement="_5jxKBxdiEfCt4-y9K0xULg">
@@ -284,7 +284,7 @@
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
         </children>
         <children xsi:type="basic:Part" xmi:id="_vaIC4B4lEfCTkqaUNeGfCA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="GlobalExceptionHandler.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;GlobalExceptionHandler.java&quot; partName=&quot;GlobalExceptionHandler.java&quot; title=&quot;GlobalExceptionHandler.java&quot; tooltip=&quot;Hotel-api/src/main/java/com/hotel/api/exceptionHandling/GlobalExceptionHandler.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Hotel-api/src/main/java/com/hotel/api/exceptionHandling/GlobalExceptionHandler.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;699&quot;/>&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;GlobalExceptionHandler.java&quot; partName=&quot;GlobalExceptionHandler.java&quot; title=&quot;GlobalExceptionHandler.java&quot; tooltip=&quot;Hotel-api/src/main/java/com/hotel/api/exceptionHandling/GlobalExceptionHandler.java&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Hotel-api/src/main/java/com/hotel/api/exceptionHandling/GlobalExceptionHandler.java&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;1117&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>removeOnHide</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
@@ -468,7 +468,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_5jzmXBdiEfCt4-y9K0xULg" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_-VyA4B6IEfC99LVjj0cCQw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_5j6VFhdiEfCt4-y9K0xULg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_7Wf2UB96EfCrvpN9RNRXxw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_5j6VFhdiEfCt4-y9K0xULg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_5jzmaRdiEfCt4-y9K0xULg" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -476,8 +476,8 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_5jzmaxdiEfCt4-y9K0xULg" elementId="org.eclipse.ui.workbench.edit">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_-V0dIB6IEfC99LVjj0cCQw" elementId="undo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/undo_edit.png" tooltip="Undo" enabled="false" command="_5j5tDBdiEfCt4-y9K0xULg"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_-V1EMB6IEfC99LVjj0cCQw" elementId="redo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/redo_edit.png" tooltip="Redo" enabled="false" command="_5j5tiRdiEfCt4-y9K0xULg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_7WiSkB96EfCrvpN9RNRXxw" elementId="undo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/undo_edit.png" tooltip="Undo" enabled="false" command="_5j5tDBdiEfCt4-y9K0xULg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_7Wi5oB96EfCrvpN9RNRXxw" elementId="redo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/redo_edit.png" tooltip="Redo" enabled="false" command="_5j5tiRdiEfCt4-y9K0xULg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_5jzmbxdiEfCt4-y9K0xULg" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -501,7 +501,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_5jzmnhdiEfCt4-y9K0xULg" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_-V3gcB6IEfC99LVjj0cCQw" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_5j6UzxdiEfCt4-y9K0xULg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_7WlV4B96EfCrvpN9RNRXxw" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_5j6UzxdiEfCt4-y9K0xULg"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_5jzmqhdiEfCt4-y9K0xULg" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
