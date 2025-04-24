@@ -1,5 +1,6 @@
-import { ProfileEditNoticeContext } from '@/contexts/contextComponents/ProfileEditNoticeContext'
-import { ProfileManagementContext } from '@/contexts/contextComponents/ProfileManagementContext'
+import { ErrorMessageContext } from '@/context/contexts/ErrorMessageConext'
+import { ProfileEditNoticeContext } from '@/context/contexts/ProfileEditNoticeContext'
+import { ProfileManagementContext } from '@/context/contexts/ProfileManagementContext'
 import { getLoggedInUser, tempGetPassword, tempSavePassword, saveToken} from '@/services/credentialsService'
 import { changePassword } from '@/services/hotelUserService'
 import React, { useContext, useState } from 'react'
@@ -10,6 +11,7 @@ const ChangePassword = () => {
   const {cleanUp} = useContext(ProfileManagementContext) 
   const {notifyProfileChange} = useContext(ProfileEditNoticeContext)
   const [showPassword, setShowPassword] = useState(false)
+  const {showError} = useContext(ErrorMessageContext)
 
   async function setNewPassword(e){
 
@@ -21,7 +23,7 @@ const ChangePassword = () => {
 
     let response
 
-    await changePassword(changePasswordForm).then(res => {response = res.data}).catch(e => {window.alert(e.response.data)})
+    await changePassword(changePasswordForm).then(res => {response = res.data}).catch(e => {showError(e.response.data)})
 
     if(response && response === 'success'){
       await tempSavePassword(e.newPassword.value)

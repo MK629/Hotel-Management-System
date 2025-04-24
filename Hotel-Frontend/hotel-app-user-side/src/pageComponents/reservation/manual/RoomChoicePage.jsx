@@ -1,16 +1,19 @@
 "use client"
 
+import { ErrorMessageContext } from '@/context/contexts/ErrorMessageConext'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 const RoomChoicePage = ({rooms}) => {
 
   const router = useRouter()
   const currentUrl = usePathname()
 
+  const {showError} = useContext(ErrorMessageContext)
+
   const toManualReservationForm = (roomNumber, reserved) => {
-    reserved ? window.alert("This rooom is not available.")  : router.push(`${currentUrl}/manualReservation/${roomNumber}`)
+    reserved ?  showError("This room is not available.") : router.push(`${currentUrl}/manualReservation/${roomNumber}`)
   }
 
   return (

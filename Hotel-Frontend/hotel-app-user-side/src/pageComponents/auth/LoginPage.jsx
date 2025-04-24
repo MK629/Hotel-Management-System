@@ -4,14 +4,16 @@ import { useRouter } from 'next/navigation'
 import React, { useContext, useState } from 'react'
 import {getLoggedInUser, saveLoggedInUser, saveToken} from '@/services/credentialsService'
 import { login } from '@/services/authenticationService'
-import { ChangeTrackerContext } from '@/contexts/contextComponents/ChangeTrackerContext'
+import { ChangeTrackerContext } from '@/context/contexts/ChangeTrackerContext'
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
+import { ErrorMessageContext } from '@/context/contexts/ErrorMessageConext'
 
 const LoginPage = () => {
 
   const [showPassword, setShowPassword] = useState(false)
   const router = useRouter()
   const {flipChangeTracker} = useContext(ChangeTrackerContext)
+  const {showError} = useContext(ErrorMessageContext)
 
   async function sendLoginInfo(e) {
     
@@ -21,9 +23,8 @@ const LoginPage = () => {
     }
 
     let response
-    let error
 
-    await login(loginInfo).then((res) => {response = res.data}).catch((e) => {error = e.response.data})
+    await login(loginInfo).then((res) => {response = res.data}).catch((e) => {showError(e.response.data)})
     
     if(response && response === "success"){
       await saveLoggedInUser(loginInfo.usernameOrEmail)
@@ -31,9 +32,7 @@ const LoginPage = () => {
       router.push("/home")
       flipChangeTracker()
     }
-    else{
-      window.alert(error)
-    }
+
   }
 
   return (
@@ -66,7 +65,7 @@ const LoginPage = () => {
             </div>
           </div>
 
-          <button className='bg-[#2D2D2D] hover:bg-[#414040] transition lg:mx-[43%] md:mx-[43%] sm:mx-[41%] mx-[41%] text-white rounded-lg px-3 py-1 mt-4 text-lg font-semibold' type='submit'>Login</button>
+          <button className='bg-[#2D2D2D] hover:bg-[#414040] transition lg:mx-[43%] md:mx-[43%] sm:mx-[41%] mx-[41%] text-[#EAE0D2] rounded-lg px-3 py-1 mt-4 text-lg font-semibold' type='submit'>Login</button>
         </form>
       </div>
 

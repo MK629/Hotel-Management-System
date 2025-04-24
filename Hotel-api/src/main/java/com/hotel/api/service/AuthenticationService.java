@@ -73,7 +73,7 @@ public class AuthenticationService{
 			throw new BadCredentialsException(e.getMessage());
 		}
 		catch (BadCredentialsException e) {
-			throw new BadCredentialsException("Incorrect username or password.");
+			throw new BadCredentialsException("Incorrect credentials.");
 		}
 		catch (AuthenticationException e) {
 			throw new BadCredentialsException("User does not exist.");

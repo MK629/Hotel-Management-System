@@ -1,0 +1,29 @@
+package com.hotel.api.dto.input;
+
+import com.hotel.api.entity.enums.RoomType;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
+public record RoomEditForm(
+		@NotNull(message = "Room ID is null")
+		Long id,
+		@NotEmpty(message = "Please enter a new room number.")
+		@NotBlank(message = "Please enter a new room number.")
+		String number,
+		@NotNull(message = "Please select a room type.")
+		RoomType type,
+		@NotNull(message = "Please enter the amount of beds.")
+		@Positive(message = "")
+		Integer beds,
+		@NotNull(message = "price is null.")
+		@Positive(message = "price is below 1.")
+		Double price,
+		@NotEmpty(message = "image url is empty.")
+		@NotBlank(message = "image url is blank.")
+		String image
+		) {
+
+}

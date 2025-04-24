@@ -79,7 +79,7 @@ public class AdminOperationsService {
 	public RoomDTO getRoomById(RoomIdForm roomIdForm) {
 		Room foundRoom = roomRepository.findById(roomIdForm.id()).orElse(null);
 		if(foundRoom == null) {
-			throw new UnavailableRoomException("room not found.");
+			throw new UnavailableRoomException("Room not found.");
 		}
 		return ServiceUtil.changeToRoomDTO(foundRoom);
 	}
@@ -101,7 +101,7 @@ public class AdminOperationsService {
 	public String editRoom(RoomEditForm roomEditForm) {
 		Room roomToEdit = roomRepository.findById(roomEditForm.id()).orElse(null);
 		if(roomToEdit == null) {
-			throw new UnavailableRoomException("room not found.");
+			throw new UnavailableRoomException("Room not found.");
 		}
 		roomToEdit.setNumber(roomEditForm.number());
 		roomToEdit.setType(roomEditForm.type());
@@ -153,7 +153,7 @@ public class AdminOperationsService {
 		
 		//Make sure reservation exists.
 		if(checkInReservation == null) { 
-			throw new ReservationNotFoundException("reservation not found.");
+			throw new ReservationNotFoundException("Reservation not found.");
 		}
 		
 		//Make sure it's checked in on the day that it's booked.
@@ -170,13 +170,13 @@ public class AdminOperationsService {
 			
 			//Just in case if there was anything wrong.
 			if(checkInReservation.getReservationStatus() != ReservationStatus.Checked_In) {
-				throw new ReservationStatusErrorException("something went wrong. please contact the developer.");
+				throw new ReservationStatusErrorException("Something went wrong. please contact the developer.");
 			}
 			
 			//Save to database.
 			reservationRepository.save(checkInReservation);
 			
-			return "successfully checked in user: " + checkInReservation.getUser().getUsername() + ".";
+			return "Successfully checked in user: " + checkInReservation.getUser().getUsername() + ".";
 		}
 		//Throw a custom exception if reservation status is not 'Awaiting'.
 		else {
@@ -191,7 +191,7 @@ public class AdminOperationsService {
 		
 		//Make sure reservation exists.
 		if(checkOutReservation == null) {
-			throw new ReservationNotFoundException("reservation not found.");
+			throw new ReservationNotFoundException("Reservation not found.");
 		}
 		
 		//Make sure reservation is in 'Checked_In' status.
@@ -211,14 +211,14 @@ public class AdminOperationsService {
 			
 			//Just in case if there was anything wrong.
 			if(checkOutReservation.getReservationStatus() != ReservationStatus.Checked_Out) {
-				throw new ReservationStatusErrorException("something went wrong. please contact the developer.");
+				throw new ReservationStatusErrorException("Something went wrong. please contact the developer.");
 			}
 			
 			//Save to database.
 			roomRepository.save(checkOutRoom);
 			reservationRepository.save(checkOutReservation);
 			
-			return "successfully checked out user: " + checkOutReservation.getUser().getUsername() + ".";
+			return "Successfully checked out user: " + checkOutReservation.getUser().getUsername() + ".";
 		}
 		//Throw a custom exception if reservation status is not 'Checked_In'.
 		else {
@@ -233,7 +233,7 @@ public class AdminOperationsService {
 		
 		//Make sure reservation exists.
 		if(cancelReservation == null) {
-			throw new ReservationNotFoundException("reservation not found.");
+			throw new ReservationNotFoundException("Reservation not found.");
 		}
 		
 		//Make sure reservation is in 'Awaiting' status.
@@ -252,7 +252,7 @@ public class AdminOperationsService {
 			
 			//Just in case if there was anything wrong.
 			if(cancelReservation.getReservationStatus() != ReservationStatus.Cancelled) {
-				throw new ReservationStatusErrorException("something went wrong. please contact the developer.");
+				throw new ReservationStatusErrorException("Something went wrong. please contact the developer.");
 			}
 			
 			//Save to database.
@@ -260,11 +260,11 @@ public class AdminOperationsService {
 			roomRepository.save(cancelRoom);
 			reservationRepository.save(cancelReservation);
 			
-			return "successfully cancelled the reservation for user: " + cancelReservation.getUser().getUsername() + ".";
+			return "Successfully cancelled the reservation for user: " + cancelReservation.getUser().getUsername() + ".";
 		}
 		//Throw a custom exception if reservation status is not 'Awaiting'.
 		else {
-			throw new ReservationStatusErrorException("inappropriate reservation status.");
+			throw new ReservationStatusErrorException("Inappropriate reservation status.");
 		}
 	}
 	
@@ -275,7 +275,7 @@ public class AdminOperationsService {
 		
 		//Make sure reservation exists.
 		if(extendReservation == null) {
-			throw new ReservationNotFoundException("reservation not found.");
+			throw new ReservationNotFoundException("Reservation not found.");
 		}
 		
 		//Make sure reservation is in either 'Awaiting' or 'Checked_In' status
@@ -298,11 +298,11 @@ public class AdminOperationsService {
 			userRepository.save(updateUser);
 			reservationRepository.save(extendReservation);
 			
-			return "nights extended to " + extendReservation.getNights() + " for user: " + extendReservation.getUser().getUsername() + ".";
+			return "Nights extended to " + extendReservation.getNights() + " for user: " + extendReservation.getUser().getUsername() + ".";
 		}
 		//Throw a custom exception if reservation status is neither 'Awaiting' not 'Checked_In'.
 		else {
-			throw new ReservationStatusErrorException("inappropriate reservation status.");
+			throw new ReservationStatusErrorException("Inappropriate reservation status.");
 		}
 	}
 	
@@ -319,7 +319,7 @@ public class AdminOperationsService {
 		
 		//Make sure reservation exists.
 		if(editReservation == null) {
-			throw new ReservationNotFoundException("reservation not found.");
+			throw new ReservationNotFoundException("Reservation not found.");
 		}
 		
 		//Make sure reservation is in 'Awaiting' status.
@@ -339,7 +339,7 @@ public class AdminOperationsService {
 		}
 		//Throw a custom exception if reservation status is not 'Awaiting'.
 		else {
-			throw new ReservationStatusErrorException("inappropriate reservation status.");
+			throw new ReservationStatusErrorException("Inappropriate reservation status.");
 		}
 	}
 

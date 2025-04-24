@@ -5,7 +5,7 @@ import com.hotel.api.entity.enums.ReservationStatus;
 import jakarta.validation.constraints.NotNull;
 
 public record ReservationStatusForm(
-		@NotNull(message = "reservation reservationStatus is null.")
+		@NotNull(message = "Reservation status is null.")
 		ReservationStatus reservationStatus
 		) {
 

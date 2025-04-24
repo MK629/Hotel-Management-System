@@ -1,6 +1,6 @@
 'use client'
 
-import { ProfileManagementContext } from '@/contexts/contextComponents/ProfileManagementContext'
+import { ProfileManagementContext } from '@/context/contexts/ProfileManagementContext'
 import { getSimpleUserInfo } from '@/services/hotelUserService'
 import React, { useContext, useEffect, useState } from 'react'
 import UserRankDisplay from './UserRankDisplay'

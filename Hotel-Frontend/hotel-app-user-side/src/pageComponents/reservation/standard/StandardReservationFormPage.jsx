@@ -1,15 +1,21 @@
 'use client'
 
+import { ErrorMessageContext } from '@/context/contexts/ErrorMessageConext'
+import { SuccessMessageContext } from '@/context/contexts/SuccessMessageContext'
 import { getLoggedInUser } from '@/services/credentialsService'
 import { standardReservation } from '@/services/hotelUserService'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React , { useContext } from 'react'
 
 
 const StandardReservationFormPage = ({roomType}) => {
 
   const router = useRouter()
+
+  const {showError} = useContext(ErrorMessageContext)
+
+  const {showSuccess} = useContext(SuccessMessageContext)
 
   async function sendStandardBookingInfo(e){
       const standardReservationForm = {
@@ -19,7 +25,7 @@ const StandardReservationFormPage = ({roomType}) => {
         contactNumber : e.contactNumber.value,
         roomType : roomType  
       }
-      await standardReservation(standardReservationForm).then(res => {router.push("/home"); window.alert(res.data)}).catch(e => window.alert(e.response.data))
+      await standardReservation(standardReservationForm).then(res => {router.push("/home"); showSuccess(res.data)}).catch(e => {showError(e.response.data)})
   }
 
   return (

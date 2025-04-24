@@ -11,20 +11,20 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 public record StandardReservationForm(
-		@NotBlank(message = "username is blank.")
-		@NotEmpty(message = "username is empty.")
+		@NotBlank(message = "Please enter your username.")
+		@NotEmpty(message = "Please enter your username.")
 		String usernameOrEmail,
-		@NotNull(message = "booking date is null.")
-		@FutureOrPresent(message = "booking date must be in the future or present.")
+		@NotNull(message = "Please enter a booking date.")
+		@FutureOrPresent(message = "The booking date must be in the future or present.")
 		LocalDate bookedDate,
-		@NotNull(message = "nights can't be null!")
-		@Positive(message = "nights can't be negative.")
+		@NotNull(message = "Please enter the amount of nights to stay.")
+		@Positive(message = "Negative values detected. Invalid.")
 		Integer nights,
-		@NotBlank(message = "contact number is blank.")
-		@NotEmpty(message = "contact number is empty.")
-		@Size(min=7, message = "contact number must have at least 7 numbers.")
-		@Pattern(regexp = "^[0-9]+$", message = "contact number must contain only digits.")
+		@NotBlank(message = "Please enter a contact number.")
+		@NotEmpty(message = "Please enter a contact number.")
+		@Size(min=7, message = "The contact number must have at least 7 numbers.")
+		@Pattern(regexp = "^[0-9]+$", message = "The contact number must contain only digits.")
 		String contactNumber,
-		@NotNull(message = "Room type is null.")
+		@NotNull(message = "Please select a room type.")
 		RoomType roomType
 		) {}

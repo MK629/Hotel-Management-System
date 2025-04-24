@@ -8,22 +8,19 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 public record RoomEditForm(
-		@NotNull(message = "room id is null")
+		@NotNull(message = "Room ID is null.")
 		Long id,
-		@NotEmpty(message = "room number is empty.")
-		@NotBlank(message = "room number is blank.")
+		@NotEmpty(message = "Please enter a new room number.")
+		@NotBlank(message = "Please enter a new room number.")
 		String number,
-		@NotNull(message = "room type is null.")
+		@NotNull(message = "Please select a room type.")
 		RoomType type,
-		@NotNull(message = "bed count is null.")
-		@Positive(message = "bed count is below 1.")
+		@NotNull(message = "Please enter the amount of beds.")
+		@Positive(message = "Negative values detected. Invalid.")
 		Integer beds,
-		@NotNull(message = "price is null.")
-		@Positive(message = "price is below 1.")
-		Double price,
-		@NotEmpty(message = "image url is empty.")
-		@NotBlank(message = "image url is blank.")
-		String image
+		@NotNull(message = "Please enter a new price.")
+		@Positive(message = "Negative values detected. Invalid.")
+		Double price
 		) {
 
 }

@@ -145,12 +145,12 @@ public class HotelService {
 		
 		//Make sure the chosen room exists.
 		if(chosenRoom == null) {
-			throw new UnavailableRoomException("room not found");
+			throw new UnavailableRoomException("Room not found");
 		}
 		
 		//Make sure the chosen room is not occupied. This will be checked and constrained on the front-end as well. But, I just had to make it sure.
 		if(chosenRoom.getReserved() == true) {
-			throw new UnavailableRoomException("room " + manualReservationForm.roomNumber() + " is not available");
+			throw new UnavailableRoomException("Room " + manualReservationForm.roomNumber() + " is not available.");
 		}
 		
 		User reservationMaker = userRepository.findByUsernameOrEmail(manualReservationForm.usernameOrEmail()).orElse(null); 
@@ -195,7 +195,7 @@ public class HotelService {
 		
 		//Make sure user exists.
 		if(user == null) {
-			throw new UserNotFoundException("user not found.");
+			throw new UserNotFoundException("User not found.");
 		}
 		
 		//Validate user with old password.
@@ -205,7 +205,7 @@ public class HotelService {
 			return "success";
 		}
 		else {
-			throw new BadCredentialsException("current password is incorrect.");
+			throw new BadCredentialsException("Current password is incorrect.");
 		}
 	}
 	
@@ -216,7 +216,7 @@ public class HotelService {
 		
 		//Make sure user exists.
 		if(user == null) {
-			throw new UserNotFoundException("user not found.");
+			throw new UserNotFoundException("User not found.");
 		}
 		
 		//Validate user with old password.
@@ -226,7 +226,7 @@ public class HotelService {
 			return "success";
 		}
 		else {
-			throw new BadCredentialsException("current password is incorrect.");
+			throw new BadCredentialsException("Current password is incorrect.");
 		}
 	}
 	

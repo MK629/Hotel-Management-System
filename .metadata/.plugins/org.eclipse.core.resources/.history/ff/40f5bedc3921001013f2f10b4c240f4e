@@ -1,0 +1,31 @@
+package com.hotel.api.dto.input;
+
+import java.time.LocalDate;
+
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+
+public record ManualReservationForm(
+		@NotBlank(message = "Please enter your username.")
+		@NotEmpty(message = "Please enter your username.")
+		String usernameOrEmail,
+		@NotNull(message = "Please enter a booking date..")
+		@FutureOrPresent(message = "The booking date must be in the future or present.")
+		LocalDate bookedDate,
+		@NotNull(message = "Please enter the amount of nights to stay.")
+		@Positive(message = "Negative values detected. Invalid.")
+		Integer nights,
+		@NotBlank(message = "Please enter a contact number.")
+		@NotEmpty(message = "Please enter a contact number.")
+		@Size(min=7, message="The contact number must have at least 7 numbers.")
+		@Pattern(regexp = "^[0-9]+$", message = "The contact number must contain only digits.")
+		String contactNumber,
+		@NotBlank(message = "room number is blank")
+		@NotEmpty(message = "room number is empty")
+		String roomNumber
+		) {}

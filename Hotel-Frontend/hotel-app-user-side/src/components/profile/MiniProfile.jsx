@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { BsDot } from 'react-icons/bs'
 import UserRankDisplay from './UserRankDisplay'
 import { useRouter } from 'next/navigation'
-import { ProfileEditNoticeContext } from '@/contexts/contextComponents/ProfileEditNoticeContext'
+import { ProfileEditNoticeContext } from '@/context/contexts/ProfileEditNoticeContext'
 
 const MiniProfile = () => {
 

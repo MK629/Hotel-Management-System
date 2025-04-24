@@ -1,14 +1,20 @@
 "use client"
 
+import { ErrorMessageContext } from '@/context/contexts/ErrorMessageConext'
+import { SuccessMessageContext } from '@/context/contexts/SuccessMessageContext'
 import { getLoggedInUser } from '@/services/credentialsService'
 import { manualReservation } from '@/services/hotelUserService'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useContext } from 'react'
 
 const ManualReservationFormPage = ({roomType, roomNumber}) => {
 
   const router = useRouter()
+
+  const {showError} = useContext(ErrorMessageContext)
+
+  const {showSuccess} = useContext(SuccessMessageContext)
 
   async function sendManualBookingInfo(e){
           const manualReservationForm = {
@@ -18,7 +24,7 @@ const ManualReservationFormPage = ({roomType, roomNumber}) => {
             contactNumber : e.contactNumber.value,
             roomNumber : roomNumber 
           }
-        await manualReservation(manualReservationForm).then(res => {router.push("/home"); window.alert(res.data)}).catch(e => {window.alert(e.response.data)})
+        await manualReservation(manualReservationForm).then(res => {router.push("/home"); showSuccess(res.data)}).catch(e => {showError(e.response.data)})
     }
 
 

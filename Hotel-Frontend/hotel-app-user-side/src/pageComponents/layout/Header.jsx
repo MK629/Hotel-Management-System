@@ -7,7 +7,7 @@ import HeaderNavItem from "../../components/navigation/HeaderNavItem"
 import MiniProfile from '../../components/profile/MiniProfile'
 import { BsClipboard2Fill, BsClockFill, BsInfoCircleFill, BsJournalBookmarkFill, BsPenFill} from 'react-icons/bs'
 import { AiOutlineCaretDown} from 'react-icons/ai'
-import { ChangeTrackerContext } from '@/contexts/contextComponents/ChangeTrackerContext'
+import { ChangeTrackerContext } from '@/context/contexts/ChangeTrackerContext'
 import { FaHotel } from 'react-icons/fa'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'

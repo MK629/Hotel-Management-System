@@ -1,6 +1,7 @@
 'use client'
 
-import { ProfileManagementContext } from '@/contexts/contextComponents/ProfileManagementContext'
+import { ErrorMessageContext } from '@/context/contexts/ErrorMessageConext'
+import { ProfileManagementContext } from '@/context/contexts/ProfileManagementContext'
 import { login } from '@/services/authenticationService'
 import { getLoggedInUser, tempSavePassword } from '@/services/credentialsService'
 import React, { useContext, useState } from 'react'
@@ -12,6 +13,8 @@ const PasswordVaidation = () => {
 
   const {editingStep, cleanUp} = useContext(ProfileManagementContext)
 
+  const {showError} = useContext(ErrorMessageContext)
+
   async function validatePassword(e){
 
     const loginInfo = {
@@ -21,7 +24,7 @@ const PasswordVaidation = () => {
 
     let response
 
-    await login(loginInfo).then(res => {response = res.data}).catch(e => {window.alert(e.response.data)})
+    await login(loginInfo).then(res => {response = res.data}).catch(e => {showError(e.response.data)})
 
     if(response && response === 'success'){
       await tempSavePassword(e.password.value)

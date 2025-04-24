@@ -6,10 +6,10 @@ import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 
 public record EditBookedDateForm(
-		@NotNull(message = "reservation reservationId is null")
+		@NotNull(message = "Reservation ID is null.")
 		Long reservationId,
-		@NotNull(message = "booking date is null")
-		@FutureOrPresent(message = "the fixed booking date must be in the future or the present.")
+		@NotNull(message = "Please enter a new booking date.")
+		@FutureOrPresent(message = "The new booking date must be in the future or the present.")
 		LocalDate bookedDate
 		) {
 }

@@ -1,0 +1,15 @@
+package com.hotel.api.dto.input;
+
+import com.hotel.api.entity.enums.ReservationStatus;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
+public record UsernameOrEmailAndReservationStatusForm(
+		@NotBlank(message = "Please enter a username.")
+		@NotEmpty(message = "Please enter a username.")
+		String usernameOrEmail,
+		@NotNull(message = "reservation reservationStatus is null.")
+		ReservationStatus reservationStatus
+		) {}

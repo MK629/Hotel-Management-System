@@ -7,9 +7,9 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public record UsernameOrEmailAndReservationTypeForm(
-		@NotBlank(message = "username is blank")
-		@NotEmpty(message = "username is empty")
+		@NotBlank(message = "Please enter a username.")
+		@NotEmpty(message = "Please enter a username.")
 		String usernameOrEmail,
-		@NotNull(message = "reservation status is null.")
+		@NotNull(message = "Reservation status is null.")
 		ReservationType reservationType
 		) {}

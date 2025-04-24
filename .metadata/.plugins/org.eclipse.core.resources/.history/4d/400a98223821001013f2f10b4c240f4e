@@ -1,0 +1,17 @@
+package com.hotel.api.dto.input;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+
+public record ChangePasswordForm(
+		@NotBlank(message = "Please enter a current username.")
+		@NotEmpty(message = "Please enter a current username.")
+		String currentUsernameOrEmail,
+		@NotBlank(message = "Please enter a current password.")
+		@NotEmpty(message = "Please enter a current password.")
+		String currentPassword,
+		@NotBlank(message = "Please enter a new password.")
+		@NotEmpty(message = "Please enter a new password.")
+		String newPassword
+		) {
+}

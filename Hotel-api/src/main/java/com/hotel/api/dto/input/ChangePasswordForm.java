@@ -4,14 +4,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
 public record ChangePasswordForm(
-		@NotBlank(message = "current username is blank")
-		@NotEmpty(message = "current username is empty")
+		@NotBlank(message = "Please enter your current username.")
+		@NotEmpty(message = "Please enter your current username.")
 		String currentUsernameOrEmail,
-		@NotBlank(message = "current password is blank")
-		@NotEmpty(message = "current password is empty")
+		@NotBlank(message = "Please enter your current password.")
+		@NotEmpty(message = "Please enter your current password.")
 		String currentPassword,
-		@NotBlank(message = "new password is blank")
-		@NotEmpty(message = "new password is empty")
+		@NotBlank(message = "Please enter a new password.")
+		@NotEmpty(message = "Please enter a new password.")
 		String newPassword
 		) {
 }

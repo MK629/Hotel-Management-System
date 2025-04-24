@@ -7,14 +7,11 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public record RoomAddForm(
-		@NotEmpty(message = "room number is empty.")
-		@NotBlank(message = "room number is blank.")
+		@NotEmpty(message = "Please enter a room number.")
+		@NotBlank(message = "Please enter a room number.")
 		String number,
-		@NotNull(message = "room number is null.")
-		RoomType type,
-		@NotEmpty(message = "image url is empty.")
-		@NotBlank(message = "image url is blank.")
-		String image
+		@NotNull(message = "Please select a room type.")
+		RoomType type
 		) {
 
 }

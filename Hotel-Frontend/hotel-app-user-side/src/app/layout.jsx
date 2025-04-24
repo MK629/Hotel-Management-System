@@ -1,7 +1,7 @@
 import Header from "@/pageComponents/layout/Header";
 import './global.css'
 import Footer from "@/pageComponents/layout/Footer";
-import GlobalContextManager from "@/contexts/GlobalContextManager";
+import GlobalContextManager from "@/context/GlobalContextManager";
 
 export default function RootLayout({ children }) {
 

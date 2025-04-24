@@ -3,6 +3,6 @@ package com.hotel.api.dto.input;
 import jakarta.validation.constraints.NotNull;
 
 public record RoomIdForm(
-		@NotNull(message = "reservation id is null")
+		@NotNull(message = "Reservation ID is null.")
 		Long id
 		) {}

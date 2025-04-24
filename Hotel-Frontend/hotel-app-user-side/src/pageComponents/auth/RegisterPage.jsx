@@ -1,13 +1,15 @@
 "use client"
 
-import React from 'react'
-import { formToJSON } from 'axios'
+import React, { useContext } from 'react'
 import { useRouter } from 'next/navigation'
 import { sendRegisterInfo } from '@/services/authenticationService'
+import { ErrorMessageContext } from '@/context/contexts/ErrorMessageConext'
 
 const RegisterPage = () => {
 
     const router = useRouter()
+
+    const {showError} = useContext(ErrorMessageContext)
 
     const handleRegister = async (e) => {
 
@@ -18,15 +20,11 @@ const RegisterPage = () => {
         }
 
         let response
-        let error
     
-        await sendRegisterInfo(registerInfo).then((res) => {response = res.data}).catch((e) => {error = e.response.data})
+        await sendRegisterInfo(registerInfo).then((res) => {response = res.data}).catch((e) => {showError(e.response.data)})
         
         if(response && response === 'success'){
           router.push("/auth/login")
-        }
-        else{
-          window.alert(error)
         }
     }
 

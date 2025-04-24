@@ -4,9 +4,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 public record ExtendStayForm(
-		@NotNull(message = "reservation reservationId is null")
+		@NotNull(message = "Reservation ID is null.")
 		Long reservationId,
-		@NotNull(message = "nights can't be null!")
-		@Positive(message = "What the hell is that? Are you not staying?")
+		@NotNull(message = "Please enter the extended nights amount.")
+		@Positive(message = "Negative values detected. Invalid.")
 		Integer nights
 		) {}

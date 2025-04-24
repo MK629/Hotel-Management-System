@@ -4,10 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
 public record LoginForm(
-		@NotBlank(message = "username is blank")
-		@NotEmpty(message = "username is empty")
+		@NotBlank(message = "Please enter your username.")
+		@NotEmpty(message = "Please enter your username.")
 		String usernameOrEmail,
-		@NotBlank(message = "password is blank")
-		@NotEmpty(message = "password is empty")
+		@NotBlank(message = "Please enter your password.")
+		@NotEmpty(message = "Please enter your password.")
 		String password
 		){}

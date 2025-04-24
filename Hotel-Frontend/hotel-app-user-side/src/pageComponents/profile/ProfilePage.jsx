@@ -1,6 +1,6 @@
 'use client'
 
-import { ProfileManagementContext } from '@/contexts/contextComponents/ProfileManagementContext'
+import { ProfileManagementContext } from '@/context/contexts/ProfileManagementContext'
 import ChangePassword from '@/components/profile/ChangePassword'
 import ChangeUsername from '@/components/profile/ChangeUsername'
 import PasswordVaidation from '@/components/profile/PasswordVaidation'

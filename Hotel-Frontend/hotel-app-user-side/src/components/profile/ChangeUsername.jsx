@@ -1,5 +1,6 @@
-import { ProfileEditNoticeContext } from '@/contexts/contextComponents/ProfileEditNoticeContext'
-import { ProfileManagementContext } from '@/contexts/contextComponents/ProfileManagementContext'
+import { ErrorMessageContext } from '@/context/contexts/ErrorMessageConext'
+import { ProfileEditNoticeContext } from '@/context/contexts/ProfileEditNoticeContext'
+import { ProfileManagementContext } from '@/context/contexts/ProfileManagementContext'
 import { getLoggedInUser, saveLoggedInUser, saveToken, tempGetPassword } from '@/services/credentialsService'
 import { changeUsername } from '@/services/hotelUserService'
 import React, { useContext } from 'react'
@@ -8,6 +9,7 @@ const ChangeUsername = () => {
 
   const {cleanUp} = useContext(ProfileManagementContext)
   const {notifyProfileChange} = useContext(ProfileEditNoticeContext)
+  const {showError} = useContext(ErrorMessageContext)
 
   async function setNewUsername(e) {
     
@@ -19,7 +21,7 @@ const ChangeUsername = () => {
 
     let response
 
-    await changeUsername(changeUsernameForm).then(res => {response = res.data}).catch(e => {window.alert(e.response.data)})
+    await changeUsername(changeUsernameForm).then(res => {response = res.data}).catch(e => {showError(e.response.data)})
 
     if(response && response === 'success'){
       await saveLoggedInUser(e.newUsername.value)

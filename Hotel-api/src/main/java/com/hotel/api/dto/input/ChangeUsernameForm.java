@@ -4,13 +4,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
 public record ChangeUsernameForm(
-		@NotBlank(message = "current username is blank")
-		@NotEmpty(message = "current username is empty")
+		@NotBlank(message = "Please enter your current username.")
+		@NotEmpty(message = "Please enter your current username.")
 		String currentUsernameOrEmail,
-		@NotBlank(message = "current password is blank")
-		@NotEmpty(message = "current password is empty")
+		@NotBlank(message = "Please enter your current password.")
+		@NotEmpty(message = "Please enter your current password.")
 		String currentPassword,
-		@NotBlank(message = "new username is blank")
-		@NotEmpty(message = "new username is empty")
+		@NotBlank(message = "Please enter a new username.")
+		@NotEmpty(message = "Please enter a new username.")
 		String newUsername
 		) {}
