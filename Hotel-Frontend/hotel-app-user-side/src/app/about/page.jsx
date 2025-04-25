@@ -1,9 +1,14 @@
+import RenderSSR from '@/components/rendering/RenderSSR'
+import dynamic from 'next/dynamic'
 import React from 'react'
 
+const AboutPage = dynamic(() => {return import('@/pageComponents/about/AboutPage')}, {suspense: true, ssr: true})
+
 const page = () => {
+
   return (
-    <div>About</div>
+    <RenderSSR ssrComponent={<AboutPage/>}/>
   )
 }
 
-export default page
+export default page 
